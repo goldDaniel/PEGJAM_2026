@@ -1,4 +1,5 @@
 ﻿
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ public class Food : MonoBehaviour
 	private int _currentHealth;
 
 	[SerializeField] private Mask mask;
+
+	[Header("Template")]
+	public FoodTemplate template;
 
 	void Awake()
 	{
