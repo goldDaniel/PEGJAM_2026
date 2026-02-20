@@ -8,16 +8,16 @@ public class GameplayUI : MonoBehaviour
 	[SerializeField] private UIAnimator _animator;
 	[SerializeField] private UIAnimationTarget _target;
 	[SerializeField] private SpriteRenderer _renderer;
-	
+	[SerializeField] private RectTransform _rectTransform;
 
 	[SerializeField] private Sprite _upSprite;
-    [SerializeField] private Sprite _downSprite;
-    [SerializeField] private Sprite _leftSprite;
-    [SerializeField] private Sprite _rightSprite;
+	[SerializeField] private Sprite _downSprite;
+	[SerializeField] private Sprite _leftSprite;
+	[SerializeField] private Sprite _rightSprite;
 
-    private KeyControl _control;
+	private KeyControl _control;
 
-    void Init(Key key)
+	public void Init(Key key)
 	{
 		_control = Keyboard.current[key];
 		switch (key) 
@@ -35,10 +35,11 @@ public class GameplayUI : MonoBehaviour
 				_renderer.sprite = _rightSprite;
 				break;
 		}
-    }
+	}
 
-	void MoveToPosition(Vector2 position)
+	public void MoveToPosition(Vector2 position)
 	{
-
+		var clip = UIAnimationClip.CreateRuntimeAnchoredMoveClip(_rectTransform.position, position, 0.1f, UIEaseType.SineInOut);
+		_animator.Play(clip);
 	}
 }

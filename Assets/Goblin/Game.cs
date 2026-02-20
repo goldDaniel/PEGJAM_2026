@@ -14,6 +14,8 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private GameObject _mouthOpen;
 	[SerializeField] private GameObject _mouthClosed;
 
+	[SerializeField] private RectTransform[] _arrowPath;
+
 	public enum GameInput
 	{
 		ArrowUp,
