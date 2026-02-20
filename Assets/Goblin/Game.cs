@@ -27,9 +27,7 @@ public class Game : MonoSingleton<Game>
 	{
 		ReachForFood,
 		HoldFoodInFront,
-		MouthOpen,
-		MouthClose,
-		Water,
+		Eat,
 	}
 
 	public enum HandState
@@ -78,32 +76,10 @@ public class Game : MonoSingleton<Game>
 		_food = _foodContainer.GetComponentsInChildren<Food>().ToList();
 	}
 
-	public void Register(GameplayAction gameplayAction, GameplayUI arrow)
-	{
-		if (_ui.ContainsKey(gameplayAction))
-		{
-			Debug.LogWarning($"UI for action {gameplayAction} is already registered.");
-			return;
-		}
-		_ui[gameplayAction] = arrow;
-	}
-
-	public void Deregister(GameplayAction gameplayAction)
-	{
-		if (!_ui.ContainsKey(gameplayAction))
-		{
-			Debug.LogWarning($"No UI registered for action {gameplayAction} to deregister.");
-			return;
-		}
-		_ui.Remove(gameplayAction);
-	}
-
 	public void Press(GameplayAction gameplayAction)
 	{
 		if (IsPaused)
 			return;
-
-		var uiElement = _ui[gameplayAction];
 
 		switch (gameplayAction)
 		{
@@ -113,15 +89,7 @@ public class Game : MonoSingleton<Game>
 			case GameplayAction.HoldFoodInFront:
 				HandleHoldFoodInFront();
 				break;
-			case GameplayAction.MouthOpen:
-				HandleMouthOpen();
-				break;
-			case GameplayAction.MouthClose:
-				HandleMouthClosed();
-				break;
-			case GameplayAction.Water:
-				_handState = HandState.Water;
-				break;
+			
 		}
 	}
 	
@@ -150,39 +118,6 @@ public class Game : MonoSingleton<Game>
 		else 
 		{
 			_handState = HandState.Empty;
-		}
-	}
-
-	private void HandleMouthOpen()
-	{
-		if (_eatingState != EatingState.MouthOpen)
-		{
-			_eatingState = EatingState.MouthOpen;
-			_mouthClosed.gameObject.SetActive(false);
-			_mouthOpen.gameObject.SetActive(true);
-		}
-	}
-
-	private void HandleMouthClosed()
-	{
-		if (_eatingState != EatingState.MouthClosed)
-		{
-			_eatingState = EatingState.MouthClosed;
-			_mouthOpen.gameObject.SetActive(false);
-			_mouthClosed.gameObject.SetActive(true);
-
-			if (_isHolding && _handState == HandState.Holding)
-			{
-				float percentage = _currentFood.GetPercentage();
-				if (_currentFood.TakeBite())
-				{
-					percentage = _currentFood.GetPercentage();
-					Destroy(_currentFood.gameObject);
-					_currentFood = null;
-					_handState = HandState.Empty;
-				}
-				_goblinMeter.SetPercentage(percentage, 0.1f);
-			}
 		}
 	}
 }

@@ -2,54 +2,43 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
-using static Game;
-
 
 public class GameplayUI : MonoBehaviour
 {
 	[SerializeField] private UIAnimator _animator;
 	[SerializeField] private UIAnimationTarget _target;
+	[SerializeField] private SpriteRenderer _renderer;
+	
 
-	[SerializeField] private GameplayAction _action;
-	[SerializeField] private GameInput _input;
+	[SerializeField] private Sprite _upSprite;
+    [SerializeField] private Sprite _downSprite;
+    [SerializeField] private Sprite _leftSprite;
+    [SerializeField] private Sprite _rightSprite;
 
-	private KeyControl _control;
+    private KeyControl _control;
 
-	void Awake()
+    void Init(Key key)
 	{
-		switch (_action)
+		_control = Keyboard.current[key];
+		switch (key) 
 		{
-			case GameplayAction.ReachForFood:
-				_control = Keyboard.current.rightArrowKey;
+			case Key.UpArrow:
+				_renderer.sprite = _upSprite;
 				break;
-			case GameplayAction.HoldFoodInFront:
-				_control = Keyboard.current.leftArrowKey;
+			case Key.DownArrow:
+				_renderer.sprite = _downSprite;
 				break;
-			case GameplayAction.MouthClose:
-				_control = Keyboard.current.upArrowKey;
+			case Key.LeftArrow:
+				_renderer.sprite = _leftSprite;
 				break;
-			case GameplayAction.MouthOpen:
-				_control = Keyboard.current.downArrowKey;
+			case Key.RightArrow:
+				_renderer.sprite = _rightSprite;
 				break;
-			case GameplayAction.Water:
-				_control = Keyboard.current.enterKey;
-				break;
-			default:
-				throw new ArgumentOutOfRangeException();
 		}
-	}
+    }
 
-	private void OnEnable() => Game.Instance.Register(_action, this);
-
-	private void OnDisable()
+	void MoveToPosition(Vector2 position)
 	{
-		if(Game.HasInstance)
-			Game.Instance.Deregister(_action);
-	}
 
-	void Update()
-	{
-		if (_control != null && _control.wasPressedThisFrame)
-			Game.Instance.Press(_action);
 	}
 }
