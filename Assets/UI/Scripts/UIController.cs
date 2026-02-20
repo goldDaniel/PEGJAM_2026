@@ -11,11 +11,6 @@ public class UIController : MonoBehaviour
 	public UIAnimator pauseAnimator;
 	private UIAnimHandle _pauseHandle;
 
-	[Header("Goblin Bar")]
-	public UIAnimator _goblinBarAnimator;
-	public UIAnimationTarget _goblinTarget;
-	private UIAnimHandle _goblinBarHandle;
-
 
 	[Header("Tutorial")]
 	public UITutorialController tutorialController;
@@ -46,7 +41,6 @@ public class UIController : MonoBehaviour
 	void Update()
 	{
 		UpdatePause();
-		UpdateMeter();
 	}
 
 	private void UpdatePause()
@@ -74,28 +68,6 @@ public class UIController : MonoBehaviour
 				}
 			}
 		}
-	}
-
-	private void UpdateMeter()
-	{
-		int minKey = (int)Key.Digit1;
-		int maxKey = (int)Key.Digit0;
-
-		for(int i = minKey; i <= maxKey; i++)
-		{
-			KeyControl keyControl = Keyboard.current[(Key)i];
-			if (keyControl != null && keyControl.wasPressedThisFrame)
-			{
-				float percentage = (i - minKey) / (float)(maxKey - minKey);
-				if (_goblinBarHandle != null && _goblinBarHandle.IsPlaying)
-					_goblinBarHandle.Stop();
-				
-				var clip = UIAnimationClip.CreateRuntimeScaleClip(_goblinTarget.GetScale(), new Vector2(percentage, 1f), 1.0f, UIEaseType.SineInOut);
-				_goblinBarHandle = _goblinBarAnimator.Play(clip);
-				break;
-			}
-		}
-		
 	}
 
 	private void UpdateTutorial()
