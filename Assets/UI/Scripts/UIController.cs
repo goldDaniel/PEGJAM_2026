@@ -11,11 +11,10 @@ public class UIController : MonoBehaviour
 	public UIAnimator pauseAnimator;
 	private UIAnimHandle _pauseHandle;
 
-	[Header("Right Side Banner")]
-	public UIAnimationClip rightSideInClip;
-	public UIAnimationClip rightSideOutClip;
-	public UIAnimator rightSideAnimator;
-	private UIAnimHandle _rightSideHandle;
+	[Header("Goblin Bar")]
+	public UIAnimator _goblinBarAnimator;
+	public UIAnimationTarget _goblinTarget;
+	private UIAnimHandle _goblinBarHandle;
 
 
 	[Header("Tutorial")]
@@ -47,11 +46,7 @@ public class UIController : MonoBehaviour
 	void Update()
 	{
 		UpdatePause();
-		UpdateBanner();
-		UpdateTutorial();
-
-		if (Keyboard.current.f2Key.wasPressedThisFrame)
-			SceneTransitionManager.LoadScene("SampleScene");
+		UpdateMeter();
 	}
 
 	private void UpdatePause()
@@ -62,10 +57,18 @@ public class UIController : MonoBehaviour
 			{
 				if (pauseAnimator.gameObject.activeSelf)
 				{
-					_pauseHandle = pauseAnimator.Play(pauseOutClip, new() { OnComplete = () => pauseAnimator.gameObject.SetActive(false) });
+					_pauseHandle = pauseAnimator.Play(pauseOutClip, new()
+					{ 
+						OnComplete = () =>
+						{
+							pauseAnimator.gameObject.SetActive(false);
+							Game.Instance.ResumeGame();
+						}
+					});
 				}
 				else
 				{
+					Game.Instance.PauseGame();
 					pauseAnimator.gameObject.SetActive(true);
 					_pauseHandle = pauseAnimator.Play(pauseInClip);
 				}
@@ -73,23 +76,26 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	private void UpdateBanner()
+	private void UpdateMeter()
 	{
-		if(Keyboard.current.tabKey.wasPressedThisFrame)
+		int minKey = (int)Key.Digit1;
+		int maxKey = (int)Key.Digit0;
+
+		for(int i = minKey; i <= maxKey; i++)
 		{
-			if (_rightSideHandle == null || !_rightSideHandle.IsPlaying)
+			KeyControl keyControl = Keyboard.current[(Key)i];
+			if (keyControl != null && keyControl.wasPressedThisFrame)
 			{
-				if (rightSideAnimator.gameObject.activeSelf)
-				{
-					_rightSideHandle = rightSideAnimator.Play(rightSideOutClip, new() { OnComplete = () => rightSideAnimator.gameObject.SetActive(false) });
-				}
-				else
-				{
-					rightSideAnimator.gameObject.SetActive(true);
-					_rightSideHandle = rightSideAnimator.Play(rightSideInClip);
-				}
+				float percentage = (i - minKey) / (float)(maxKey - minKey);
+				if (_goblinBarHandle != null && _goblinBarHandle.IsPlaying)
+					_goblinBarHandle.Stop();
+				
+				var clip = UIAnimationClip.CreateRuntimeScaleClip(_goblinTarget.GetScale(), new Vector2(percentage, 1f), 1.0f, UIEaseType.SineInOut);
+				_goblinBarHandle = _goblinBarAnimator.Play(clip);
+				break;
 			}
 		}
+		
 	}
 
 	private void UpdateTutorial()

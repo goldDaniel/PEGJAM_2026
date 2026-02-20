@@ -31,7 +31,7 @@ public sealed class UIAnimator : MonoBehaviour
 		if (_target == null || _activeAnimations.Count == 0)
 			return;
 
-		float dt = Time.deltaTime;
+		float dt = Time.unscaledDeltaTime;
 		ApplyAnimations(dt);
 	}
 
@@ -105,9 +105,6 @@ public sealed class UIAnimator : MonoBehaviour
 		Vector2 size = _target.GetScale();
 		float alpha = _target.GetAlpha();
 
-		Vector3 additiveOffset = Vector3.zero;
-		Vector2 additiveSize = Vector2.zero;
-
 		bool movesAnchored = false;
 		bool movesWorld = false;
 
@@ -117,7 +114,7 @@ public sealed class UIAnimator : MonoBehaviour
 			if (animation.IsPaused)
 				continue;
 
-		float speed = Mathf.Abs(animation.Options.Speed);
+			float speed = Mathf.Abs(animation.Options.Speed);
 			float direction = animation.Options.Reverse ? -1f : 1f;
 			animation.Time += dt * speed * direction;
 
@@ -130,9 +127,7 @@ public sealed class UIAnimator : MonoBehaviour
 									ref movesAnchored,
 									ref movesWorld,
 									ref size,
-									ref alpha,
-									ref additiveOffset,
-									ref additiveSize);
+									ref alpha);
 
 			if (!completed)
 				continue;
@@ -140,10 +135,6 @@ public sealed class UIAnimator : MonoBehaviour
 			_activeAnimations.RemoveAt(i);
 			animation.Options.OnComplete?.Invoke();
 		}
-
-		position += additiveOffset;
-		size += additiveSize;
-
 
 		if (movesAnchored)
 			_target.SetAnchoredPosition(anchoredPosition);
@@ -189,9 +180,7 @@ public sealed class UIAnimator : MonoBehaviour
 						ref bool movesAnchored,
 						ref bool movesWorld,
 						ref Vector2 size,
-						ref float alpha,
-						ref Vector3 additiveOffset,
-						ref Vector2 additiveSize)
+						ref float alpha)
 	{
 		UIAnimationClip clip = animation.Clip;
 		float clipEasedT = UIEase.Evaluate(clip.DefaultEase, t, clip.CustomCurve);

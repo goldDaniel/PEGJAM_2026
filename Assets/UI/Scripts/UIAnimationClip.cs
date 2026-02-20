@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UIAnimationClip", menuName = "BulletHeaven/UI Animation Clip")]
+[CreateAssetMenu(fileName = "Goblin", menuName = "BulletHeaven/UI Animation Clip")]
 public sealed class UIAnimationClip : ScriptableObject
 {
 	[SerializeField, Min(0.01f)]
@@ -58,6 +58,27 @@ public sealed class UIAnimationClip : ScriptableObject
 		};
 		clip._scaleTracks = Array.Empty<ScaleTrack>();
 		clip._alphaTracks = Array.Empty<AlphaTrack>();
+		return clip;
+	}
+
+	public static UIAnimationClip CreateRuntimeScaleClip(Vector2 fromScale, Vector2 toScale, float duration, UIEaseType ease)
+	{
+		UIAnimationClip clip = CreateInstance<UIAnimationClip>();
+		clip.hideFlags = HideFlags.DontSave;
+		clip._duration = Mathf.Max(0.01f, duration);
+		clip._delay = 0f;
+		clip._loopMode = UIAnimationLoopMode.None;
+		clip._defaultEase = ease;
+		clip._scaleTracks = new[]
+		{
+			new ScaleTrack
+			{
+				Enabled = true,
+				Ease = ease,
+				From = fromScale,
+				To = toScale,
+			},
+		};
 		return clip;
 	}
 }
