@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Goblin", menuName = "BulletHeaven/UI Animation Clip")]
+[CreateAssetMenu(fileName = "Goblin", menuName = "Scriptable Objects/UI Animation Clip")]
 public sealed class UIAnimationClip : ScriptableObject
 {
 	[SerializeField, Min(0.01f)]

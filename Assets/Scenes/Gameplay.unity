@@ -583,15 +583,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6132076, g: 0.8522363, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -6162363074407128110, guid: a12631efd13cd38448cfac7fcd3da156, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2717,6 +2717,11 @@ MonoBehaviour:
   - {fileID: 764690202}
   - {fileID: 710321722}
   - {fileID: 935335814}
+  _foodTemplate: {fileID: 11400000, guid: 38523eefea757c445b2440688e5dece8, type: 2}
+  _leftArrowPrefab: {fileID: -7926013444272775923, guid: fc93e63d7bd366547afc07de5c1fc7c7, type: 3}
+  _rightArrowPrefab: {fileID: -7926013444272775923, guid: 9f0a2f97a1bb51d4ab3a6b3d4bd18f9d, type: 3}
+  _upArrowPrefab: {fileID: -7926013444272775923, guid: 101db196319290742b9201ca7a84feb5, type: 3}
+  _downArrowPrefab: {fileID: -7926013444272775923, guid: 347d6157eb6fcf74aabffa750ecb4b73, type: 3}
 --- !u!1 &935335813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,7 +2829,7 @@ SpriteRenderer:
   m_SortingOrder: -50
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6695950386315148514, guid: dd507c660eee6794fb8304845c96badd, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6855345, g: 0.6855345, b: 0.6855345, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

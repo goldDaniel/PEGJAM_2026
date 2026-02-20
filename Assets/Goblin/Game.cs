@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Game : MonoSingleton<Game>
 {
@@ -15,6 +16,14 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private GameObject _mouthClosed;
 
 	[SerializeField] private RectTransform[] _arrowPath;
+	[SerializeField] private FoodTemplate _foodTemplate;
+
+	[SerializeField] private GameplayUI _leftArrowPrefab;
+	[SerializeField] private GameplayUI _rightArrowPrefab;
+	[SerializeField] private GameplayUI _upArrowPrefab;
+	[SerializeField] private GameplayUI _downArrowPrefab;
+
+	private List<GameplayUI> _activeArrows = new();
 
 	public enum GameInput
 	{
@@ -71,27 +80,67 @@ public class Game : MonoSingleton<Game>
 	private HandState _handState = HandState.Empty;
 	private bool _isHolding => _currentFood != null;
 
-	private Dictionary<GameplayAction, GameplayUI> _ui = new();
-
 	void Awake()
 	{
 		_food = _foodContainer.GetComponentsInChildren<Food>().ToList();
+		SetupFood(_foodTemplate);
 	}
 
-	public void Press(GameplayAction gameplayAction)
+	void Update()
 	{
 		if (IsPaused)
 			return;
 
-		switch (gameplayAction)
+		if (_activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
 		{
-			case GameplayAction.ReachForFood:
-				HandleReachForFood();
-				break;
-			case GameplayAction.HoldFoodInFront:
-				HandleHoldFoodInFront();
-				break;
-			
+			var desiredKey = _activeArrows[0].GetKey();
+			if (Keyboard.current[desiredKey].wasPressedThisFrame)
+			{
+				Destroy(_activeArrows[0].gameObject);
+				_activeArrows.RemoveAt(0);
+
+				for (int i = 0; i < _activeArrows.Count; ++i)
+				{
+					var arrow = _activeArrows[i];
+					arrow.MoveToPosition(_arrowPath[i].transform.position);
+				}
+			}
+		}		
+	}
+
+	private void SetupFood(FoodTemplate template)
+	{
+		_activeArrows.Clear();
+
+		for (int i = 0; i < template.keySequence.Length; ++i)
+		{
+			GameplayUI prefab = null;
+			var keys = template.keySequence[i].keys;
+			if (keys.Length == 1)
+			{
+				switch (keys[0])
+				{
+					case Key.LeftArrow:
+						prefab = _leftArrowPrefab; break;
+					case Key.RightArrow:
+						prefab = _rightArrowPrefab; break;
+					case Key.UpArrow:
+						prefab = _upArrowPrefab; break;
+					case Key.DownArrow:
+						prefab = _downArrowPrefab; break;
+				}
+			}
+			else 
+			{
+				// TODO (danielg): Handle multipress
+			}
+
+			var parent = _arrowPath[i];
+			var instance = Instantiate(prefab, parent);
+			instance.transform.position = parent.transform.position;
+			instance.rectTransform.sizeDelta *= 1.5f;
+			instance.Init(keys[0]);
+			_activeArrows.Add(instance);
 		}
 	}
 	

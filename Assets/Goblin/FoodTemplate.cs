@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[Serializable]
 public struct KeyCombo
 {
     public Key[] keys;
