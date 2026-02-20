@@ -6,18 +6,23 @@ public class Food : MonoBehaviour
 {
 	[Range(1, 100)]
 	public int bitesNeeded;
-	private int _currrentHealth;
+	private int _currentHealth;
 
 	[SerializeField] private Mask mask;
 
 	void Awake()
 	{
-		_currrentHealth = bitesNeeded;
+		_currentHealth = bitesNeeded;
 	}
 
 	public bool TakeBite()
 	{
-		_currrentHealth = Mathf.Max(_currrentHealth - 1, 0);
+		_currentHealth = Mathf.Max(_currentHealth - 1, 0);
 		return _currentHealth == 0;
+	}
+
+	public float GetPercentage()
+	{
+		return (float)_currentHealth / (float)bitesNeeded;
 	}
 }

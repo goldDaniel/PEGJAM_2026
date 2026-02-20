@@ -10,14 +10,14 @@ public class GoblinMeter : MonoBehaviour
 
 	public float GetPercentage() => _target.GetScale().x;
 
-	public void SetPercentage(float value)
+	public void SetPercentage(float value, float duration)
 	{
 		float percentage = Mathf.Clamp01(value);
 		
 		if (_goblinBarHandle != null && _goblinBarHandle.IsPlaying)
 			_goblinBarHandle.Stop();
 
-		var clip = UIAnimationClip.CreateRuntimeScaleClip(_target.GetScale(), new Vector2(percentage, 1f), 1.0f, UIEaseType.SineInOut);
+		var clip = UIAnimationClip.CreateRuntimeScaleClip(_target.GetScale(), new Vector2(percentage, 1f), duration, UIEaseType.SineInOut);
 		_goblinBarHandle = _animator.Play(clip);
 	}
 }

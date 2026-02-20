@@ -9,6 +9,10 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private Transform _foodContainer;
 	[SerializeField] private Transform _foodPivot;
 	private List<Food> _food = new();
+	private Food _currentFood = null;
+
+	[SerializeField] private GameObject _mouthOpen;
+	[SerializeField] private GameObject _mouthClosed;
 
 	public enum GameInput
 	{
@@ -65,7 +69,7 @@ public class Game : MonoSingleton<Game>
 
 	private EatingState _eatingState = EatingState.MouthClosed;
 	private HandState _handState = HandState.Empty;
-	private bool _isHolding = false;
+	private bool _isHolding => _currentFood != null;
 
 	private Dictionary<GameplayAction, GameplayUI> _ui = new();
 
@@ -126,8 +130,15 @@ public class Game : MonoSingleton<Game>
 		_handState = HandState.Reaching;
 		if (!_isHolding)
 		{
-			_isHolding = true;
-			// logic for picking up food can be added here
+			if(_food.Count > 0)
+			{
+				_currentFood = _food[0];
+				_food.RemoveAt(0);
+
+				_currentFood.transform.SetParent(_foodPivot, true);
+				_currentFood.transform.position = _foodPivot.position;
+				_goblinMeter.SetPercentage(_currentFood.GetPercentage(), 0.5f);
+			}
 		}
 	}
 	private void HandleHoldFoodInFront()
@@ -136,6 +147,10 @@ public class Game : MonoSingleton<Game>
 		{
 			_handState = HandState.Holding;
 		}
+		else 
+		{
+			_handState = HandState.Empty;
+		}
 	}
 
 	private void HandleMouthOpen()
@@ -143,6 +158,8 @@ public class Game : MonoSingleton<Game>
 		if (_eatingState != EatingState.MouthOpen)
 		{
 			_eatingState = EatingState.MouthOpen;
+			_mouthClosed.gameObject.SetActive(false);
+			_mouthOpen.gameObject.SetActive(true);
 		}
 	}
 
@@ -151,7 +168,21 @@ public class Game : MonoSingleton<Game>
 		if (_eatingState != EatingState.MouthClosed)
 		{
 			_eatingState = EatingState.MouthClosed;
-			_goblinMeter.SetPercentage(_goblinMeter.GetPercentage() - 0.1f);
+			_mouthOpen.gameObject.SetActive(false);
+			_mouthClosed.gameObject.SetActive(true);
+
+			if (_isHolding && _handState == HandState.Holding)
+			{
+				float percentage = _currentFood.GetPercentage();
+				if (_currentFood.TakeBite())
+				{
+					percentage = _currentFood.GetPercentage();
+					Destroy(_currentFood.gameObject);
+					_currentFood = null;
+					_handState = HandState.Empty;
+				}
+				_goblinMeter.SetPercentage(percentage, 0.1f);
+			}
 		}
 	}
 }
