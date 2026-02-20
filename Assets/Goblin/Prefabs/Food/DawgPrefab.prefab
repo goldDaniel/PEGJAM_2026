@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6741226938037444207}
   - component: {fileID: 957973336231640870}
   m_Layer: 0
-  m_Name: Dawg
+  m_Name: DawgPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Food
   bitesNeeded: 8
   mask: {fileID: 0}
+  template: {fileID: 11400000, guid: 54e668dad8a03174a8695fce4de5ce96, type: 2}
 --- !u!1 &5363103929623780063
 GameObject:
   m_ObjectHideFlags: 0

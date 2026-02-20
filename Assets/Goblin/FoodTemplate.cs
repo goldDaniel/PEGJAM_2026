@@ -16,4 +16,7 @@ public class FoodTemplate : ScriptableObject
 
     [Header("Key Sequence")]
     public KeyCombo[] keySequence;
+
+    [Header("Cycles")]
+    public int cycles = 1;
 }
