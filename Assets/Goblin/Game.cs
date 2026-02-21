@@ -6,11 +6,14 @@ using UnityEngine.InputSystem;
 public class Game : MonoSingleton<Game>
 {
 	private Food _currentFood = null;
+	private List<Food> _foodPile = new();
 
 	[SerializeField] private RectTransform[] _arrowPath;
 	[SerializeField] private Level _currentLevel;
 	[SerializeField] private Food _foodPrefab;
 	[SerializeField] private Transform _foodHoldingPosition;
+
+	[SerializeField] private Transform _foodSpawnPosition;
 
 	[SerializeField] private GameplayUI _leftArrowPrefab;
 	[SerializeField] private GameplayUI _rightArrowPrefab;
@@ -28,25 +31,12 @@ public class Game : MonoSingleton<Game>
 		Enter,
 	}
 
-	public enum GameplayAction
-	{
-		ReachForFood,
-		HoldFoodInFront,
-		Eat,
-	}
 
 	public enum HandState
 	{
 		Reaching,
 		Holding,
 		Empty,
-		Water
-	}
-
-	public enum EatingState
-	{
-		MouthOpen,
-		MouthClosed,
 	}
 
 	private bool _isPaused;
@@ -70,13 +60,20 @@ public class Game : MonoSingleton<Game>
 	public void PauseGame() => IsPaused = true;
 	public void ResumeGame() => IsPaused = false;
 
-	private EatingState _eatingState = EatingState.MouthClosed;
 	private HandState _handState = HandState.Empty;
-	private bool _isHoldingFood => _currentFood != null;
+	private bool _isReadyToEat => _currentFood != null && _handState == HandState.Holding;
 
 	void Awake()
 	{
 		_currentLevel = Instantiate(_currentLevel);
+		_foodPile.Capacity = _currentLevel.foodItems.Count;
+		for (int i = 0; i < _currentLevel.foodItems.Count; ++i)
+		{
+			var food = Instantiate(_foodPrefab, _foodSpawnPosition, true); 
+			food.transform.position = _foodSpawnPosition.position;
+			food.Init(_currentLevel.foodItems[i]);
+			_foodPile.Add(food);
+		}
 	}
 
 	void Update()
@@ -88,11 +85,11 @@ public class Game : MonoSingleton<Game>
 		if (stageComplete)
 			return;
 
-		if (!_isHoldingFood)
+		if (!_isReadyToEat)
 		{
-			HandleGrabbing();	
+			HandleGrabbing();
 		}
-		else if (_isHoldingFood && _activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
+		else if (_isReadyToEat && _activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
 		{
 			HandleEating();
 		}		
@@ -100,35 +97,34 @@ public class Game : MonoSingleton<Game>
 
 	private void HandleGrabbing()
 	{
-		if (_handState == HandState.Empty || _handState == HandState.Holding)
+		if (_handState == HandState.Empty)
 		{
 			if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
 			{
 				_handState = HandState.Reaching;
-				if(!_isHoldingFood)
+				if(!_isReadyToEat)
 				{
 					GrabNextFoodItem();
 				}
 			}
 				
 		}
-		else if (_handState != HandState.Reaching)
+		else if (_handState == HandState.Reaching)
 		{
 			if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+			{
 				_handState = HandState.Holding;
+				SetupArrowsForFood(_currentFood);
+			}
 		}
 	}
 
 	private void GrabNextFoodItem()
 	{
-		var items = _currentLevel.foodItems;
-		SetupArrowsForFood(items[0]);
-
-		_currentFood = Instantiate(_foodPrefab, _foodHoldingPosition, true);
+		_currentFood = _foodPile[0];
+		_foodPile.RemoveAt(0);
+		_currentFood.transform.SetParent(_foodHoldingPosition, true);
 		_currentFood.transform.position = _foodHoldingPosition.position;
-		_currentFood.Init(items[0]);
-
-		items.RemoveAt(0);
 	}
 
 	private void HandleEating()
@@ -154,11 +150,11 @@ public class Game : MonoSingleton<Game>
 		}
 	}
 
-	private void SetupArrowsForFood(FoodTemplate template)
+	private void SetupArrowsForFood(Food food)
 	{
 		_activeArrows.Clear();
 
-		var seq = template.GetKeySequence();
+		var seq = food.template.GetKeySequence();
 		for (int i = 0; i < seq.Length; ++i)
 		{
 			GameplayUI prefab = null;

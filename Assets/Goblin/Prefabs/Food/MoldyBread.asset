@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: MoldyBread
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: -5783837053116056543, guid: 3a2cbc0cce3bae34aaee85f7a29fefbe, type: 3}
+  sprite: {fileID: 21300000, guid: 3a2cbc0cce3bae34aaee85f7a29fefbe, type: 3}
   keySequence:
   - keys: 3d00000040000000
   - keys: 3f00000040000000
