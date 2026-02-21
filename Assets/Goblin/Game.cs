@@ -108,7 +108,7 @@ public class Game : MonoSingleton<Game>
 		_comboDict[HashInputs(GameInput.Down)] = _downArrowPrefab;
 		_comboDict[HashInputs(GameInput.Up)] = _upArrowPrefab;
 
-		_comboDict[HashInputs(GameInput.Up, GameInput.Right)] = _urArrowPrefab;
+		_comboDict[HashInputs(GameInput.Left, GameInput.Up)] = _luArrowPrefab;
 		_comboDict[HashInputs(GameInput.Left, GameInput.Down)] = _ldArrowPrefab;
 		_comboDict[HashInputs(GameInput.Left, GameInput.Right)] = _lrArrowPrefab;
 		_comboDict[HashInputs(GameInput.Down, GameInput.Up)] = _duArrowPrefab;
