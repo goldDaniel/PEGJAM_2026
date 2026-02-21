@@ -238,7 +238,8 @@ public class Game : MonoSingleton<Game>
 			_indicator.MissedInput();
 		}
 		else if(comboPressed)
-		{ 
+		{
+			_indicator.CorrectInput();
 			_player.Bite();
 			_activeArrowCombos[0].OnValidPress();
 

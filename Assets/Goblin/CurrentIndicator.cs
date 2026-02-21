@@ -23,10 +23,8 @@ public class CurrentIndicator : MonoBehaviour
 	public void Play() => _handle = animator.Play(clip);
 	public void Stop() => _handle?.Stop();
 
-	public void MissedInput()
-	{
-		StartCoroutine(AnimateColor());
-	}
+	public void MissedInput() => StartCoroutine(AnimateMissedInput());
+	public void CorrectInput() => StartCoroutine(AnimateCorrectInput());
 
 	public void Update()
 	{
@@ -41,12 +39,27 @@ public class CurrentIndicator : MonoBehaviour
 		transform.position = Vector3.Lerp(_origin, _origin + shakeOffset, shakeIntensity * shakeIntensity);
 	}
 
-	private IEnumerator AnimateColor()
+	private IEnumerator AnimateMissedInput()
 	{
 		while (Game.Instance.OnPunishmentCooldown)
 		{
 			_image.color = Color.Lerp(Color.white, Color.red, Game.Instance.CooldownPercentage);
 			yield return null;
+		}
+		_image.color = Color.white;
+	}
+
+	private IEnumerator AnimateCorrectInput()
+	{
+		float tMax = 0.2f;
+		float t = tMax;
+		while (t > 0)
+		{
+			float interpolant = Mathf.Clamp01(t / tMax);
+			_image.color = Color.Lerp(Color.white, Color.green, interpolant);
+			yield return null;
+
+			t -= Time.deltaTime;
 		}
 		_image.color = Color.white;
 	}
