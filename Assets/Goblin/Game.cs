@@ -241,6 +241,7 @@ public class Game : MonoSingleton<Game>
 		}
 		else if(comboPressed)
 		{ 
+			_indicator.CorrectInput();
 			_player.Bite((float)_inputSeqProgress++ / (_inputSeqCount - 1));
 			_activeArrowCombos[0].OnValidPress();
 
