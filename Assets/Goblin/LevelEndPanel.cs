@@ -1,7 +1,6 @@
 ﻿
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class LevelEndPanel : MonoBehaviour
@@ -21,11 +20,31 @@ public class LevelEndPanel : MonoBehaviour
 	public void OnWin()
 	{
 		endText.text = "you win";
-		tryAgainButton.gameObject.SetActive(false);
-		continueButton.gameObject.SetActive(true);
-		gameObject.SetActive(true);
 
-		animator.Play(inClip);
+		if (Game.Instance.IsLastLevel)
+		{
+			tryAgainButton.gameObject.SetActive(false);
+			continueButton.gameObject.SetActive(false);
+			quitButton.gameObject.SetActive(false);
+		}
+		else 
+		{
+			tryAgainButton.gameObject.SetActive(false);
+			continueButton.gameObject.SetActive(true);
+			quitButton.gameObject.SetActive(true);
+		}
+
+		gameObject.SetActive(true);
+		animator.Play(inClip, new()
+		{
+			Speed = 0.25f,
+			OnComplete = () =>
+			{
+				// TODO (danielg): Transition to game end / credits scene instead
+				if (Game.Instance.IsLastLevel)
+					SceneTransitionManager.LoadScene("Main Menu");
+			}
+		});
 	}
 
 	public void OnLose()
@@ -40,12 +59,25 @@ public class LevelEndPanel : MonoBehaviour
 
 	public void OnContinuePressed()
 	{
-		// TODO (danielg): Load next level
+		animator.Play(outClip, new()
+		{
+			OnComplete = () =>
+			{
+				LevelLoader.CurrentLevelIndex++;
+				SceneTransitionManager.LoadScene("Gameplay");
+			}
+		});
 	}
 
 	public void OnTryAgainPressed()
 	{
-
+		animator.Play(outClip, new()
+		{
+			OnComplete = () =>
+			{
+				SceneTransitionManager.LoadScene("Gameplay");
+			}
+		});
 	}
 
 	public void OnQuitPressed()

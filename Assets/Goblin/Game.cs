@@ -13,7 +13,10 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private TextMeshProUGUI _countdownText;
 
 	[SerializeField] private RectTransform[] _arrowPath;
-	[SerializeField] private Level _currentLevel;
+	[SerializeField] private LevelLoader _levels;
+	private Level _currentLevel => _levels.CurrentLevel;
+	public bool IsLastLevel => _levels.IsLastLevel;
+
 	[SerializeField] private Food _foodPrefab;
 	[SerializeField] private Transform _playerFoodHoldingPosition;
 	[SerializeField] private Transform _opponentFoodHoldingPosition;
@@ -163,9 +166,10 @@ public class Game : MonoSingleton<Game>
 
 	public void PrepareLevel()
 	{
-		_currentLevel = Instantiate(_currentLevel);
-		_player.Setup(null, _foodPrefab, _currentLevel, _playerFoodSpawn);
-		_opponent.Setup(_currentLevel.opponent, _foodPrefab, _currentLevel, _opponentFoodSpawn);	
+		var level = Instantiate(_currentLevel);
+
+		_player.Setup(null, _foodPrefab, level, _playerFoodSpawn);
+		_opponent.Setup(level.opponent, _foodPrefab, level, _opponentFoodSpawn);	
 	}
 
 	public void StartGameplayCountdown()

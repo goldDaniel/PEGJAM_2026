@@ -2684,7 +2684,7 @@ MonoBehaviour:
   - {fileID: 764690202}
   - {fileID: 710321722}
   - {fileID: 935335814}
-  _currentLevel: {fileID: 11400000, guid: cb297b229b2be6941aeaf22e2500eef3, type: 2}
+  _levels: {fileID: 11400000, guid: 7806bbeeadbc70c4b9e7ed09c5593db6, type: 2}
   _foodPrefab: {fileID: 957973336231640870, guid: c5fcd3c80f7ff5c4a906b5db4872ee41, type: 3}
   _playerFoodHoldingPosition: {fileID: 970863192}
   _opponentFoodHoldingPosition: {fileID: 331516277}
