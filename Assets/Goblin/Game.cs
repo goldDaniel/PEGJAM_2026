@@ -123,16 +123,18 @@ public class Game : MonoSingleton<Game>
 
 	void Update()
 	{
-		if (IsPaused)
+		if (IsPaused || !HasStarted)
 			return;
 
 		bool stageComplete = _player.HasEatenAllFood || _opponent.HasEatenAllFood;
 		if (stageComplete)
+		{
 			return;
+		}
 
-		HandleOpponentEating();
+		_opponent.OpponentGameplayTick();
 
-		if(OnPunishmentCooldown)
+		if (OnPunishmentCooldown)
 		{
 			_missCooldownTimer = Mathf.Max(_missCooldownTimer - Time.deltaTime, 0f);
 			return;
@@ -145,16 +147,9 @@ public class Game : MonoSingleton<Game>
 		else if (IsReadyToEat && _activeArrowCombos.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
 		{
 			HandleEating();
-		}		
+		}
 	}
 
-	private void HandleOpponentEating()
-	{
-		// TODO (danielg): 
-		// - opponent eating timer
-		// - taking bites at regular intervals
-		// - grabbing new food from plate
-	}
 
 	public void PrepareLevel()
 	{
