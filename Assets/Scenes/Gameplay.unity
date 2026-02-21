@@ -352,8 +352,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edcdc54b549fdac4ea79cd0140afcb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentIndicator
+  origin: {x: 0, y: 0}
   animator: {fileID: 310953198}
   clip: {fileID: 11400000, guid: ef25ded53fffa29488553a719067ab0a, type: 2}
+  _image: {fileID: 310953194}
+  intensity: 64
 --- !u!114 &310953197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,6 +1499,7 @@ MonoBehaviour:
   _upArrowPrefab: {fileID: -7926013444272775923, guid: 101db196319290742b9201ca7a84feb5, type: 3}
   _downArrowPrefab: {fileID: -7926013444272775923, guid: 347d6157eb6fcf74aabffa750ecb4b73, type: 3}
   _indicator: {fileID: 310953196}
+  _missCooldownTime: 0.5
 --- !u!1 &935335813
 GameObject:
   m_ObjectHideFlags: 0

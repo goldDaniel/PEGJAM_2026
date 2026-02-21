@@ -24,6 +24,10 @@ public class Game : MonoSingleton<Game>
 
 	private List<GameplayUI> _activeArrows = new();
 
+	[Range(0.01f, 1f)]
+	[SerializeField] private float _missCooldownTime = 0.2f;
+	private float _missCooldownTimer = 0;
+
 	public enum GameInput
 	{
 		ArrowUp,
@@ -63,11 +67,15 @@ public class Game : MonoSingleton<Game>
 	public void ResumeGame() => IsPaused = false;
 
 	private HandState _handState = HandState.Empty;
-	private bool _isReadyToEat => _currentFood != null && _handState == HandState.Holding;
+	private bool IsReadyToEat => _currentFood != null && _handState == HandState.Holding;
+
+	public bool OnPunishmentCooldown => _missCooldownTimer > 0;
+	public float CooldownPercentage => _missCooldownTimer / _missCooldownTime;
 
 	void Awake()
 	{
-		SpawnFoodOnTable();	
+		SpawnFoodOnTable();
+		_missCooldownTimer = 0;
 	}
 
 	private void SpawnFoodOnTable()
@@ -92,11 +100,17 @@ public class Game : MonoSingleton<Game>
 		if (stageComplete)
 			return;
 
-		if (!_isReadyToEat)
+		if(OnPunishmentCooldown)
+		{
+			_missCooldownTimer = Mathf.Max(_missCooldownTimer - Time.deltaTime, 0f);
+			return;
+		}
+	
+		if (!IsReadyToEat)
 		{
 			HandleGrabbing();
 		}
-		else if (_isReadyToEat && _activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
+		else if (IsReadyToEat && _activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
 		{
 			HandleEating();
 		}		
@@ -109,7 +123,7 @@ public class Game : MonoSingleton<Game>
 			if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
 			{
 				_handState = HandState.Reaching;
-				if(!_isReadyToEat)
+				if(!IsReadyToEat)
 				{
 					GrabNextFoodItem();
 				}
@@ -156,6 +170,11 @@ public class Game : MonoSingleton<Game>
 				_currentFood = null;
 				_handState = HandState.Empty;
 			}
+		}
+		else // miss input, punishment
+		{
+			_missCooldownTimer = _missCooldownTime;
+			_indicator.MissedInput();
 		}
 	}
 
