@@ -39,6 +39,9 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private float _missCooldownTime = 0.2f;
 	private float _missCooldownTimer = 0;
 
+	private bool _hasStarted = false;
+	public bool HasStarted => _hasStarted;
+
 	public enum GameInput
 	{
 		ArrowUp,
@@ -174,6 +177,8 @@ public class Game : MonoSingleton<Game>
 		// Display 1
 		yield return new WaitForSeconds(1);
 		// FEAST
+
+		_hasStarted = true;
 	}
 
 	private void HandleGrabbing()
@@ -200,10 +205,6 @@ public class Game : MonoSingleton<Game>
 		}
 	}
 
-	private void GrabNextFoodItem()
-	{
-		
-	}
 
 	private void HandleEating()
 	{

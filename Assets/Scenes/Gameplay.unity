@@ -235,7 +235,7 @@ MonoBehaviour:
   _bodyRenderer: {fileID: 1187010741}
   _armRenderer: {fileID: 751978380}
   _foodHoldingPosition: {fileID: 331516277}
-  _eatingTime: 5
+  _isPlayer: 0
 --- !u!1 &79685677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,7 +1633,7 @@ MonoBehaviour:
   _bodyRenderer: {fileID: 0}
   _armRenderer: {fileID: 0}
   _foodHoldingPosition: {fileID: 970863192}
-  _eatingTime: 5
+  _isPlayer: 1
 --- !u!1 &751978378
 GameObject:
   m_ObjectHideFlags: 0

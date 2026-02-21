@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public enum ContestantAnimations
@@ -22,17 +21,26 @@ public class Contestant : MonoBehaviour
 
 	private Food _currentFood = null;
 	private List<Food> _foodPile = new();
+	private int _initialFoodCount = 0;
 
-	// how long it takes the contestant to finish their plate. Only applicable to NPCS
-	[Range(5f, 30f)] 
-	[SerializeField] private float _eatingTime;
+	private float _eatingTime;
+	private float _currentEatingTimer = 0;
+
+	private bool _isReaching = false;
+	private float _reachTimer = 0;
+	private float _reachTime = 0.5f;
 
 	private Dictionary<ContestantAnimations, Sprite> _sprites;
 
 	private bool _isBiting;
+	private float _biteTime;
+	private float _biteTimer = 0;
 
 	public bool IsHoldingFood => _currentFood != null;
 	public bool HasEatenAllFood => !IsHoldingFood && _foodPile.Count == 0;
+
+	[SerializeField] private bool _isPlayer = false;
+	private bool _isNPC => !_isPlayer;
 
 	void Awake()
 	{
@@ -61,10 +69,14 @@ public class Contestant : MonoBehaviour
 
 			_armRenderer.sprite = _sprites[ContestantAnimations.Empty];
 			_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingUp];
+
+			_eatingTime = template.EatingTime;
+			_biteTime = template.BiteTime;
 		}
 		
 		_foodPile.Capacity = level.foodItems.Count;
-		for (int i = 0; i < level.foodItems.Count; ++i)
+		_initialFoodCount = level.foodItems.Count;
+		for (int i = 0; i < _initialFoodCount; ++i)
 		{
 			var food = Instantiate(foodPrefab, foodSpawn, true);
 			food.transform.position = foodSpawn.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
@@ -75,40 +87,103 @@ public class Contestant : MonoBehaviour
 
 	public Food GetHeldFood() => _currentFood;
 
-	public void GrabNextFoodItem()
+	public bool GrabNextFoodItem()
 	{
+		if (_foodPile.Count == 0)
+			return false;
+
 		_currentFood = _foodPile[0];
 		_foodPile.RemoveAt(0);
 		_currentFood.SetPosition(_foodHoldingPosition);
+		return true;
 	}
 
 	public void Bite()
 	{
-		Eat();
 		_currentFood.Bite();
 	}
 
 	public void FinishFood()
 	{
-		Destroy(_currentFood.gameObject);
-		_currentFood = null;
+		if (_currentFood != null)
+		{
+			Destroy(_currentFood.gameObject);
+			_currentFood = null;
+		}
+		_reachTimer = _reachTime;
 	}
 
 	public void Eat()
 	{
 		if (_bodyRenderer == null)
 			return;
-	
 
-		if (_isBiting)
+		_biteTimer -= Time.deltaTime;
+		if (_biteTimer <= 0)
 		{
-			_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingUp];
-			_isBiting = false;
+			_currentFood.Bite();
+			if (_isBiting)
+			{
+				_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingUp];
+				_isBiting = false;
+			}
+			else
+			{
+				_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingDown];
+				_isBiting = true;
+			}
+			_biteTimer = _biteTime;
+		}
+	}
+
+	public void Update()
+	{
+		if (_isPlayer)
+			return;
+
+		if (!Game.Instance.HasStarted)
+			return;
+
+		// no food currently, reach and grab food
+		if (_currentFood == null)
+		{
+			if(!_isReaching)
+			{
+				if(_reachTimer > 0)
+					_reachTimer -= Time.deltaTime;
+				else
+				{
+					_isReaching = true;
+					_reachTimer = _reachTime;
+					_armRenderer.sprite = _sprites[ContestantAnimations.Reaching];
+				}
+			}
+			else 
+			{
+				if (_reachTimer > 0)
+					_reachTimer -= Time.deltaTime;
+				else 
+				{
+					_armRenderer.sprite = _sprites[ContestantAnimations.Empty];
+					GrabNextFoodItem();
+				}
+			}
+
+			return;
+		}
+		_isReaching = false;
+
+
+		float timePerFood = _eatingTime / _initialFoodCount;
+		if (_currentEatingTimer <= 0)
+		{
+			FinishFood();
+			_currentEatingTimer = timePerFood;
 		}
 		else 
 		{
-			_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingDown];
-			_isBiting = true;
+			_currentEatingTimer -= Time.deltaTime;
+			Eat();
 		}
 	}
 }
