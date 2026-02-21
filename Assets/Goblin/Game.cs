@@ -112,10 +112,11 @@ public class Game : MonoSingleton<Game>
 	{
 		_activeArrows.Clear();
 
-		for (int i = 0; i < template.keySequence.Length; ++i)
+		var seq = template.GetKeySequence();
+		for (int i = 0; i < seq.Length; ++i)
 		{
 			GameplayUI prefab = null;
-			var keys = template.keySequence[i].keys;
+			var keys = seq[i].keys;
 			if (keys.Length == 1)
 			{
 				switch (keys[0])

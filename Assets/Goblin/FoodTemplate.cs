@@ -19,4 +19,15 @@ public class FoodTemplate : ScriptableObject
 
     [Header("Cycles")]
     public int cycles = 1;
+
+    public KeyCombo[] GetKeySequence()
+    {
+        KeyCombo[] seq = new KeyCombo[cycles * keySequence.Length];
+        for (int i = 0; i < seq.Length; i++)
+        {
+            seq[i] = keySequence[i];
+        }
+
+        return seq;
+    }
 }
