@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,9 +17,9 @@ public sealed class SceneTransitionManager : MonoSingleton<SceneTransitionManage
 		
 		public static Settings Default => new Settings
 		{
-			FadeOutDuration = 0.5f,
-			FadeInDuration = 0.5f,
-			HoldDuration = 0f,
+			FadeOutDuration = 1.5f,
+			FadeInDuration = 1.5f,
+			HoldDuration = 0.5f,
 			FadeColor = Color.black,
 		};
 	}
@@ -88,6 +89,7 @@ public sealed class SceneTransitionManager : MonoSingleton<SceneTransitionManage
 
 	private IEnumerator TransitionRoutine(Func<AsyncOperation> loadOperationFactory, Settings settings)
 	{
+		InputSystem.actions.Disable();
 		EnsureVisuals();
 		_canvas.enabled = true;
 
@@ -110,6 +112,8 @@ public sealed class SceneTransitionManager : MonoSingleton<SceneTransitionManage
 		yield return AnimateTransition(settings, fadeOut: false);
 		_canvas.enabled = false;
 		_transitionRoutine = null;
+
+		InputSystem.actions.Enable();
 	}
 
 	private static IEnumerator WaitForSceneLoadComplete(AsyncOperation loadOperation)
@@ -186,7 +190,7 @@ public sealed class SceneTransitionManager : MonoSingleton<SceneTransitionManage
 			_canvas.sortingOrder = short.MaxValue;
 			CanvasScaler scaler = canvasObject.GetComponent<CanvasScaler>();
 			scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-			scaler.referenceResolution = new Vector2(1920f, 1080f);
+			scaler.referenceResolution = new Vector2(1920f, 1080f) * 1.1f; // 10% pad 
 		}
 
 		_canvasGroup = _canvas.GetComponent<CanvasGroup>();

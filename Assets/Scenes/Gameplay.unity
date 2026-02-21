@@ -1048,6 +1048,7 @@ GameObject:
   - component: {fileID: 500139945}
   - component: {fileID: 500139944}
   - component: {fileID: 500139943}
+  - component: {fileID: 500139947}
   m_Layer: 5
   m_Name: Level End Panel
   m_TagString: Untagged
@@ -1140,6 +1141,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500139941}
   m_CullTransparentMesh: 1
+--- !u!114 &500139947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500139941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f240d9b2451c84d914d4dae706bae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelEndPanel
+  endText: {fileID: 1221411538}
+  continueButton: {fileID: 1346840526}
+  tryAgainButton: {fileID: 2120290341}
+  quitButton: {fileID: 1908745556}
+  inClip: {fileID: 11400000, guid: 498ac67425ef79546bfe9b34db4475b2, type: 2}
+  outClip: {fileID: 11400000, guid: 77a2b11d0ed914e4abddf4254097bbe0, type: 2}
+  animator: {fileID: 500139944}
 --- !u!1 &502550067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,6 +2532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3b97ca4c0a56b4a90b3f05bc9ab768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game
+  _levelEndPanel: {fileID: 500139947}
   _arrowPath:
   - {fileID: 1214589778}
   - {fileID: 2142906589}
@@ -3451,7 +3472,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1346840527}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 500139947}
+        m_TargetAssemblyTypeName: LevelEndPanel, Assembly-CSharp
+        m_MethodName: OnWin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1346840527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4653,7 +4686,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1908745557}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 500139947}
+        m_TargetAssemblyTypeName: LevelEndPanel, Assembly-CSharp
+        m_MethodName: OnQuitPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1908745557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5662,7 +5707,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2120290342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 500139947}
+        m_TargetAssemblyTypeName: LevelEndPanel, Assembly-CSharp
+        m_MethodName: OnTryAgainPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2120290342
 MonoBehaviour:
   m_ObjectHideFlags: 0

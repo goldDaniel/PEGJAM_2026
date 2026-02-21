@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 
 public class Game : MonoSingleton<Game>
 {
+	[SerializeField] private LevelEndPanel _levelEndPanel;
+
 	[SerializeField] private RectTransform[] _arrowPath;
 	[SerializeField] private Level _currentLevel;
 	[SerializeField] private Food _foodPrefab;
@@ -122,6 +124,14 @@ public class Game : MonoSingleton<Game>
 		bool stageComplete = _player.HasEatenAllFood || _opponent.HasEatenAllFood;
 		if (stageComplete)
 		{
+			if (!_levelEndPanel.IsDisplayed)
+			{
+				if (_player.HasEatenAllFood)
+					_levelEndPanel.OnWin();
+				else if (_opponent.HasEatenAllFood)
+					_levelEndPanel.OnLose();
+			}
+			
 			return;
 		}
 

@@ -1,12 +1,18 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SceneTransition : MonoBehaviour
 {
-    [Header("Transition")]
-    public string transition;
+	[Header("Transition")]
+	public string transition;
 
-    public void NextScene()
-    {
-        SceneTransitionManager.LoadScene(transition);
-    }
+	void Awake()
+	{ 
+		InputSystem.actions.Enable(); 
+	}
+
+	public void NextScene()
+	{
+		SceneTransitionManager.LoadScene(transition);
+	}
 }
