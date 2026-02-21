@@ -138,7 +138,6 @@ public class Contestant : MonoBehaviour
 
 	public void OpponentGameplayTick()
 	{
-		return;
 		if (_isPlayer)
 			return;
 
