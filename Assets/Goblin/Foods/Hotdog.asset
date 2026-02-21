@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: Hotdog
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 21300000, guid: bec86dd6345347a4db604bbb1d9ff659, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: bec86dd6345347a4db604bbb1d9ff659, type: 3}
   inputSequence:
   - inputs: 02000000
   - inputs: 01000000

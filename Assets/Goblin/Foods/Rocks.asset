@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: Rocks
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: ab2fda0c64164254eba9550226c9c662, type: 3}
+  - {fileID: 21300000, guid: 3caaefcf5bcc9a5408cdaab7b810c900, type: 3}
+  - {fileID: 21300000, guid: 1f890e83a6c33014a8ee4f119d2da8d0, type: 3}
+  - {fileID: 21300000, guid: f43f2bbe744493a45ac0d74d1250e794, type: 3}
+  - {fileID: 21300000, guid: 43e6350bcf458844ba7afa9b70c4a019, type: 3}
+  - {fileID: 21300000, guid: b4180507646bd4b40b087ea4f93e167b, type: 3}
+  - {fileID: 21300000, guid: 1abe0cac564d0764ca15ce4958d26cd6, type: 3}
   inputSequence:
   - inputs: 00000000
   - inputs: 00000000

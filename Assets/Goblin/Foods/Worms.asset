@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: Worms
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: d6eb31b470ee2714d8a85cdecd3a22eb, type: 3}
+  - {fileID: 21300000, guid: 9ab39246e1f385147b6cb6e7a9c8f631, type: 3}
+  - {fileID: 21300000, guid: 9261da70721285a4a84c193e5d934ac1, type: 3}
+  - {fileID: 21300000, guid: 256e40d445ef2d446af82fd55517a9a1, type: 3}
+  - {fileID: 21300000, guid: 636221d0c9de68840921a8a6c667b585, type: 3}
+  - {fileID: 21300000, guid: 67c06e75adad49a49a66a7b2fd450ba5, type: 3}
+  - {fileID: 21300000, guid: e9c4a799af6d63448a483a5b9fecef0a, type: 3}
   inputSequence:
   - inputs: 00000000
   - inputs: 02000000

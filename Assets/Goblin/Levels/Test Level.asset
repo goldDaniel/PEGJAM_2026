@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Level
   opponent: {fileID: 11400000, guid: a1a0391fd8fb3144d8e34a21d1ace1a3, type: 2}
   foodItems:
-  - {fileID: 11400000, guid: a627cdec55765e846808436e031a1665, type: 2}
-  - {fileID: 11400000, guid: 54e668dad8a03174a8695fce4de5ce96, type: 2}
-  - {fileID: 11400000, guid: a627cdec55765e846808436e031a1665, type: 2}
+  - {fileID: 11400000, guid: e03b9f6d05e188b41b82b8cc6b57fc5f, type: 2}
+  - {fileID: 11400000, guid: e96f9e16c389f164c9fe34e692f4b1f1, type: 2}
   - {fileID: 11400000, guid: 54e668dad8a03174a8695fce4de5ce96, type: 2}
   - {fileID: 11400000, guid: a627cdec55765e846808436e031a1665, type: 2}
   - {fileID: 11400000, guid: 1ce51ec7cf6b85a419dc9e05348b9403, type: 2}
+  - {fileID: 11400000, guid: 801332198bada83459d2564b55b6497a, type: 2}
+  - {fileID: 11400000, guid: d79eae62dc39d73489c61cf62f647756, type: 2}

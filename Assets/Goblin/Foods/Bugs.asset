@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: Bugs
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: deca268447630e04bb1d55fa51263172, type: 3}
+  - {fileID: 21300000, guid: 584154469c5c7e445a03c79055200026, type: 3}
+  - {fileID: 21300000, guid: 311d64e0504f7934d93adcc41a7c5c4a, type: 3}
+  - {fileID: 21300000, guid: 117682e01ecf50843881708f26057a34, type: 3}
   inputSequence:
   - inputs: 02000000
   - inputs: 02000000

@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: MoldyBread
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 21300000, guid: 3a2cbc0cce3bae34aaee85f7a29fefbe, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 3a2cbc0cce3bae34aaee85f7a29fefbe, type: 3}
   inputSequence:
   - inputs: 0000000003000000
   - inputs: 0200000003000000
-  - inputs: 0200000001000000
-  - inputs: 0300000001000000
-  - inputs: 0300000002000000
+  - inputs: 0100000002000000
+  - inputs: 0100000003000000
+  - inputs: 0200000003000000
   - inputs: 0000000002000000
   - inputs: 0000000001000000
   cycles: 1

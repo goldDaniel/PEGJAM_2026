@@ -9,12 +9,22 @@ public class Food : MonoBehaviour
 	public FoodTemplate template;
 
 	private Vector2 _origin;
+    private int _numBites;
+	private int _maxBites;
 
-	public void Init(FoodTemplate template)
+    public void Init(FoodTemplate template)
 	{
 		this.template = template;
 		var sr = GetComponentInChildren<SpriteRenderer>();
-		sr.sprite = template.sprite;
+        _numBites = 0;
+        _maxBites = template.GetInputSequence().Length;
+        sr.sprite = template.sprites[GetSpriteIndex()];
+	}
+
+	private int GetSpriteIndex()
+	{
+		float map = ((float)_numBites / (_maxBites - 1)) * (template.sprites.Length - 1);
+		return (int)MathF.Max(0, MathF.Min(template.sprites.Length - 1, map));
 	}
 
 	public void SetPosition(Transform holdLocation)
@@ -26,13 +36,10 @@ public class Food : MonoBehaviour
 
 	public void Bite()
 	{
-		StartCoroutine(AnimateBite(0.5f));
-	}
-
-	public void Update()
-	{
-		if (!Game.Instance.OnPunishmentCooldown)
-			return;
+        _numBites = _numBites < _maxBites ? _numBites + 1 : _maxBites;
+        var sr = GetComponentInChildren<SpriteRenderer>();
+		sr.sprite = template.sprites[GetSpriteIndex()];
+        StartCoroutine(AnimateBite(0.5f));
 	}
 
 	private IEnumerator AnimateBite(float duration)

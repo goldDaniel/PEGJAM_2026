@@ -10,8 +10,8 @@ public struct InputCombo
 [CreateAssetMenu(fileName = "FoodTemplate", menuName = "Scriptable Objects/FoodTemplate")]
 public class FoodTemplate : ScriptableObject
 {
-	[Header("Sprite")]
-	public Sprite sprite;
+	[Header("Sprites")]
+	public Sprite[] sprites;
 
 	[Header("Input Sequence")]
 	public InputCombo[] inputSequence;
