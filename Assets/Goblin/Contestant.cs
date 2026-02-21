@@ -77,9 +77,9 @@ public class Contestant : MonoBehaviour
 		
 		_foodPile.Capacity = level.foodItems.Count;
 		_initialFoodCount = level.foodItems.Count;
-        _timePerFood = _eatingTime / _initialFoodCount;
+		_timePerFood = _eatingTime / _initialFoodCount;
 		_currentEatingTimer = _timePerFood;
-        for (int i = 0; i < _initialFoodCount; ++i)
+		for (int i = 0; i < _initialFoodCount; ++i)
 		{
 			var food = Instantiate(foodPrefab, foodSpawn, true);
 			food.transform.position = foodSpawn.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
@@ -101,9 +101,9 @@ public class Contestant : MonoBehaviour
 		return true;
 	}
 
-	public void Bite()
+	public void Bite(float foodProgress)
 	{
-		_currentFood.Bite();
+		_currentFood.Bite(foodProgress);
 	}
 
 	public void FinishFood()
@@ -124,7 +124,7 @@ public class Contestant : MonoBehaviour
 		_biteTimer -= Time.deltaTime;
 		if (_biteTimer <= 0)
 		{
-			_currentFood.Bite();
+			_currentFood.Bite((_timePerFood - _currentEatingTimer) / _timePerFood);
 			if (_isBiting)
 			{
 				_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingUp];
@@ -167,7 +167,7 @@ public class Contestant : MonoBehaviour
 					_armRenderer.sprite = _sprites[ContestantAnimations.Empty];
 					GrabNextFoodItem();
 					_isReaching = false;
-                }
+				}
 			}
 		}
 		else
