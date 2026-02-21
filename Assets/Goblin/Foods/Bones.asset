@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: Bones
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: 2edf36ef41211384fa15fd234992193f, type: 3}
+  - {fileID: 21300000, guid: ef5e63445ee8cbf4e9717a1945b0e6ed, type: 3}
+  - {fileID: 21300000, guid: 42a26a03398f4cf4a9ce4098e407d629, type: 3}
+  - {fileID: 21300000, guid: 6fb8f3465fa4b9046a4317515da33ebf, type: 3}
   inputSequence:
   - inputs: 0300000001000000
   - inputs: 0300000000000000
