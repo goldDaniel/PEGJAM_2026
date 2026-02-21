@@ -22,13 +22,13 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private GameplayUI _downArrowPrefab;
 
 	[SerializeField] private GameplayUI _luArrowPrefab;
-    [SerializeField] private GameplayUI _ldArrowPrefab;
-    [SerializeField] private GameplayUI _lrArrowPrefab;
-    [SerializeField] private GameplayUI _duArrowPrefab;
-    [SerializeField] private GameplayUI _drArrowPrefab;
+	[SerializeField] private GameplayUI _ldArrowPrefab;
+	[SerializeField] private GameplayUI _lrArrowPrefab;
+	[SerializeField] private GameplayUI _duArrowPrefab;
+	[SerializeField] private GameplayUI _drArrowPrefab;
 	[SerializeField] private GameplayUI _urArrowPrefab;
 
-    [SerializeField] private CurrentIndicator _indicator;
+	[SerializeField] private CurrentIndicator _indicator;
 
 	private List<GameplayUI> _activeArrowCombos = new();
 	private Dictionary<int, GameplayUI> _comboDict = new();
@@ -83,8 +83,9 @@ public class Game : MonoSingleton<Game>
 
 	IEnumerator Start()
 	{
+		yield return new WaitForSeconds(1f);
 		InitArrowDict();
-		SpawnFoodOnTable();	
+		SpawnFoodOnTable();
 	}
 
 	private static int HashKeys(params Key[] keys)
@@ -104,12 +105,12 @@ public class Game : MonoSingleton<Game>
 		_comboDict[HashKeys(Key.UpArrow)] = _upArrowPrefab;
 
 		_comboDict[HashKeys(Key.LeftArrow, Key.UpArrow)] = _urArrowPrefab;
-        _comboDict[HashKeys(Key.LeftArrow, Key.DownArrow)] = _ldArrowPrefab;
-        _comboDict[HashKeys(Key.LeftArrow, Key.RightArrow)] = _lrArrowPrefab;
-        _comboDict[HashKeys(Key.DownArrow, Key.UpArrow)] = _duArrowPrefab;
-        _comboDict[HashKeys(Key.DownArrow, Key.RightArrow)] = _drArrowPrefab;
-        _comboDict[HashKeys(Key.UpArrow, Key.RightArrow)] = _urArrowPrefab;
-    }
+		_comboDict[HashKeys(Key.LeftArrow, Key.DownArrow)] = _ldArrowPrefab;
+		_comboDict[HashKeys(Key.LeftArrow, Key.RightArrow)] = _lrArrowPrefab;
+		_comboDict[HashKeys(Key.DownArrow, Key.UpArrow)] = _duArrowPrefab;
+		_comboDict[HashKeys(Key.DownArrow, Key.RightArrow)] = _drArrowPrefab;
+		_comboDict[HashKeys(Key.UpArrow, Key.RightArrow)] = _urArrowPrefab;
+	}
 
 	private void SpawnFoodOnTable()
 	{
@@ -256,14 +257,14 @@ public class Game : MonoSingleton<Game>
 			var keys = seq[i].keys;
 			var prefab = _comboDict[HashKeys(keys)];
 
-            var parent = _arrowPath[count];
-            var instance = Instantiate(prefab, parent);
-            instance.transform.position = parent.transform.position;
-            instance.rectTransform.sizeDelta *= 1.5f;
-            instance.Init(keys);
-            _activeArrowCombos.Add(instance);
-            count++;
-        }
+			var parent = _arrowPath[count];
+			var instance = Instantiate(prefab, parent);
+			instance.transform.position = parent.transform.position;
+			instance.rectTransform.sizeDelta *= 1.5f;
+			instance.Init(keys);
+			_activeArrowCombos.Add(instance);
+			count++;
+		}
 		_indicator.Stop();
 		_indicator.Play();
 	}
