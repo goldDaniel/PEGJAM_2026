@@ -118,7 +118,7 @@ public class Game : MonoSingleton<Game>
 			for (int i = 0; i < _currentLevel.foodItems.Count; ++i)
 			{
 				var food = Instantiate(_foodPrefab, spawnPos, true);
-				food.transform.position = spawnPos.position.xy() + Random.insideUnitCircle;
+				food.transform.position = spawnPos.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
 				food.Init(_currentLevel.foodItems[i]);
 				_foodPile.Add(food);
 			}
