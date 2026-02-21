@@ -10,6 +10,9 @@ public class GameplayUI : MonoBehaviour
 	[SerializeField] private Image _renderer;
 	public RectTransform rectTransform;
 
+	[SerializeField] private UIAnimationClip _bounce;
+
+	[SerializeField] private string _sfxKey;
 
 	private KeyControl _control;
 
@@ -18,6 +21,12 @@ public class GameplayUI : MonoBehaviour
 	public void Init(Key key)
 	{
 		_control = Keyboard.current[key];
+		_animator.Play(_bounce);
+	}
+
+	public void OnValidPress()
+	{
+		AudioManager.Instance.Play(_sfxKey);
 	}
 
 	public void MoveToPosition(Vector2 position)

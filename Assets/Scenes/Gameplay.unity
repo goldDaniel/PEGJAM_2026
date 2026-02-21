@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentIndicator
   animator: {fileID: 310953198}
-  clip: {fileID: 11400000, guid: 861bde0733689994c936dc071be21d73, type: 2}
+  clip: {fileID: 11400000, guid: ef25ded53fffa29488553a719067ab0a, type: 2}
 --- !u!114 &310953197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1495,6 +1495,7 @@ MonoBehaviour:
   _rightArrowPrefab: {fileID: -7926013444272775923, guid: 9f0a2f97a1bb51d4ab3a6b3d4bd18f9d, type: 3}
   _upArrowPrefab: {fileID: -7926013444272775923, guid: 101db196319290742b9201ca7a84feb5, type: 3}
   _downArrowPrefab: {fileID: -7926013444272775923, guid: 347d6157eb6fcf74aabffa750ecb4b73, type: 3}
+  _indicator: {fileID: 310953196}
 --- !u!1 &935335813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,6 +2144,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1417c2d33ba0bca4b998aed88cb1ae14, type: 3}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ac94fd685e77e5488f240fc5dc0647f, type: 3}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[1].name
+      value: LeftArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e90d80f02f842f04aa793874813598e6, type: 3}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[2].name
+      value: RightArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 68d09d2e62b9a954dbbcd6a50bc4d600, type: 3}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[3].name
+      value: UpArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[0].defaultVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[1].defaultVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[2].defaultVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6023528422478583254, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
+      propertyPath: _audioBank.Array.data[3].defaultVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7383108948733193213, guid: 5412d78c7618cfd4488e49c21b165013, type: 3}
       propertyPath: m_Name
       value: AudioManager

@@ -20,6 +20,8 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private GameplayUI _upArrowPrefab;
 	[SerializeField] private GameplayUI _downArrowPrefab;
 
+	[SerializeField] private CurrentIndicator _indicator;
+
 	private List<GameplayUI> _activeArrows = new();
 
 	public enum GameInput
@@ -65,12 +67,17 @@ public class Game : MonoSingleton<Game>
 
 	void Awake()
 	{
+		SpawnFoodOnTable();	
+	}
+
+	private void SpawnFoodOnTable()
+	{
 		_currentLevel = Instantiate(_currentLevel);
 		_foodPile.Capacity = _currentLevel.foodItems.Count;
 		for (int i = 0; i < _currentLevel.foodItems.Count; ++i)
 		{
-			var food = Instantiate(_foodPrefab, _foodSpawnPosition, true); 
-			food.transform.position = _foodSpawnPosition.position;
+			var food = Instantiate(_foodPrefab, _foodSpawnPosition, true);
+			food.transform.position = _foodSpawnPosition.position.xy() + Random.insideUnitCircle;
 			food.Init(_currentLevel.foodItems[i]);
 			_foodPile.Add(food);
 		}
@@ -81,7 +88,7 @@ public class Game : MonoSingleton<Game>
 		if (IsPaused)
 			return;
 
-		bool stageComplete = _currentLevel.foodItems.Count == 0 && _currentFood == null;
+		bool stageComplete = _foodPile.Count == 0 && _currentFood == null;
 		if (stageComplete)
 			return;
 
@@ -132,6 +139,8 @@ public class Game : MonoSingleton<Game>
 		var desiredKey = _activeArrows[0].GetKey();
 		if (Keyboard.current[desiredKey].wasPressedThisFrame)
 		{
+			_activeArrows[0].OnValidPress();
+
 			Destroy(_activeArrows[0].gameObject);
 			_activeArrows.RemoveAt(0);
 
@@ -185,5 +194,7 @@ public class Game : MonoSingleton<Game>
 			instance.Init(keys[0]);
 			_activeArrows.Add(instance);
 		}
+		_indicator.Stop();
+		_indicator.Play();
 	}
 }

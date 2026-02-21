@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06bd357f6c72433b8e4504f5e263bab1, type: 3}
+  m_Name: Indicator Bounce
+  m_EditorClassIdentifier: Assembly-CSharp::UIAnimationClip
+  _duration: 0.4
+  _delay: 0
+  _loopMode: 1
+  _defaultEase: 2
+  _customCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4
+      value: 0.4
+      inSlope: 2.7439184
+      outSlope: 2.7439184
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6
+      value: 0.4
+      inSlope: -2.851633
+      outSlope: -2.851633
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.03811026
+      outSlope: -0.03811026
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12025923
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _positionTracks: []
+  _scaleTracks:
+  - Enabled: 1
+    Ease: 10
+    From: {x: 1, y: 1}
+    To: {x: 1.05, y: 1.05}
+  _alphaTracks: []

@@ -31,8 +31,8 @@ RectTransform:
   m_GameObject: {fileID: 831119237784292481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,6 +95,8 @@ MonoBehaviour:
   _target: {fileID: 2193385791444176368}
   _renderer: {fileID: 6993883291903538888}
   rectTransform: {fileID: 7813737567390986927}
+  _bounce: {fileID: 11400000, guid: 861bde0733689994c936dc071be21d73, type: 2}
+  _sfxKey: RightArrow
 --- !u!114 &-8028119043519592628
 MonoBehaviour:
   m_ObjectHideFlags: 0

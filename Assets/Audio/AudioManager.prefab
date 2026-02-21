@@ -44,11 +44,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4505a6fed4c3f174e98b9a0f98f3df82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  _audioSourcePrefab: {fileID: 5733634809892711062, guid: 84abf405440d43845bdc0e125e270eaa, type: 3}
   _sfxPoolSize: 16
   _musicPoolSize: 2
   _uiPoolSize: 8
   _sfxMixer: {fileID: 24300002, guid: ad0cd941d2162ad498f1d2aff9fe895c, type: 2}
   _musicMixer: {fileID: 24300002, guid: de80e431038fb6044830a60fea0cc6f5, type: 2}
   _uiMixer: {fileID: 24300002, guid: 7b87f8c6bc3c153448f082b78d3e308a, type: 2}
-  audioBank: []
+  _audioBank:
+  - name: DownArrow
+    clip: {fileID: 0}
+    channel: 0
+    loop: 0
+    defaultVolume: 0
+  - name: 
+    clip: {fileID: 0}
+    channel: 0
+    loop: 0
+    defaultVolume: 0
+  - name: 
+    clip: {fileID: 0}
+    channel: 0
+    loop: 0
+    defaultVolume: 0
+  - name: 
+    clip: {fileID: 0}
+    channel: 0
+    loop: 0
+    defaultVolume: 0
