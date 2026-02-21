@@ -15,8 +15,9 @@ MonoBehaviour:
   opponentName: Marvina
   opponentImage: {fileID: -5319527762437388050, guid: 5b0b960a53bf3bb4eb6691a4604dbd68, type: 3}
   foodItems:
-  - {fileID: 11400000, guid: 38523eefea757c445b2440688e5dece8, type: 2}
+  - {fileID: 11400000, guid: a627cdec55765e846808436e031a1665, type: 2}
   - {fileID: 11400000, guid: 54e668dad8a03174a8695fce4de5ce96, type: 2}
-  - {fileID: 11400000, guid: 38523eefea757c445b2440688e5dece8, type: 2}
+  - {fileID: 11400000, guid: a627cdec55765e846808436e031a1665, type: 2}
   - {fileID: 11400000, guid: 54e668dad8a03174a8695fce4de5ce96, type: 2}
-  - {fileID: 11400000, guid: 38523eefea757c445b2440688e5dece8, type: 2}
+  - {fileID: 11400000, guid: a627cdec55765e846808436e031a1665, type: 2}
+  - {fileID: 11400000, guid: 1ce51ec7cf6b85a419dc9e05348b9403, type: 2}

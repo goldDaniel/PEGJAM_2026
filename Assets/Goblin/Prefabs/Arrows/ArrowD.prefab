@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2193385791444176368}
   - component: {fileID: -3819112091207663276}
   m_Layer: 5
-  m_Name: ArrowLeft
+  m_Name: ArrowD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c0958207088c0ba4ca79a49cd11110fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63da8a73f92476845bfba2939b0550b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -96,7 +96,7 @@ MonoBehaviour:
   _renderer: {fileID: 6993883291903538888}
   rectTransform: {fileID: 7813737567390986927}
   _bounce: {fileID: 11400000, guid: 861bde0733689994c936dc071be21d73, type: 2}
-  _sfxKey: LeftArrow
+  _sfxKey: DownArrow
 --- !u!114 &-8028119043519592628
 MonoBehaviour:
   m_ObjectHideFlags: 0
