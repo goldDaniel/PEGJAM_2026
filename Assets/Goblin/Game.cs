@@ -3,12 +3,14 @@ using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Game : MonoSingleton<Game>
 {
 	[SerializeField] private LevelEndPanel _levelEndPanel;
+	[SerializeField] private TextMeshProUGUI _countdownText;
 
 	[SerializeField] private RectTransform[] _arrowPath;
 	[SerializeField] private Level _currentLevel;
@@ -173,14 +175,21 @@ public class Game : MonoSingleton<Game>
 
 	private IEnumerator GameplayCountdown()
 	{
-		// Display 3
-		yield return new WaitForSeconds(1);
-		// Display 2
-		yield return new WaitForSeconds(1);
-		// Display 1
-		yield return new WaitForSeconds(1);
-		// FEAST
+		_countdownText.gameObject.SetActive(true);
 
+		_countdownText.text = $"{3}";
+		yield return new WaitForSeconds(1);
+		
+		_countdownText.text = $"{2}";
+		yield return new WaitForSeconds(1);
+		
+		_countdownText.text = $"{1}";
+		yield return new WaitForSeconds(1);
+		
+		_countdownText.text = "feast";
+		yield return new WaitForSeconds(1);
+
+		_countdownText.gameObject.SetActive(false);
 		_hasStarted = true;
 	}
 
@@ -196,7 +205,6 @@ public class Game : MonoSingleton<Game>
 					_player.GrabNextFoodItem();
 				}
 			}
-				
 		}
 		else if (_handState == HandState.Reaching)
 		{
@@ -207,7 +215,6 @@ public class Game : MonoSingleton<Game>
 			}
 		}
 	}
-
 
 	private void HandleEating(List<GameInput> inputs, bool inWindow)
 	{
