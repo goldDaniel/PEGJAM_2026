@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 045593374a4e5654e910a12d1bbbe111
+guid: d7653b90ee1b69847aacf2f65b11e7d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 497600754102043572
-    second: Table_0
+      213: 4657904882236264277
+    second: Jerkey_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Table_0
+      name: Jerkey_0
       rect:
         serializedVersion: 2
-        x: 231
-        y: 0
-        width: 2108
-        height: 773
+        x: 54
+        y: 9
+        width: 1965
+        height: 1862
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b3083cdf35d7e600800000000000000
-      internalID: 497600754102043572
+      spriteID: 55f004fcfc334a040800000000000000
+      internalID: 4657904882236264277
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Table_0: 497600754102043572
+      Jerkey_0: 4657904882236264277
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

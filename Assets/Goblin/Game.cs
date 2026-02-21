@@ -1,22 +1,16 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Game : MonoSingleton<Game>
 {
-	[SerializeField] private GoblinMeter _goblinMeter;
-	[SerializeField] private Transform _foodContainer;
-	[SerializeField] private Transform _foodPivot;
-	private List<Food> _food = new();
 	private Food _currentFood = null;
 
-	[SerializeField] private GameObject _mouthOpen;
-	[SerializeField] private GameObject _mouthClosed;
-
 	[SerializeField] private RectTransform[] _arrowPath;
-	[SerializeField] private FoodTemplate _foodTemplate;
+	[SerializeField] private Level _currentLevel;
+	[SerializeField] private Food _foodPrefab;
+	[SerializeField] private Transform _foodHoldingPosition;
 
 	[SerializeField] private GameplayUI _leftArrowPrefab;
 	[SerializeField] private GameplayUI _rightArrowPrefab;
@@ -78,11 +72,11 @@ public class Game : MonoSingleton<Game>
 
 	private EatingState _eatingState = EatingState.MouthClosed;
 	private HandState _handState = HandState.Empty;
-	private bool _isHolding => _currentFood != null;
+	private bool _isHoldingFood => _currentFood != null;
 
 	void Awake()
 	{
-		SetupFood(_foodTemplate);
+		_currentLevel = Instantiate(_currentLevel);
 	}
 
 	void Update()
@@ -90,24 +84,77 @@ public class Game : MonoSingleton<Game>
 		if (IsPaused)
 			return;
 
-		if (_activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
-		{
-			var desiredKey = _activeArrows[0].GetKey();
-			if (Keyboard.current[desiredKey].wasPressedThisFrame)
-			{
-				Destroy(_activeArrows[0].gameObject);
-				_activeArrows.RemoveAt(0);
+		bool stageComplete = _currentLevel.foodItems.Count == 0 && _currentFood == null;
+		if (stageComplete)
+			return;
 
-				for (int i = 0; i < _activeArrows.Count; ++i)
-				{
-					var arrow = _activeArrows[i];
-					arrow.MoveToPosition(_arrowPath[i].transform.position);
-				}
-			}
+		if (!_isHoldingFood)
+		{
+			HandleGrabbing();	
+		}
+		else if (_isHoldingFood && _activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
+		{
+			HandleEating();
 		}		
 	}
 
-	private void SetupFood(FoodTemplate template)
+	private void HandleGrabbing()
+	{
+		if (_handState == HandState.Empty || _handState == HandState.Holding)
+		{
+			if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+			{
+				_handState = HandState.Reaching;
+				if(!_isHoldingFood)
+				{
+					GrabNextFoodItem();
+				}
+			}
+				
+		}
+		else if (_handState != HandState.Reaching)
+		{
+			if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+				_handState = HandState.Holding;
+		}
+	}
+
+	private void GrabNextFoodItem()
+	{
+		var items = _currentLevel.foodItems;
+		SetupArrowsForFood(items[0]);
+
+		_currentFood = Instantiate(_foodPrefab, _foodHoldingPosition, true);
+		_currentFood.transform.position = _foodHoldingPosition.position;
+		_currentFood.Init(items[0]);
+
+		items.RemoveAt(0);
+	}
+
+	private void HandleEating()
+	{
+		var desiredKey = _activeArrows[0].GetKey();
+		if (Keyboard.current[desiredKey].wasPressedThisFrame)
+		{
+			Destroy(_activeArrows[0].gameObject);
+			_activeArrows.RemoveAt(0);
+
+			for (int i = 0; i < _activeArrows.Count; ++i)
+			{
+				var arrow = _activeArrows[i];
+				arrow.MoveToPosition(_arrowPath[i].transform.position);
+			}
+
+			if (_activeArrows.Count == 0)
+			{
+				Destroy(_currentFood.gameObject);
+				_currentFood = null;
+				_handState = HandState.Empty;
+			}
+		}
+	}
+
+	private void SetupArrowsForFood(FoodTemplate template)
 	{
 		_activeArrows.Clear();
 
@@ -141,34 +188,6 @@ public class Game : MonoSingleton<Game>
 			instance.rectTransform.sizeDelta *= 1.5f;
 			instance.Init(keys[0]);
 			_activeArrows.Add(instance);
-		}
-	}
-	
-	private void HandleReachForFood()
-	{
-		_handState = HandState.Reaching;
-		if (!_isHolding)
-		{
-			if(_food.Count > 0)
-			{
-				_currentFood = _food[0];
-				_food.RemoveAt(0);
-
-				_currentFood.transform.SetParent(_foodPivot, true);
-				_currentFood.transform.position = _foodPivot.position;
-				_goblinMeter.SetPercentage(_currentFood.GetPercentage(), 0.5f);
-			}
-		}
-	}
-	private void HandleHoldFoodInFront()
-	{
-		if (_isHolding)
-		{
-			_handState = HandState.Holding;
-		}
-		else 
-		{
-			_handState = HandState.Empty;
 		}
 	}
 }

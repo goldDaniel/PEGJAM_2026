@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: Hotdog
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 0}
+  sprite: {fileID: 5187186849918937928, guid: bec86dd6345347a4db604bbb1d9ff659, type: 3}
   keySequence:
   - keys: 3f000000
   - keys: 3e000000
