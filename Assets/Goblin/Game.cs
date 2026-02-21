@@ -41,6 +41,8 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private Contestant _player;
 	[SerializeField] private Contestant _opponent;
 
+	private int _inputSeqProgress;
+	private int _inputSeqCount;
 	private List<GameplayUI> _activeArrowCombos = new();
 	private Dictionary<int, GameplayUI> _comboDict = new();
 
@@ -238,9 +240,9 @@ public class Game : MonoSingleton<Game>
 			_indicator.MissedInput();
 		}
 		else if(comboPressed)
-		{
+		{ 
 			_indicator.CorrectInput();
-			_player.Bite();
+			_player.Bite((float)_inputSeqProgress++ / (_inputSeqCount - 1));
 			_activeArrowCombos[0].OnValidPress();
 
 			Destroy(_activeArrowCombos[0].gameObject);
@@ -267,20 +269,20 @@ public class Game : MonoSingleton<Game>
 		_activeArrowCombos.Clear();
 
 		var seq = food.template.GetInputSequence();
-		int count = 0;
 		for (int i = 0; i < seq.Length; ++i)
 		{
 			var inputs = seq[i].inputs;
 			var prefab = _comboDict[HashInputs(inputs)];
 
-			var parent = _arrowPath[count];
+			var parent = _arrowPath[i];
 			var instance = Instantiate(prefab, parent);
 			instance.transform.position = parent.transform.position;
 			instance.rectTransform.sizeDelta *= 1.5f;
 			instance.Init(inputs);
 			_activeArrowCombos.Add(instance);
-			count++;
 		}
+		_inputSeqProgress = 0;
+		_inputSeqCount = _activeArrowCombos.Count;
 		_indicator.Stop();
 		_indicator.Play();
 	}
