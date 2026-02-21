@@ -136,13 +136,10 @@ public class Contestant : MonoBehaviour
 		}
 	}
 
-	public void Update()
+	public void OpponentGameplayTick()
 	{
 		return;
 		if (_isPlayer)
-			return;
-
-		if (!Game.Instance.HasStarted)
 			return;
 
 		// no food currently, reach and grab food
