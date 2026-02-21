@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,7 +14,7 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private Food _foodPrefab;
 	[SerializeField] private Transform _foodHoldingPosition;
 
-	[SerializeField] private Transform _foodSpawnPosition;
+	[SerializeField] private Transform[] _foodSpawnPosition;
 
 	[SerializeField] private GameplayUI _leftArrowPrefab;
 	[SerializeField] private GameplayUI _rightArrowPrefab;
@@ -72,23 +73,14 @@ public class Game : MonoSingleton<Game>
 	public bool OnPunishmentCooldown => _missCooldownTimer > 0;
 	public float CooldownPercentage => _missCooldownTimer / _missCooldownTime;
 
-	void Awake()
+	IEnumerator Start()
 	{
-		SpawnFoodOnTable();
 		_missCooldownTimer = 0;
-	}
 
-	private void SpawnFoodOnTable()
-	{
-		_currentLevel = Instantiate(_currentLevel);
-		_foodPile.Capacity = _currentLevel.foodItems.Count;
-		for (int i = 0; i < _currentLevel.foodItems.Count; ++i)
-		{
-			var food = Instantiate(_foodPrefab, _foodSpawnPosition, true);
-			food.transform.position = _foodSpawnPosition.position.xy() + Random.insideUnitCircle;
-			food.Init(_currentLevel.foodItems[i]);
-			_foodPile.Add(food);
-		}
+		for( int i = 0; i < 10; ++i)
+			yield return null;
+
+		UIController.Instance.ShowVersusPanel(_currentLevel);
 	}
 
 	void Update()
@@ -114,6 +106,39 @@ public class Game : MonoSingleton<Game>
 		{
 			HandleEating();
 		}		
+	}
+
+	public void PrepareLevel()
+	{
+		_currentLevel = Instantiate(_currentLevel);
+
+		_foodPile.Capacity = _currentLevel.foodItems.Count;
+		foreach (var spawnPos in _foodSpawnPosition)
+		{
+			for (int i = 0; i < _currentLevel.foodItems.Count; ++i)
+			{
+				var food = Instantiate(_foodPrefab, spawnPos, true);
+				food.transform.position = spawnPos.position.xy() + Random.insideUnitCircle;
+				food.Init(_currentLevel.foodItems[i]);
+				_foodPile.Add(food);
+			}
+		}
+	}
+
+	public void StartGameplayCountdown()
+	{
+		StartCoroutine(GameplayCountdown());
+	}
+
+	private IEnumerator GameplayCountdown()
+	{
+		// Display 3
+		yield return new WaitForSeconds(1);
+		// Display 2
+		yield return new WaitForSeconds(1);
+		// Display 1
+		yield return new WaitForSeconds(1);
+		// FEAST
 	}
 
 	private void HandleGrabbing()

@@ -4,8 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Stage", menuName = "Scriptable Objects/Stage")]
 public class Level : ScriptableObject
 {
-	public List<FoodTemplate> foodItems;
+	public string opponentName;	
+	public Sprite opponentImage;
 
-	// enemies
-	// other modifiers?
+	public List<FoodTemplate> foodItems;
 }

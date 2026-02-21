@@ -1,15 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+public class UIController : MonoSingleton<UIController>
 {
 	[Header("Pause")]
 	public UIAnimationClip pauseInClip;
 	public UIAnimationClip pauseOutClip;
 	public UIAnimator pauseAnimator;
 	private UIAnimHandle _pauseHandle;
+
+
+	public UIAnimator versusAnimator;
+	private UIAnimHandle _versusHandle;
+
+	public TextMeshProUGUI opponentName;
+	public Image opponentImage;
 
 
 	[Header("Tutorial")]
@@ -41,6 +51,34 @@ public class UIController : MonoBehaviour
 	void Update()
 	{
 		UpdatePause();
+	}
+
+	public void ShowVersusPanel(Level level)
+	{
+		_versusHandle?.Stop();
+		opponentName.text = level.opponentName;
+		opponentImage.sprite = level.opponentImage;
+
+		versusAnimator.gameObject.SetActive(true);
+		_versusHandle = versusAnimator.Play(pauseInClip, new()
+		{
+			OnComplete = () => StartCoroutine(DelayBeforeHideVersus(3))
+		});
+	}
+
+	private IEnumerator DelayBeforeHideVersus(float seconds)
+	{
+		Game.Instance.PrepareLevel();
+
+		yield return new WaitForSeconds(seconds);
+		versusAnimator.Play(pauseOutClip, new()
+		{
+			OnComplete = () => 
+			{ 
+				Game.Instance.StartGameplayCountdown();
+				versusAnimator.gameObject.SetActive(false);
+			}
+		});
 	}
 
 	private void UpdatePause()
