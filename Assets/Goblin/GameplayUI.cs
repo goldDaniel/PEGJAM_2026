@@ -21,7 +21,7 @@ public class GameplayUI : MonoBehaviour
 	public void Init(Key key)
 	{
 		_control = Keyboard.current[key];
-		_animator.Play(_bounce);
+		//_animator.Play(_bounce);
 	}
 
 	public void OnValidPress()
