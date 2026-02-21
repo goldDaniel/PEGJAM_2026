@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5134fc30ed7b18468d4d08056f7d058, type: 3}
   m_Name: Jerky
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: d7653b90ee1b69847aacf2f65b11e7d3, type: 3}
   keySequence:
   - keys: 3f000000
   - keys: 40000000

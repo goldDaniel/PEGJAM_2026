@@ -21,9 +21,17 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private GameplayUI _upArrowPrefab;
 	[SerializeField] private GameplayUI _downArrowPrefab;
 
-	[SerializeField] private CurrentIndicator _indicator;
+	[SerializeField] private GameplayUI _luArrowPrefab;
+    [SerializeField] private GameplayUI _ldArrowPrefab;
+    [SerializeField] private GameplayUI _lrArrowPrefab;
+    [SerializeField] private GameplayUI _duArrowPrefab;
+    [SerializeField] private GameplayUI _drArrowPrefab;
+	[SerializeField] private GameplayUI _urArrowPrefab;
 
-	private List<GameplayUI> _activeArrows = new();
+    [SerializeField] private CurrentIndicator _indicator;
+
+	private List<GameplayUI> _activeArrowCombos = new();
+	private Dictionary<int, GameplayUI> _comboDict = new();
 
 	[Range(0.01f, 1f)]
 	[SerializeField] private float _missCooldownTime = 0.2f;
@@ -75,6 +83,36 @@ public class Game : MonoSingleton<Game>
 
 	IEnumerator Start()
 	{
+		InitArrowDict();
+		SpawnFoodOnTable();	
+	}
+
+	private static int HashKeys(params Key[] keys)
+	{
+		System.Array.Sort(keys);
+		int hash = 0;
+		foreach (Key key in keys)
+			hash = System.HashCode.Combine(hash, key);
+		return hash;
+	}
+
+	private void InitArrowDict()
+	{
+		_comboDict[HashKeys(Key.RightArrow)] = _rightArrowPrefab;
+		_comboDict[HashKeys(Key.LeftArrow)] = _leftArrowPrefab;
+		_comboDict[HashKeys(Key.DownArrow)] = _downArrowPrefab;
+		_comboDict[HashKeys(Key.UpArrow)] = _upArrowPrefab;
+
+		_comboDict[HashKeys(Key.LeftArrow, Key.UpArrow)] = _urArrowPrefab;
+        _comboDict[HashKeys(Key.LeftArrow, Key.DownArrow)] = _ldArrowPrefab;
+        _comboDict[HashKeys(Key.LeftArrow, Key.RightArrow)] = _lrArrowPrefab;
+        _comboDict[HashKeys(Key.DownArrow, Key.UpArrow)] = _duArrowPrefab;
+        _comboDict[HashKeys(Key.DownArrow, Key.RightArrow)] = _drArrowPrefab;
+        _comboDict[HashKeys(Key.UpArrow, Key.RightArrow)] = _urArrowPrefab;
+    }
+
+	private void SpawnFoodOnTable()
+	{
 		_missCooldownTimer = 0;
 
 		for( int i = 0; i < 10; ++i)
@@ -102,7 +140,7 @@ public class Game : MonoSingleton<Game>
 		{
 			HandleGrabbing();
 		}
-		else if (IsReadyToEat && _activeArrows.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
+		else if (_isReadyToEat && _activeArrowCombos.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
 		{
 			HandleEating();
 		}		
@@ -175,21 +213,25 @@ public class Game : MonoSingleton<Game>
 
 	private void HandleEating()
 	{
-		var desiredKey = _activeArrows[0].GetKey();
-		if (Keyboard.current[desiredKey].wasPressedThisFrame)
+		var desiredCombo = _activeArrowCombos[0].GetKeys();
+		bool comboPressed = true;
+		foreach (var key in desiredCombo)
+			comboPressed &= Keyboard.current[key].wasPressedThisFrame;
+
+		if (comboPressed)
 		{
-			_activeArrows[0].OnValidPress();
+			_activeArrowCombos[0].OnValidPress();
 
-			Destroy(_activeArrows[0].gameObject);
-			_activeArrows.RemoveAt(0);
+			Destroy(_activeArrowCombos[0].gameObject);
+			_activeArrowCombos.RemoveAt(0);
 
-			for (int i = 0; i < _activeArrows.Count; ++i)
+			for (int i = 0; i < _activeArrowCombos.Count; ++i)
 			{
-				var arrow = _activeArrows[i];
-				arrow.MoveToPosition(_arrowPath[i].transform.position);
+				var arrowCombo = _activeArrowCombos[i];
+				arrowCombo.MoveToPosition(_arrowPath[i].transform.position);
 			}
 
-			if (_activeArrows.Count == 0)
+			if (_activeArrowCombos.Count == 0)
 			{
 				Destroy(_currentFood.gameObject);
 				_currentFood = null;
@@ -205,39 +247,23 @@ public class Game : MonoSingleton<Game>
 
 	private void SetupArrowsForFood(Food food)
 	{
-		_activeArrows.Clear();
+		_activeArrowCombos.Clear();
 
 		var seq = food.template.GetKeySequence();
+		int count = 0;
 		for (int i = 0; i < seq.Length; ++i)
 		{
-			GameplayUI prefab = null;
 			var keys = seq[i].keys;
-			if (keys.Length == 1)
-			{
-				switch (keys[0])
-				{
-					case Key.LeftArrow:
-						prefab = _leftArrowPrefab; break;
-					case Key.RightArrow:
-						prefab = _rightArrowPrefab; break;
-					case Key.UpArrow:
-						prefab = _upArrowPrefab; break;
-					case Key.DownArrow:
-						prefab = _downArrowPrefab; break;
-				}
-			}
-			else 
-			{
-				// TODO (danielg): Handle multipress
-			}
+			var prefab = _comboDict[HashKeys(keys)];
 
-			var parent = _arrowPath[i];
-			var instance = Instantiate(prefab, parent);
-			instance.transform.position = parent.transform.position;
-			instance.rectTransform.sizeDelta *= 1.5f;
-			instance.Init(keys[0]);
-			_activeArrows.Add(instance);
-		}
+            var parent = _arrowPath[count];
+            var instance = Instantiate(prefab, parent);
+            instance.transform.position = parent.transform.position;
+            instance.rectTransform.sizeDelta *= 1.5f;
+            instance.Init(keys);
+            _activeArrowCombos.Add(instance);
+            count++;
+        }
 		_indicator.Stop();
 		_indicator.Play();
 	}
