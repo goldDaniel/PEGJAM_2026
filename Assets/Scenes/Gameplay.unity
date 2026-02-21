@@ -1964,6 +1964,12 @@ MonoBehaviour:
   _rightArrowPrefab: {fileID: -7926013444272775923, guid: 9f0a2f97a1bb51d4ab3a6b3d4bd18f9d, type: 3}
   _upArrowPrefab: {fileID: -7926013444272775923, guid: 101db196319290742b9201ca7a84feb5, type: 3}
   _downArrowPrefab: {fileID: -7926013444272775923, guid: 347d6157eb6fcf74aabffa750ecb4b73, type: 3}
+  _luArrowPrefab: {fileID: -7926013444272775923, guid: a2a869f504498c0479ccedcae896f2f1, type: 3}
+  _ldArrowPrefab: {fileID: -7926013444272775923, guid: 2d15dc6ffdebd14409356318756b8791, type: 3}
+  _lrArrowPrefab: {fileID: -7926013444272775923, guid: dbd9f9c619b008f4cbe65d3d6ffd67d5, type: 3}
+  _duArrowPrefab: {fileID: -7926013444272775923, guid: 0f72de4ba80ab3c49b2ab2fb8d1687b5, type: 3}
+  _drArrowPrefab: {fileID: -7926013444272775923, guid: 16718f4f3bd6c41419a96371356b27ce, type: 3}
+  _urArrowPrefab: {fileID: -7926013444272775923, guid: 0d4fa05e5c75e5246b8a20d0e9ce207f, type: 3}
   _indicator: {fileID: 310953196}
   _missCooldownTime: 0.5
 --- !u!1 &935335813

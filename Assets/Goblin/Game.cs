@@ -83,9 +83,13 @@ public class Game : MonoSingleton<Game>
 
 	IEnumerator Start()
 	{
-		yield return new WaitForSeconds(1f);
 		InitArrowDict();
-		SpawnFoodOnTable();
+		_missCooldownTimer = 0;
+
+		while (SceneTransitionManager.Instance.IsTransitioning)
+			yield return null;
+
+		UIController.Instance.ShowVersusPanel(_currentLevel);
 	}
 
 	private static int HashKeys(params Key[] keys)
@@ -112,16 +116,6 @@ public class Game : MonoSingleton<Game>
 		_comboDict[HashKeys(Key.UpArrow, Key.RightArrow)] = _urArrowPrefab;
 	}
 
-	private void SpawnFoodOnTable()
-	{
-		_missCooldownTimer = 0;
-
-		for( int i = 0; i < 10; ++i)
-			yield return null;
-
-		UIController.Instance.ShowVersusPanel(_currentLevel);
-	}
-
 	void Update()
 	{
 		if (IsPaused)
@@ -141,7 +135,7 @@ public class Game : MonoSingleton<Game>
 		{
 			HandleGrabbing();
 		}
-		else if (_isReadyToEat && _activeArrowCombos.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
+		else if (IsReadyToEat && _activeArrowCombos.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
 		{
 			HandleEating();
 		}		
