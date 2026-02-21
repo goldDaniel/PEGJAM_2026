@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bd357f6c72433b8e4504f5e263bab1, type: 3}
   m_Name: Pause Out
   m_EditorClassIdentifier: Assembly-CSharp::UIAnimationClip
-  _duration: 0.2
+  _duration: 0.5
   _delay: 0
   _loopMode: 0
   _defaultEase: 3
@@ -40,10 +40,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _positionTracks: []
-  _scaleTracks:
+  _positionTracks:
   - Enabled: 1
     Ease: 3
-    From: {x: 1, y: 1}
-    To: {x: 1, y: 0}
+    Space: 0
+    From: {x: 0, y: 200}
+    To: {x: 0, y: 1200}
+  _scaleTracks: []
   _alphaTracks: []

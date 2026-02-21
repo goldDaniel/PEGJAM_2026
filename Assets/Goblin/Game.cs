@@ -82,7 +82,6 @@ public class Game : MonoSingleton<Game>
 
 	void Awake()
 	{
-		_food = _foodContainer.GetComponentsInChildren<Food>().ToList();
 		SetupFood(_foodTemplate);
 	}
 
