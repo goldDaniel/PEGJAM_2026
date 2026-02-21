@@ -6,15 +6,14 @@ using UnityEngine.InputSystem;
 
 public class Game : MonoSingleton<Game>
 {
-	private Food _currentFood = null;
-	private List<Food> _foodPile = new();
-
 	[SerializeField] private RectTransform[] _arrowPath;
 	[SerializeField] private Level _currentLevel;
 	[SerializeField] private Food _foodPrefab;
-	[SerializeField] private Transform _foodHoldingPosition;
+	[SerializeField] private Transform _playerFoodHoldingPosition;
+	[SerializeField] private Transform _opponentFoodHoldingPosition;
 
-	[SerializeField] private Transform[] _foodSpawnPosition;
+	[SerializeField] private Transform _playerFoodSpawn;
+	[SerializeField] private Transform _opponentFoodSpawn;
 
 	[SerializeField] private GameplayUI _leftArrowPrefab;
 	[SerializeField] private GameplayUI _rightArrowPrefab;
@@ -29,6 +28,9 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private GameplayUI _urArrowPrefab;
 
 	[SerializeField] private CurrentIndicator _indicator;
+
+	[SerializeField] private Contestant _player;
+	[SerializeField] private Contestant _opponent;
 
 	private List<GameplayUI> _activeArrowCombos = new();
 	private Dictionary<int, GameplayUI> _comboDict = new();
@@ -76,7 +78,7 @@ public class Game : MonoSingleton<Game>
 	public void ResumeGame() => IsPaused = false;
 
 	private HandState _handState = HandState.Empty;
-	private bool IsReadyToEat => _currentFood != null && _handState == HandState.Holding;
+	private bool IsReadyToEat => _player.IsHoldingFood && _handState == HandState.Holding;
 
 	public bool OnPunishmentCooldown => _missCooldownTimer > 0;
 	public float CooldownPercentage => _missCooldownTimer / _missCooldownTime;
@@ -121,9 +123,11 @@ public class Game : MonoSingleton<Game>
 		if (IsPaused)
 			return;
 
-		bool stageComplete = _foodPile.Count == 0 && _currentFood == null;
+		bool stageComplete = _player.HasEatenAllFood || _opponent.HasEatenAllFood;
 		if (stageComplete)
 			return;
+
+		HandleOpponentEating();
 
 		if(OnPunishmentCooldown)
 		{
@@ -141,21 +145,19 @@ public class Game : MonoSingleton<Game>
 		}		
 	}
 
+	private void HandleOpponentEating()
+	{
+		// TODO (danielg): 
+		// - opponent eating timer
+		// - taking bites at regular intervals
+		// - grabbing new food from plate
+	}
+
 	public void PrepareLevel()
 	{
 		_currentLevel = Instantiate(_currentLevel);
-
-		_foodPile.Capacity = _currentLevel.foodItems.Count;
-		foreach (var spawnPos in _foodSpawnPosition)
-		{
-			for (int i = 0; i < _currentLevel.foodItems.Count; ++i)
-			{
-				var food = Instantiate(_foodPrefab, spawnPos, true);
-				food.transform.position = spawnPos.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
-				food.Init(_currentLevel.foodItems[i]);
-				_foodPile.Add(food);
-			}
-		}
+		_player.Setup(null, _foodPrefab, _currentLevel, _playerFoodSpawn);
+		_opponent.Setup(_currentLevel.opponent, _foodPrefab, _currentLevel, _opponentFoodSpawn);	
 	}
 
 	public void StartGameplayCountdown()
@@ -183,7 +185,7 @@ public class Game : MonoSingleton<Game>
 				_handState = HandState.Reaching;
 				if(!IsReadyToEat)
 				{
-					GrabNextFoodItem();
+					_player.GrabNextFoodItem();
 				}
 			}
 				
@@ -193,17 +195,14 @@ public class Game : MonoSingleton<Game>
 			if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
 			{
 				_handState = HandState.Holding;
-				SetupArrowsForFood(_currentFood);
+				SetupArrowsForFood(_player.GetHeldFood());
 			}
 		}
 	}
 
 	private void GrabNextFoodItem()
 	{
-		_currentFood = _foodPile[0];
-		_foodPile.RemoveAt(0);
-		_currentFood.transform.SetParent(_foodHoldingPosition, true);
-		_currentFood.transform.position = _foodHoldingPosition.position;
+		
 	}
 
 	private void HandleEating()
@@ -215,6 +214,7 @@ public class Game : MonoSingleton<Game>
 
 		if (comboPressed)
 		{
+			_player.Bite();
 			_activeArrowCombos[0].OnValidPress();
 
 			Destroy(_activeArrowCombos[0].gameObject);
@@ -228,8 +228,7 @@ public class Game : MonoSingleton<Game>
 
 			if (_activeArrowCombos.Count == 0)
 			{
-				Destroy(_currentFood.gameObject);
-				_currentFood = null;
+				_player.FinishFood();
 				_handState = HandState.Empty;
 			}
 		}

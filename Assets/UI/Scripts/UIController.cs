@@ -56,8 +56,8 @@ public class UIController : MonoSingleton<UIController>
 	public void ShowVersusPanel(Level level)
 	{
 		_versusHandle?.Stop();
-		opponentName.text = level.opponentName;
-		opponentImage.sprite = level.opponentImage;
+		opponentName.text = level.opponent.Name.ToLower();
+		opponentImage.sprite = level.opponent.EntryImage;
 
 		versusAnimator.gameObject.SetActive(true);
 		_versusHandle = versusAnimator.Play(pauseInClip, new()

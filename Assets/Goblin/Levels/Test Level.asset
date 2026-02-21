@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d310f846a031945b8b651799bf1cb4, type: 3}
   m_Name: Test Level
   m_EditorClassIdentifier: Assembly-CSharp::Level
-  opponentName: Marvina
-  opponentImage: {fileID: -5319527762437388050, guid: 5b0b960a53bf3bb4eb6691a4604dbd68, type: 3}
+  opponent: {fileID: 11400000, guid: a1a0391fd8fb3144d8e34a21d1ace1a3, type: 2}
   foodItems:
   - {fileID: 11400000, guid: a627cdec55765e846808436e031a1665, type: 2}
   - {fileID: 11400000, guid: 54e668dad8a03174a8695fce4de5ce96, type: 2}

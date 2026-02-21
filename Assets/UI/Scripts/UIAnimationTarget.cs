@@ -37,8 +37,7 @@ public sealed class UIAnimationTarget : MonoBehaviour
 	public Vector2 GetScale()
 	{
 		// For non-stretch this reads nicely as size relative to base rect size.
-		// For stretch it’s not strictly meaningful (size depends on parent),
-		// but this preserves your previous intent as best as possible.
+		// For stretch it’s not strictly meaningful (size depends on parent)
 		var s = _rectTransform.rect.size;
 		return new Vector2(
 			_baseRectSize.x != 0 ? s.x / _baseRectSize.x : 1f,
