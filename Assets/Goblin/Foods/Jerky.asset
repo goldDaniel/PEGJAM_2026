@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Jerky
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
   sprite: {fileID: 21300000, guid: d7653b90ee1b69847aacf2f65b11e7d3, type: 3}
-  keySequence:
-  - keys: 3f000000
-  - keys: 40000000
-  - keys: 3f000000
-  - keys: 40000000
-  - keys: 3f00000040000000
-  - keys: 3d000000
-  - keys: 3e000000
-  - keys: 3d000000
-  - keys: 3e000000
-  - keys: 3d0000003e000000
+  inputSequence:
+  - inputs: 02000000
+  - inputs: 03000000
+  - inputs: 02000000
+  - inputs: 03000000
+  - inputs: 0200000003000000
+  - inputs: 00000000
+  - inputs: 01000000
+  - inputs: 00000000
+  - inputs: 01000000
+  - inputs: 0000000001000000
   cycles: 1

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: MoldyBread
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
   sprite: {fileID: 21300000, guid: 3a2cbc0cce3bae34aaee85f7a29fefbe, type: 3}
-  keySequence:
-  - keys: 3d00000040000000
-  - keys: 3f00000040000000
-  - keys: 3f0000003e000000
-  - keys: 3e00000040000000
-  - keys: 3f00000040000000
-  - keys: 3f00000040000000
-  - keys: 3d0000003e000000
+  inputSequence:
+  - inputs: 0000000003000000
+  - inputs: 0200000003000000
+  - inputs: 0200000001000000
+  - inputs: 0300000001000000
+  - inputs: 0300000002000000
+  - inputs: 0000000002000000
+  - inputs: 0000000001000000
   cycles: 1

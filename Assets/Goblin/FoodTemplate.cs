@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [Serializable]
-public struct KeyCombo
+public struct InputCombo
 {
-	public Key[] keys;
+	public GameInput[] inputs;
 }
 
 [CreateAssetMenu(fileName = "FoodTemplate", menuName = "Scriptable Objects/FoodTemplate")]
@@ -14,19 +13,19 @@ public class FoodTemplate : ScriptableObject
 	[Header("Sprite")]
 	public Sprite sprite;
 
-	[Header("Key Sequence")]
-	public KeyCombo[] keySequence;
+	[Header("Input Sequence")]
+	public InputCombo[] inputSequence;
 
 	[Header("Cycles")]
 	[Min(1)]
 	public int cycles = 1;
 
-	public KeyCombo[] GetKeySequence()
+	public InputCombo[] GetInputSequence()
 	{
-		KeyCombo[] seq = new KeyCombo[cycles * keySequence.Length];
+		InputCombo[] seq = new InputCombo[cycles * inputSequence.Length];
 		for (int i = 0; i < seq.Length; i++)
 		{
-			seq[i] = keySequence[i % keySequence.Length];
+			seq[i] = inputSequence[i % inputSequence.Length];
 		}
 
 		return seq;

@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Rocks
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
   sprite: {fileID: 0}
-  keySequence:
-  - keys: 3d000000
-  - keys: 3d000000
-  - keys: 3e000000
-  - keys: 3e000000
-  - keys: 400000003f000000
-  - keys: 400000003f000000
-  - keys: 3f000000
-  - keys: 3f000000
-  - keys: 40000000
-  - keys: 40000000
-  - keys: 3d0000003e000000
-  - keys: 3d0000003e000000
+  inputSequence:
+  - inputs: 00000000
+  - inputs: 00000000
+  - inputs: 01000000
+  - inputs: 01000000
+  - inputs: 0200000003000000
+  - inputs: 0200000003000000
+  - inputs: 02000000
+  - inputs: 02000000
+  - inputs: 03000000
+  - inputs: 03000000
+  - inputs: 0000000001000000
+  - inputs: 0000000001000000
   cycles: 1

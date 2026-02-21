@@ -15,19 +15,16 @@ public class GameplayUI : MonoBehaviour
 
 	[SerializeField] private string _sfxKey;
 
-	private KeyControl[] _controls;
+	private GameInput[] _controls;
 
-	public IEnumerable<Key> GetKeys()
+	public GameInput[] GetInputs()
 	{
-		for (int i = 0; i < _controls.Length; i++)
-			yield return _controls[i].keyCode;
+		return _controls;
 	}
 
-	public void Init(params Key[] keys)
+	public void Init(params GameInput[] inputs)
 	{
-		_controls = new KeyControl[keys.Length];
-		for (int i = 0; i < keys.Length; i++)
-			_controls[i] = Keyboard.current[keys[i]];
+		_controls = inputs;
 		//_animator.Play(_bounce);
 	}
 

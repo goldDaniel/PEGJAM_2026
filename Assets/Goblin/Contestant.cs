@@ -138,6 +138,7 @@ public class Contestant : MonoBehaviour
 
 	public void Update()
 	{
+		return;
 		if (_isPlayer)
 			return;
 

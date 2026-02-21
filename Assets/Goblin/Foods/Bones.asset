@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Bones
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
   sprite: {fileID: 0}
-  keySequence:
-  - keys: 400000003e000000
-  - keys: 400000003d000000
-  - keys: 3e000000
-  - keys: 40000000
-  - keys: 3d000000
-  - keys: 3d000000
-  - keys: 3f000000
-  - keys: 3e000000
-  - keys: 3e0000003d000000
+  inputSequence:
+  - inputs: 0300000001000000
+  - inputs: 0300000000000000
+  - inputs: 01000000
+  - inputs: 03000000
+  - inputs: 00000000
+  - inputs: 00000000
+  - inputs: 02000000
+  - inputs: 01000000
+  - inputs: 0000000001000000
   cycles: 1

@@ -1633,7 +1633,7 @@ MonoBehaviour:
   _bodyRenderer: {fileID: 0}
   _armRenderer: {fileID: 0}
   _foodHoldingPosition: {fileID: 970863192}
-  _isPlayer: 1
+  _isPlayer: 0
 --- !u!1 &751978378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,6 +2098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 917699324}
   - component: {fileID: 917699325}
+  - component: {fileID: 917699326}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2165,6 +2166,19 @@ MonoBehaviour:
   _player: {fileID: 736688993}
   _opponent: {fileID: 57966302}
   _missCooldownTime: 0.5
+--- !u!114 &917699326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917699323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f8a09bf3d99504b976fe2bb7ffb38b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputController
+  inputWindow: 0.3
 --- !u!1 &935335813
 GameObject:
   m_ObjectHideFlags: 0

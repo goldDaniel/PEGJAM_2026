@@ -1,6 +1,8 @@
 ﻿
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,15 +43,6 @@ public class Game : MonoSingleton<Game>
 
 	private bool _hasStarted = false;
 	public bool HasStarted => _hasStarted;
-
-	public enum GameInput
-	{
-		ArrowUp,
-		ArrowDown,
-		ArrowLeft,
-		ArrowRight,
-		Enter,
-	}
 
 
 	public enum HandState
@@ -97,29 +90,29 @@ public class Game : MonoSingleton<Game>
 		UIController.Instance.ShowVersusPanel(_currentLevel);
 	}
 
-	private static int HashKeys(params Key[] keys)
-	{
-		System.Array.Sort(keys);
-		int hash = 0;
-		foreach (Key key in keys)
-			hash = System.HashCode.Combine(hash, key);
-		return hash;
-	}
+    private static int HashInputs(params GameInput[] inputs)
+    {
+        System.Array.Sort(inputs);
+        int hash = 0;
+        foreach (var input in inputs)
+            hash = System.HashCode.Combine(hash, input);
+        return hash;
+    }
 
-	private void InitArrowDict()
+    private void InitArrowDict()
 	{
-		_comboDict[HashKeys(Key.RightArrow)] = _rightArrowPrefab;
-		_comboDict[HashKeys(Key.LeftArrow)] = _leftArrowPrefab;
-		_comboDict[HashKeys(Key.DownArrow)] = _downArrowPrefab;
-		_comboDict[HashKeys(Key.UpArrow)] = _upArrowPrefab;
+        _comboDict[HashInputs(GameInput.Right)] = _rightArrowPrefab;
+        _comboDict[HashInputs(GameInput.Left)] = _leftArrowPrefab;
+        _comboDict[HashInputs(GameInput.Down)] = _downArrowPrefab;
+        _comboDict[HashInputs(GameInput.Up)] = _upArrowPrefab;
 
-		_comboDict[HashKeys(Key.LeftArrow, Key.UpArrow)] = _urArrowPrefab;
-		_comboDict[HashKeys(Key.LeftArrow, Key.DownArrow)] = _ldArrowPrefab;
-		_comboDict[HashKeys(Key.LeftArrow, Key.RightArrow)] = _lrArrowPrefab;
-		_comboDict[HashKeys(Key.DownArrow, Key.UpArrow)] = _duArrowPrefab;
-		_comboDict[HashKeys(Key.DownArrow, Key.RightArrow)] = _drArrowPrefab;
-		_comboDict[HashKeys(Key.UpArrow, Key.RightArrow)] = _urArrowPrefab;
-	}
+        _comboDict[HashInputs(GameInput.Up, GameInput.Right)] = _urArrowPrefab;
+        _comboDict[HashInputs(GameInput.Left, GameInput.Down)] = _ldArrowPrefab;
+        _comboDict[HashInputs(GameInput.Left, GameInput.Right)] = _lrArrowPrefab;
+        _comboDict[HashInputs(GameInput.Down, GameInput.Up)] = _duArrowPrefab;
+        _comboDict[HashInputs(GameInput.Down, GameInput.Right)] = _drArrowPrefab;
+        _comboDict[HashInputs(GameInput.Up, GameInput.Right)] = _urArrowPrefab;
+    }
 
 	void Update()
 	{
@@ -137,15 +130,20 @@ public class Game : MonoSingleton<Game>
 			_missCooldownTimer = Mathf.Max(_missCooldownTimer - Time.deltaTime, 0f);
 			return;
 		}
-	
-		if (!IsReadyToEat)
+
+		var inputs = InputController.Instance.GetInputs();
+		if (inputs.Count > 0)
 		{
-			HandleGrabbing();
+			if (!IsReadyToEat)
+			{
+				HandleGrabbing(inputs);
+				InputController.Instance.ClearInputBuffer();
+			}
+			else if (IsReadyToEat && _activeArrowCombos.Count > 0)
+			{
+				HandleEating(inputs, InputController.Instance.inWindow());
+			}
 		}
-		else if (IsReadyToEat && _activeArrowCombos.Count > 0 && Keyboard.current.anyKey.wasPressedThisFrame)
-		{
-			HandleEating();
-		}		
 	}
 
 	private void HandleOpponentEating()
@@ -181,11 +179,11 @@ public class Game : MonoSingleton<Game>
 		_hasStarted = true;
 	}
 
-	private void HandleGrabbing()
-	{
-		if (_handState == HandState.Empty)
+	private void HandleGrabbing(List<GameInput> inputs)
+    {
+        if (_handState == HandState.Empty)
 		{
-			if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+			if (inputs.Contains(GameInput.Right))
 			{
 				_handState = HandState.Reaching;
 				if(!IsReadyToEat)
@@ -197,7 +195,7 @@ public class Game : MonoSingleton<Game>
 		}
 		else if (_handState == HandState.Reaching)
 		{
-			if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+			if (inputs.Contains(GameInput.Left))
 			{
 				_handState = HandState.Holding;
 				SetupArrowsForFood(_player.GetHeldFood());
@@ -206,15 +204,25 @@ public class Game : MonoSingleton<Game>
 	}
 
 
-	private void HandleEating()
+	private void HandleEating(List<GameInput> inputs, bool inWindow)
 	{
-		var desiredCombo = _activeArrowCombos[0].GetKeys();
-		bool comboPressed = true;
-		foreach (var key in desiredCombo)
-			comboPressed &= Keyboard.current[key].wasPressedThisFrame;
+        var desiredCombo = _activeArrowCombos[0].GetInputs();
+        
+		bool wrongCombo = false;
+        foreach (var input in inputs)
+            wrongCombo |= !desiredCombo.Contains(input);
 
-		if (comboPressed)
+		bool comboPressed = true;
+		foreach (var input in desiredCombo)
+			comboPressed &= inputs.Contains(input);
+
+		if (wrongCombo || (!comboPressed && !inWindow))
 		{
+            _missCooldownTimer = _missCooldownTime;
+            _indicator.MissedInput();
+        }
+		else if(comboPressed)
+		{ 
 			_player.Bite();
 			_activeArrowCombos[0].OnValidPress();
 
@@ -232,34 +240,31 @@ public class Game : MonoSingleton<Game>
 				_player.FinishFood();
 				_handState = HandState.Empty;
 			}
-		}
-		else // miss input, punishment
-		{
-			_missCooldownTimer = _missCooldownTime;
-			_indicator.MissedInput();
+
+			InputController.Instance.ClearInputBuffer();
 		}
 	}
 
 	private void SetupArrowsForFood(Food food)
 	{
-		_activeArrowCombos.Clear();
+        _activeArrowCombos.Clear();
 
-		var seq = food.template.GetKeySequence();
-		int count = 0;
-		for (int i = 0; i < seq.Length; ++i)
-		{
-			var keys = seq[i].keys;
-			var prefab = _comboDict[HashKeys(keys)];
+        var seq = food.template.GetInputSequence();
+        int count = 0;
+        for (int i = 0; i < seq.Length; ++i)
+        {
+            var inputs = seq[i].inputs;
+            var prefab = _comboDict[HashInputs(inputs)];
 
-			var parent = _arrowPath[count];
-			var instance = Instantiate(prefab, parent);
-			instance.transform.position = parent.transform.position;
-			instance.rectTransform.sizeDelta *= 1.5f;
-			instance.Init(keys);
-			_activeArrowCombos.Add(instance);
-			count++;
-		}
-		_indicator.Stop();
-		_indicator.Play();
-	}
+            var parent = _arrowPath[count];
+            var instance = Instantiate(prefab, parent);
+            instance.transform.position = parent.transform.position;
+            instance.rectTransform.sizeDelta *= 1.5f;
+            instance.Init(inputs);
+            _activeArrowCombos.Add(instance);
+            count++;
+        }
+        _indicator.Stop();
+        _indicator.Play();
+    }
 }
