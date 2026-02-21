@@ -23,6 +23,7 @@ public class Contestant : MonoBehaviour
 	private List<Food> _foodPile = new();
 	private int _initialFoodCount = 0;
 
+	private float _timePerFood;
 	private float _eatingTime;
 	private float _currentEatingTimer = 0;
 
@@ -76,7 +77,9 @@ public class Contestant : MonoBehaviour
 		
 		_foodPile.Capacity = level.foodItems.Count;
 		_initialFoodCount = level.foodItems.Count;
-		for (int i = 0; i < _initialFoodCount; ++i)
+        _timePerFood = _eatingTime / _initialFoodCount;
+		_currentEatingTimer = _timePerFood;
+        for (int i = 0; i < _initialFoodCount; ++i)
 		{
 			var food = Instantiate(foodPrefab, foodSpawn, true);
 			food.transform.position = foodSpawn.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
@@ -144,9 +147,9 @@ public class Contestant : MonoBehaviour
 		// no food currently, reach and grab food
 		if (_currentFood == null)
 		{
-			if(!_isReaching)
+			if (!_isReaching)
 			{
-				if(_reachTimer > 0)
+				if (_reachTimer > 0)
 					_reachTimer -= Time.deltaTime;
 				else
 				{
@@ -155,32 +158,30 @@ public class Contestant : MonoBehaviour
 					_armRenderer.sprite = _sprites[ContestantAnimations.Reaching];
 				}
 			}
-			else 
+			else
 			{
 				if (_reachTimer > 0)
 					_reachTimer -= Time.deltaTime;
-				else 
+				else
 				{
 					_armRenderer.sprite = _sprites[ContestantAnimations.Empty];
 					GrabNextFoodItem();
-				}
+					_isReaching = false;
+                }
 			}
-
-			return;
 		}
-		_isReaching = false;
-
-
-		float timePerFood = _eatingTime / _initialFoodCount;
-		if (_currentEatingTimer <= 0)
+		else
 		{
-			FinishFood();
-			_currentEatingTimer = timePerFood;
-		}
-		else 
-		{
-			_currentEatingTimer -= Time.deltaTime;
-			Eat();
+			if (_currentEatingTimer <= 0)
+			{
+				FinishFood();
+				_currentEatingTimer = _timePerFood;
+			}
+			else
+			{
+				_currentEatingTimer -= Time.deltaTime;
+				Eat();
+			}
 		}
 	}
 }
