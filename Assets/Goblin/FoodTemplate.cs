@@ -5,29 +5,30 @@ using UnityEngine.InputSystem;
 [Serializable]
 public struct KeyCombo
 {
-    public Key[] keys;
+	public Key[] keys;
 }
 
 [CreateAssetMenu(fileName = "FoodTemplate", menuName = "Scriptable Objects/FoodTemplate")]
 public class FoodTemplate : ScriptableObject
 {
-    [Header("Sprite")]
-    public Sprite sprite;
+	[Header("Sprite")]
+	public Sprite sprite;
 
-    [Header("Key Sequence")]
-    public KeyCombo[] keySequence;
+	[Header("Key Sequence")]
+	public KeyCombo[] keySequence;
 
-    [Header("Cycles")]
-    public int cycles = 1;
+	[Header("Cycles")]
+	[Min(1)]
+	public int cycles = 1;
 
-    public KeyCombo[] GetKeySequence()
-    {
-        KeyCombo[] seq = new KeyCombo[cycles * keySequence.Length];
-        for (int i = 0; i < seq.Length; i++)
-        {
-            seq[i] = keySequence[i];
-        }
+	public KeyCombo[] GetKeySequence()
+	{
+		KeyCombo[] seq = new KeyCombo[cycles * keySequence.Length];
+		for (int i = 0; i < seq.Length; i++)
+		{
+			seq[i] = keySequence[i % keySequence.Length];
+		}
 
-        return seq;
-    }
+		return seq;
+	}
 }

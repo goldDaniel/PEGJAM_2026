@@ -544,6 +544,9 @@ GameObject:
   - component: {fileID: 310953193}
   - component: {fileID: 310953195}
   - component: {fileID: 310953194}
+  - component: {fileID: 310953196}
+  - component: {fileID: 310953198}
+  - component: {fileID: 310953197}
   m_Layer: 5
   m_Name: Current Indicator
   m_TagString: Untagged
@@ -608,6 +611,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310953192}
   m_CullTransparentMesh: 1
+--- !u!114 &310953196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310953192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edcdc54b549fdac4ea79cd0140afcb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrentIndicator
+  animator: {fileID: 310953198}
+  clip: {fileID: 11400000, guid: 861bde0733689994c936dc071be21d73, type: 2}
+--- !u!114 &310953197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310953192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4717b50937486b9d8c002baece6b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAnimationTarget
+  _rectTransform: {fileID: 310953193}
+  _canvasGroup: {fileID: 0}
+--- !u!114 &310953198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310953192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abcdd0e22f664a658980fa1e6e140447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAnimator
+  _target: {fileID: 310953197}
 --- !u!1 &328078732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2717,7 +2761,7 @@ MonoBehaviour:
   - {fileID: 764690202}
   - {fileID: 710321722}
   - {fileID: 935335814}
-  _foodTemplate: {fileID: 11400000, guid: 38523eefea757c445b2440688e5dece8, type: 2}
+  _foodTemplate: {fileID: 11400000, guid: 54e668dad8a03174a8695fce4de5ce96, type: 2}
   _leftArrowPrefab: {fileID: -7926013444272775923, guid: fc93e63d7bd366547afc07de5c1fc7c7, type: 3}
   _rightArrowPrefab: {fileID: -7926013444272775923, guid: 9f0a2f97a1bb51d4ab3a6b3d4bd18f9d, type: 3}
   _upArrowPrefab: {fileID: -7926013444272775923, guid: 101db196319290742b9201ca7a84feb5, type: 3}
