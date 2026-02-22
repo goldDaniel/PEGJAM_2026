@@ -36,6 +36,8 @@ public class Game : MonoSingleton<Game>
 	private Level _currentLevel => _levels.CurrentLevel;
 	public bool IsLastLevel => _levels.IsLastLevel;
 
+	[SerializeField] private Level _tutorialLevel;
+
 	[SerializeField] private ContestantTemplate _playerTemplate;
 
 	[SerializeField] private Food _foodPrefab;
@@ -136,8 +138,8 @@ public class Game : MonoSingleton<Game>
 			for(int i = 0; i < 30; ++i)
 				yield return null;
 
-			_tutorial.StartTutorial();
-			yield break;
+			yield return HandleTutorial();
+			SceneTransitionManager.LoadScene("Gameplay");
 		}
 		else
 			UIController.Instance.ShowVersusPanel(_currentLevel, _playerTemplate.EntryImage);
@@ -171,7 +173,8 @@ public class Game : MonoSingleton<Game>
 	{
 		if (_isTutorial)
 		{
-			HandleTutorial();
+			if (OnPunishmentCooldown)
+				_missCooldownTimer = Mathf.Max(_missCooldownTimer - Time.deltaTime, 0f);
 			return;
 		}
 
@@ -419,7 +422,8 @@ public class Game : MonoSingleton<Game>
 			InputController.Instance.ClearInputBuffer();
 			_wasWaiting = false;
 
-            OpponentAttack(_opponent.Attack());
+			if (_isTutorial)
+				OpponentAttack(_opponent.Attack());
         }
 	}
 
@@ -495,8 +499,84 @@ public class Game : MonoSingleton<Game>
 		_indicator.Play();
 	}
 
-	public void HandleTutorial()
+	public IEnumerator HandleTutorial()
 	{
+		_tutorial.StartTutorial();
+
+		while (_tutorial.CurrentStepIndex != 2)
+			yield return null;
 		
+		_player.Setup(_playerTemplate, _foodPrefab, _tutorialLevel, _playerFoodSpawn);
+		while (!_player.AllFoodSetup)
+			yield return null;
+
+		_tutorial.AdvanceStep();
+
+		while (_tutorial.CurrentStepIndex == 3)
+			yield return null;
+
+		SetIndicator(_grabFoodIndicator);
+
+		while (_tutorial.CurrentStepIndex == 4)
+			yield return null;
+
+		_handState = HandState.Reaching;
+		_player.Reach();
+		SetIndicator(_bringFoodIndicator);
+
+		while (_tutorial.CurrentStepIndex == 5)
+			yield return null;
+
+		_handState = HandState.Holding;
+		_player.GrabNextFoodItem();
+		_player.Hold();
+		SetupArrowsForFood(_player.GetHeldFood());
+		SetIndicator(_eatIndicator);
+
+		while (_tutorial.CurrentStepIndex == 6)
+			yield return null;
+
+		SetIndicator(null);
+
+		while (!_player.HasEatenAllFood)
+		{
+			var inputs = InputController.Instance.GetInputs();
+			bool waiting = InputController.Instance.inWindow();
+			if (inputs.Count > 0 || _wasWaiting)
+			{
+				if (!IsReadyToEat)
+				{
+					HandleGrabbing(inputs);
+					InputController.Instance.ClearInputBuffer();
+				}
+				else if (IsReadyToEat && _activeArrowCombos.Count > 0)
+				{
+					_wasWaiting = waiting;
+					HandleEating(inputs, waiting);
+				}
+			}
+
+			if (inputs.Contains(GameInput.Action))
+				InputController.Instance.ClearInputBuffer();
+
+			yield return null;
+		}
+
+		_tutorial.AdvanceStep();
+
+		while (_tutorial.CurrentStepIndex == 8)
+			yield return null;
+
+
+		var spider = Instantiate(_spiderPrefab);
+		var rt = spider.GetComponent<RectTransform>();
+		rt.SetParent(_tutorial.GetComponent<RectTransform>());
+		rt.anchoredPosition = Vector2.zero;
+		rt.sizeDelta = Vector2.one * 300;
+
+		while (_tutorial.CurrentStepIndex == 9)
+			yield return null;
+
+		Destroy(spider.gameObject);
 	}
 }

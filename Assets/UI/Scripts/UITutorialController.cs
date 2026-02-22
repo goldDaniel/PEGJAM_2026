@@ -199,7 +199,9 @@ public sealed class UITutorialController : MonoBehaviour
 	{
 		_tooltipText.text = step.BodyText;
 
-		MoveHighlightToTarget(step.HighlightTarget, step.HighlightPadding);
+		if (_highlightFrame != null)
+			MoveHighlightToTarget(step.HighlightTarget, step.HighlightPadding);
+
 		MoveTooltipToAnchor(step.TooltipAnchor);
 	}
 

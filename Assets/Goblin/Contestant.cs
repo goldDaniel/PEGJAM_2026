@@ -54,6 +54,19 @@ public class Contestant : MonoBehaviour
 	[SerializeField] private bool _isPlayer = false;
 	private bool _isNPC => !_isPlayer;
 
+	public bool AllFoodSetup
+	{
+		get
+		{
+			foreach (var food in _foodPile)
+			{
+				if (!food.FallComplete)
+					return false;
+			}
+			return true;
+		}
+	}
+
 	void Awake()
 	{
 		_sprites = new();

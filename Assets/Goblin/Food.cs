@@ -11,8 +11,11 @@ public class Food : MonoBehaviour
 	private Vector2 tablePosition;
 	private Vector2 _origin;
 
+	public bool FallComplete { get; private set;  }
+
     public void Init(FoodTemplate template, Vector2 tablePosition)
 	{
+		FallComplete = false;
 		this.tablePosition = tablePosition;
 		this.template = template;
 		var sr = GetComponentInChildren<SpriteRenderer>();
@@ -34,6 +37,7 @@ public class Food : MonoBehaviour
 			yield return null;
 		}
 		transform.position = tablePosition;
+		FallComplete = true;
 	}
 
 	private int GetSpriteIndex(float t)
