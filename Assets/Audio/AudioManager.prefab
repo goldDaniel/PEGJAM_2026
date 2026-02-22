@@ -75,24 +75,24 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 562c12de7eb72454881e60fe197f4614, type: 3}
     channel: 1
     loop: 1
-    defaultVolume: 1
+    defaultVolume: 0.6
   - name: Chew
-    clip: {fileID: 8300000, guid: 59c9af776e8dd664b832da8f35557137, type: 3}
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
     channel: 0
     loop: 0
     defaultVolume: 1
   - name: Clap
-    clip: {fileID: 8300000, guid: d6e057fdc2bca9e4d951f8dae8e766b6, type: 3}
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
     channel: 0
     loop: 0
     defaultVolume: 1
   - name: Crumple
-    clip: {fileID: 8300000, guid: 4396496ccb95d1b4daee0ddf10b6d4c0, type: 3}
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
     channel: 0
     loop: 0
     defaultVolume: 1
   - name: Crunch
-    clip: {fileID: 8300000, guid: 31eb12ecb3e3fd144812a13ded51dc58, type: 3}
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
     channel: 0
     loop: 0
     defaultVolume: 1
@@ -100,4 +100,4 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4a012ba7fd099ba4f91c1b1c73ad1ad2, type: 3}
     channel: 1
     loop: 1
-    defaultVolume: 1
+    defaultVolume: 0.6
