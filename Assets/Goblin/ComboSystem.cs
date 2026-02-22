@@ -11,6 +11,9 @@ public class ComboSystem
 
 	[SerializeField] private TextMeshProUGUI _comboText;
 
+	public int CurrentCombo => _currentCombo;
+	public bool IsMaxCombo => CurrentCombo >= MaxCombo;
+
 	public void IncreaseCombo()
 	{
 		_currentCombo = Mathf.Min(_currentCombo + 1, MaxCombo);
