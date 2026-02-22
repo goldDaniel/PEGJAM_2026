@@ -83,6 +83,31 @@ public class UIController : MonoSingleton<UIController>
 		});
 	}
 
+	public void OnUnPause()
+	{
+		if (_pauseHandle == null || !_pauseHandle.IsPlaying)
+		{
+			if (pauseAnimator.gameObject.activeSelf)
+			{
+				_pauseHandle = pauseAnimator.Play(pauseOutClip, new()
+				{
+					OnComplete = () =>
+					{
+						pauseAnimator.gameObject.SetActive(false);
+						Game.Instance.ResumeGame();
+					}
+				});
+			}
+		}
+	}
+
+	public void OnQuit()
+	{
+		LevelLoader.CurrentLevelIndex = 0;
+		AudioManager.Instance.PlayMusicCrossfade("MainMenu");
+		SceneTransitionManager.LoadScene("Main Menu");
+	}
+
 	private void UpdatePause()
 	{
 		if (Keyboard.current.escapeKey.wasPressedThisFrame)

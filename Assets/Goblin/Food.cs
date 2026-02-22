@@ -31,8 +31,10 @@ public class Food : MonoBehaviour
 
 	public IEnumerator FallToSpawn()
 	{
-		while (transform.position.y != tablePosition.y)
+		float diff = Mathf.Abs(transform.position.y - tablePosition.y);
+		while (diff > 0.001f)
 		{
+			diff = Mathf.Abs(transform.position.y - tablePosition.y);
 			float y = Mathf.MoveTowards(transform.position.y, tablePosition.y, 0.01f);
 
 			var pos = transform.position;
