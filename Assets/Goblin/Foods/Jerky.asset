@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FoodTemplate
   sprites:
   - {fileID: 21300000, guid: d7653b90ee1b69847aacf2f65b11e7d3, type: 3}
+  - {fileID: 21300000, guid: 8ef31d69259cab74996528c87fbebe18, type: 3}
+  - {fileID: 21300000, guid: 6f6b5c7f0ca78a74c8cfc8c31fe20053, type: 3}
+  - {fileID: 21300000, guid: ea7eaa907bfd9a942b5fc50d2d12220c, type: 3}
+  - {fileID: 21300000, guid: 8005925014b64914292914ab9d996049, type: 3}
+  - {fileID: 21300000, guid: 4be97bbe532f901499e9dd4d67b83a84, type: 3}
   inputSequence:
   - inputs: 02000000
   - inputs: 03000000
