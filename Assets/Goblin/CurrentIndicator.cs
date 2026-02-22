@@ -41,7 +41,7 @@ public class CurrentIndicator : MonoBehaviour
 													Mathf.PerlinNoise1D(456 + Time.time * 16),
 													Mathf.PerlinNoise1D(789 + Time.time * 16)) * 2f - Vector2.one);
 
-		transform.position = Vector3.Lerp(_origin, _origin + shakeOffset, shakeIntensity * shakeIntensity);
+		_rectTransform.anchoredPosition = Vector3.Lerp(_origin, _origin + shakeOffset, shakeIntensity * shakeIntensity);
 	}
 
 	private IEnumerator AnimateMissedInput()

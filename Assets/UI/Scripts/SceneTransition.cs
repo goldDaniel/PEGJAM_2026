@@ -8,7 +8,8 @@ public class SceneTransition : MonoBehaviour
 
 	void Awake()
 	{ 
-		InputSystem.actions.Enable(); 
+		InputSystem.actions.Enable();
+		AudioManager.Instance.Play("MainMenu");
 	}
 
 	public void NextScene()
