@@ -41,6 +41,12 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private Contestant _player;
 	[SerializeField] private Contestant _opponent;
 
+	[SerializeField] private GameObject _grabFoodIndicator;
+	[SerializeField] private GameObject _bringFoodIndicator;
+	[SerializeField] private GameObject _eatIndicator;
+	private GameObject _activeIndicator = null;
+	private float _activeIndicatorCooldown = 1f;
+
 	private int _inputSeqProgress;
 	private int _inputSeqCount;
 	private List<GameplayUI> _activeArrowCombos = new();
@@ -138,7 +144,7 @@ public class Game : MonoSingleton<Game>
 				else if (_opponent.HasEatenAllFood)
 					_levelEndPanel.OnLose();
 			}
-			
+
 			return;
 		}
 
@@ -149,6 +155,31 @@ public class Game : MonoSingleton<Game>
 			_missCooldownTimer = Mathf.Max(_missCooldownTimer - Time.deltaTime, 0f);
 			return;
 		}
+
+		if (_handState == HandState.Empty)
+		{
+			SetIndicator(_grabFoodIndicator);
+			_activeIndicatorCooldown = 1f;
+		}
+		else if (_handState == HandState.Reaching)
+		{ 
+			SetIndicator(_bringFoodIndicator);
+			_activeIndicatorCooldown = 1f;
+		}
+		else
+		{
+			if(_activeIndicatorCooldown > 0f)
+			{
+				SetIndicator(_eatIndicator);
+				_activeIndicatorCooldown -= Time.deltaTime;
+			}
+			else 
+			{
+				SetIndicator(null);
+				_activeIndicatorCooldown = 0f;
+			}
+		}
+			
 
 		var inputs = InputController.Instance.GetInputs();
 		if (inputs.Count > 0)
@@ -165,6 +196,18 @@ public class Game : MonoSingleton<Game>
 		}
 	}
 
+	public void SetIndicator(GameObject indicator)
+	{
+		if (_activeIndicator == indicator)
+			return;
+
+		_grabFoodIndicator.gameObject.SetActive(false);
+		_bringFoodIndicator.gameObject.SetActive(false);
+		_eatIndicator.gameObject.SetActive(false);
+
+		indicator?.gameObject.SetActive(true);
+		_activeIndicator = indicator;
+	}
 
 	public void PrepareLevel()
 	{
@@ -206,10 +249,7 @@ public class Game : MonoSingleton<Game>
 			if (inputs.Contains(GameInput.Right))
 			{
 				_handState = HandState.Reaching;
-				if(!IsReadyToEat)
-				{
-					_player.GrabNextFoodItem();
-				}
+				// TODO (danielg): set reaching hand animation
 			}
 		}
 		else if (_handState == HandState.Reaching)
@@ -217,6 +257,7 @@ public class Game : MonoSingleton<Game>
 			if (inputs.Contains(GameInput.Left))
 			{
 				_handState = HandState.Holding;
+				_player.GrabNextFoodItem();
 				SetupArrowsForFood(_player.GetHeldFood());
 			}
 		}
