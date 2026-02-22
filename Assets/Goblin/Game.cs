@@ -4,11 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Game : MonoSingleton<Game>
 {
+	public struct GameArrow
+	{
+		public GameplayUI gameElement;
+		public MashAttack spider;
+	};
+
 	[SerializeField] private LevelEndPanel _levelEndPanel;
 	[SerializeField] private TextMeshProUGUI _countdownText;
 
@@ -41,17 +48,21 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private Contestant _player;
 	[SerializeField] private Contestant _opponent;
 
-	private List<AttackType> _currentAttacks;
-	
-	[SerializeField] private GameObject _grabFoodIndicator;
+	private MashAttack _fire = null;
+	[SerializeField] private MashAttack _spiderPrefab;
+    [SerializeField] private MashAttack _firePrefab;
+    [SerializeField] private GameObject _rockPrefab;
+
+    [SerializeField] private GameObject _grabFoodIndicator;
 	[SerializeField] private GameObject _bringFoodIndicator;
 	[SerializeField] private GameObject _eatIndicator;
+	[SerializeField] private GameObject _mashIndicator;
 	private GameObject _activeIndicator = null;
 	private float _activeIndicatorCooldown = 1f;
 
 	private int _inputSeqProgress;
 	private int _inputSeqCount;
-	private List<GameplayUI> _activeArrowCombos = new();
+	private List<GameArrow> _activeArrowCombos = new();
 	private Dictionary<int, GameplayUI> _comboDict = new();
 
 	[Range(0.01f, 1f)]
@@ -60,7 +71,6 @@ public class Game : MonoSingleton<Game>
 
 	private bool _hasStarted = false;
 	public bool HasStarted => _hasStarted;
-
 
 	public enum HandState
 	{
@@ -168,7 +178,7 @@ public class Game : MonoSingleton<Game>
 			SetIndicator(_bringFoodIndicator);
 			_activeIndicatorCooldown = 1f;
 		}
-		else
+		else if (!ActiveThreat())
 		{
 			if(_activeIndicatorCooldown > 0f)
 			{
@@ -181,10 +191,19 @@ public class Game : MonoSingleton<Game>
 				_activeIndicatorCooldown = 0f;
 			}
 		}
+		else
+		{
+			SetIndicator(_mashIndicator);
+			_activeIndicatorCooldown = 1f;
+		}
 			
 
 		var inputs = InputController.Instance.GetInputs();
-		if (inputs.Count > 0)
+		if (inputs.Contains(GameInput.Action))
+		{
+			HandleAttack();
+		}
+		else if (inputs.Count > 0)
 		{
 			if (!IsReadyToEat)
 			{
@@ -196,6 +215,47 @@ public class Game : MonoSingleton<Game>
 				HandleEating(inputs, InputController.Instance.inWindow());
 			}
 		}
+
+		if (inputs.Contains(GameInput.Action))
+			InputController.Instance.ClearInputBuffer();
+	}
+
+	private bool ActiveThreat()
+	{
+		return ActiveFire() || ActiveSpider();
+	}
+
+	private bool ActiveFire()
+	{
+		return _fire != null;
+	}
+
+	private bool ActiveSpider()
+	{
+		return _activeArrowCombos.Count > 0 && _activeArrowCombos[0].spider != null;
+	}
+
+	private void HandleAttack()
+	{
+		if (ActiveFire())
+		{
+			_fire.Damage();
+			if (_fire.Finished())
+			{
+				Destroy(_fire.gameObject);
+				_fire = null;
+			}
+		}
+		else if (ActiveSpider())
+		{
+			var arrow = _activeArrowCombos[0];
+			arrow.spider.Damage();
+			if (arrow.spider.Finished())
+			{
+				Destroy(arrow.spider.gameObject);
+				arrow.spider = null;
+			}
+        }
 	}
 
 	public void SetIndicator(GameObject indicator)
@@ -206,6 +266,7 @@ public class Game : MonoSingleton<Game>
 		_grabFoodIndicator.gameObject.SetActive(false);
 		_bringFoodIndicator.gameObject.SetActive(false);
 		_eatIndicator.gameObject.SetActive(false);
+		_mashIndicator.gameObject.SetActive(false);
 
 		indicator?.gameObject.SetActive(true);
 		_activeIndicator = indicator;
@@ -267,7 +328,22 @@ public class Game : MonoSingleton<Game>
 
 	private void HandleEating(List<GameInput> inputs, bool inWindow)
 	{
-		var desiredCombo = _activeArrowCombos[0].GetInputs();
+		if (ActiveFire())
+		{
+            _missCooldownTimer = _missCooldownTime;
+            _indicator.MissedInput();
+            return;
+        }
+
+		if (ActiveSpider())
+		{
+			_missCooldownTimer = _missCooldownTime;
+			_indicator.MissedInput();
+			return;
+		}
+
+        var element = _activeArrowCombos[0].gameElement;
+		var desiredCombo = element.GetInputs();
 		
 		bool wrongCombo = false;
 		foreach (var input in inputs)
@@ -286,14 +362,14 @@ public class Game : MonoSingleton<Game>
 		{ 
 			_indicator.CorrectInput();
 			_player.Bite((float)_inputSeqProgress++ / (_inputSeqCount - 1));
-			_activeArrowCombos[0].OnValidPress();
+			element.OnValidPress();
 
-			Destroy(_activeArrowCombos[0].gameObject);
+			Destroy(element.gameObject);
 			_activeArrowCombos.RemoveAt(0);
 
 			for (int i = 0; i < _activeArrowCombos.Count; ++i)
 			{
-				var arrowCombo = _activeArrowCombos[i];
+				var arrowCombo = _activeArrowCombos[i].gameElement;
 				arrowCombo.MoveToPosition(_arrowPath[i].transform.position);
 			}
 
@@ -304,9 +380,57 @@ public class Game : MonoSingleton<Game>
 			}
 
 			InputController.Instance.ClearInputBuffer();
+        }
 
-			_currentAttacks.Add(_opponent.Attack()); 
+        if (!inputs.Contains(GameInput.Action)) 
+			OpponentAttack(_opponent.Attack());
+    }
+
+	private void OpponentAttack(AttackType attack)
+	{
+		switch(attack)
+		{
+			case AttackType.Spider: SpawnSpider(); break;
+			case AttackType.Fire: SpawnFire(); break;
+			case AttackType.Rock: SpawnRock();  break;
+			default: break;
 		}
+	}
+
+	private void SpawnSpider()
+	{
+		List<int> validIndexes = new();
+		for (int i = 1; i < _activeArrowCombos.Count; i++)
+			if (_activeArrowCombos[i].spider == null)
+				validIndexes.Add(i);
+
+		if (validIndexes.Count > 0)
+		{
+			int index = validIndexes[Random.Range(0, validIndexes.Count - 1)];
+			var arrow = _activeArrowCombos[index];
+			arrow.spider = Instantiate(_spiderPrefab, _activeArrowCombos[index].gameElement.rectTransform);
+			arrow.spider.transform.SetSiblingIndex(1);
+			_activeArrowCombos[index] = arrow;
+		}
+    }
+
+	private void SpawnFire()
+	{
+		if (_activeArrowCombos.Count > 0)
+		{
+			if (_fire == null)
+			{
+				_fire = Instantiate(_firePrefab, _activeArrowCombos[0].gameElement.rectTransform);
+				_fire.transform.SetAsLastSibling();
+			}
+			else
+				_fire.Reset();
+		}
+	}
+
+	private void SpawnRock()
+	{
+
 	}
 
 	private void SetupArrowsForFood(Food food)
@@ -324,7 +448,9 @@ public class Game : MonoSingleton<Game>
 			instance.transform.position = parent.transform.position;
 			instance.rectTransform.sizeDelta *= 1.5f;
 			instance.Init(inputs);
-			_activeArrowCombos.Add(instance);
+			GameArrow arrow = new();
+			arrow.gameElement = instance; 
+			_activeArrowCombos.Add(arrow);
 		}
 		_inputSeqProgress = 0;
 		_inputSeqCount = _activeArrowCombos.Count;

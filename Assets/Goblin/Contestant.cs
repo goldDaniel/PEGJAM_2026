@@ -27,8 +27,8 @@ public class Contestant : MonoBehaviour
 
 	[SerializeField] private Transform _foodHoldingPosition;
 
-	[SerializeField] private int[] _attackWeights;
-	[SerializeField, Range(0f, 1f)] float _attackRate;
+	private int[] _attackWeights;
+	float _attackRate;
 
 	private Food _currentFood = null;
 	private List<Food> _foodPile = new();
@@ -84,7 +84,14 @@ public class Contestant : MonoBehaviour
 
 			_eatingTime = template.EatingTime;
 			_biteTime = template.BiteTime;
-		}
+
+            _attackRate = template.attackRate;
+            _attackWeights = new int[template.attackWeights.Length];
+            for (int i = 0; i < _attackWeights.Length; i++)
+            {
+                _attackWeights[i] = template.attackWeights[i];
+            }
+        }
 		
 		_foodPile.Capacity = level.foodItems.Count;
 		_initialFoodCount = level.foodItems.Count;
@@ -101,20 +108,23 @@ public class Contestant : MonoBehaviour
 
 	public AttackType Attack()
 	{
-		float rand = Random.Range(0, 1);
-		if (rand > _attackRate) return AttackType.None;
+		float chance = Random.Range(0f, 1f);
+		if (chance > _attackRate) return AttackType.None;
 
 		int totalWeight = 0;
-		for (int i = 0; i < (int)AttackType.None; i++)
+		for (int i = 0; i < (int)AttackType.Rock; i++) // hardcode out the rock attack
 			totalWeight += _attackWeights[i];
 
-		float[] probabilities  = new float[_attackWeights.Length - 1];
+		float[] probabilities  = new float[_attackWeights.Length];
 		for (int i = 0; i < probabilities.Length; i++)
-            probabilities[i] = _attackWeights[i] / totalWeight;
+			probabilities[i] = (float)_attackWeights[i] / totalWeight;
 
+		float rand = Random.Range(0f, 1f);
 		for (int i = 0; i < probabilities.Length; i++)
 			if (probabilities[i] > rand)
 				return (AttackType)i;
+			else
+				rand -= probabilities[i];
 
 		return AttackType.None;
 	}

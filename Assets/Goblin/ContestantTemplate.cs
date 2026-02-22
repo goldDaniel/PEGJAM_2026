@@ -15,7 +15,11 @@ public class ContestantTemplate : ScriptableObject
 	[Range(0.01f, 1f)]
 	public float BiteTime;
 
-	public Sprite EatingLeft;
+    [Range(0f, 1f)]
+    public float attackRate;
+    public int[] attackWeights;
+
+    public Sprite EatingLeft;
 	public Sprite EatingRight;
 	public Sprite EatingUp;
 	public Sprite EatingDown;
