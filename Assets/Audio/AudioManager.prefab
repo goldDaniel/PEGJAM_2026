@@ -96,3 +96,8 @@ MonoBehaviour:
     channel: 0
     loop: 0
     defaultVolume: 1
+  - name: GameplayMusic
+    clip: {fileID: 8300000, guid: 4a012ba7fd099ba4f91c1b1c73ad1ad2, type: 3}
+    channel: 1
+    loop: 1
+    defaultVolume: 1

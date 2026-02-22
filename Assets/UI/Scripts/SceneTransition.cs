@@ -14,6 +14,7 @@ public class SceneTransition : MonoBehaviour
 
 	public void NextScene()
 	{
+		AudioManager.Instance.PlayMusicCrossfade("GameplayMusic", 5f);
 		SceneTransitionManager.LoadScene(transition);
 	}
 }
