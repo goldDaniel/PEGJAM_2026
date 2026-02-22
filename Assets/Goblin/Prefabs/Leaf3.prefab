@@ -104,3 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e328d374b128ad54db1ca73fed23be65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Leaf
+  _leaf: {fileID: 0}
+  _fallSpeed: 1.5
+  _horizontalDrift: 1.3
+  autumnProbability: 0.3
+  maxAutumnStrength: 0.8

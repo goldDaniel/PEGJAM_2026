@@ -4248,7 +4248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 286.98804, y: -0.48789498}
+  m_AnchoredPosition: {x: 286.98804, y: -0.48789978}
   m_SizeDelta: {x: 573.9761, y: 0.97578996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1221411538
@@ -4405,9 +4405,9 @@ MonoBehaviour:
   - {fileID: 1288727304205081684, guid: 57b1455887bb69942a3599d32ea679f5, type: 3}
   _pivot0: {fileID: 1169595760}
   _pivot1: {fileID: 1080023794}
-  minInterval: 2
-  averageInterval: 4
-  maxInterval: 10
+  minInterval: 0.5
+  averageInterval: 1
+  maxInterval: 2
 --- !u!212 &1276227540
 SpriteRenderer:
   serializedVersion: 2
