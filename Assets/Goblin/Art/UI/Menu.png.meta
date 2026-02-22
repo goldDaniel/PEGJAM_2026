@@ -1,39 +1,39 @@
 fileFormatVersion: 2
-guid: 09b345860d10fb64e857858dcc9c1cc5
+guid: 97c85f28f82538849a0cd84f011143de
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8493077779086071621
-    second: BringFood_0
+      213: -198938125430884413
+    second: Menu_0
   - first:
-      213: 730230671453784806
-    second: BringFood_1
+      213: -1909268238846872576
+    second: Menu_1
   - first:
-      213: 7032222543071705209
-    second: BringFood_2
+      213: -275939537401066862
+    second: Menu_2
   - first:
-      213: 5624986876994779260
-    second: BringFood_3
+      213: 2406227903653740696
+    second: Menu_3
   - first:
-      213: 8290282839561752159
-    second: BringFood_4
+      213: -894268473198475317
+    second: Menu_4
   - first:
-      213: -188633800437117033
-    second: BringFood_5
+      213: 7585431397144717044
+    second: Menu_5
   - first:
-      213: 5749489209058991897
-    second: BringFood_6
+      213: -2067535388042838268
+    second: Menu_6
   - first:
-      213: -4551414541241239022
-    second: BringFood_7
+      213: 1241894451957635108
+    second: Menu_7
   - first:
-      213: 4017674680794857667
-    second: BringFood_8
+      213: 4708945720312227554
+    second: Menu_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -137,13 +137,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BringFood_0
+      name: Menu_0
       rect:
         serializedVersion: 2
-        x: 177
-        y: 968
-        width: 226
-        height: 289
+        x: 45
+        y: 844
+        width: 328
+        height: 358
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bb8afc712c6822a80800000000000000
-      internalID: -8493077779086071621
+      spriteID: 3c7f86534da3d3df0800000000000000
+      internalID: -198938125430884413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_1
+      name: Menu_1
       rect:
         serializedVersion: 2
-        x: 515
-        y: 1192
-        width: 51
-        height: 45
+        x: 593
+        y: 1165
+        width: 59
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ea09104dec422a00800000000000000
-      internalID: 730230671453784806
+      spriteID: 004b89a07aae085e0800000000000000
+      internalID: -1909268238846872576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_2
+      name: Menu_2
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 1001
-        width: 315
-        height: 311
+        x: 1010
+        y: 864
+        width: 299
+        height: 316
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 97878450529779160800000000000000
-      internalID: 7032222543071705209
+      spriteID: 29a49b5e37aab2cf0800000000000000
+      internalID: -275939537401066862
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_3
+      name: Menu_3
       rect:
         serializedVersion: 2
-        x: 1416
-        y: 1004
-        width: 158
-        height: 205
+        x: 370
+        y: 874
+        width: 216
+        height: 242
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c78f18d13c7ff0e40800000000000000
-      internalID: 5624986876994779260
+      spriteID: 8900ae59783a46120800000000000000
+      internalID: 2406227903653740696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_4
+      name: Menu_4
       rect:
         serializedVersion: 2
-        x: 1582
-        y: 1022
-        width: 163
-        height: 332
+        x: 612
+        y: 890
+        width: 60
+        height: 221
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,20 +240,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f5e489b91500d0370800000000000000
-      internalID: 8290282839561752159
+      spriteID: bc78c29cf8be693f0800000000000000
+      internalID: -894268473198475317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_5
+      name: Menu_5
       rect:
         serializedVersion: 2
-        x: 398
-        y: 968
-        width: 130
-        height: 206
+        x: 696
+        y: 886
+        width: 204
+        height: 238
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79f4054de86d16df0800000000000000
-      internalID: -188633800437117033
+      spriteID: 4f6e7e69aadd44960800000000000000
+      internalID: 7585431397144717044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_6
+      name: Menu_6
       rect:
         serializedVersion: 2
-        x: 529
-        y: 971
-        width: 76
-        height: 196
+        x: 1320
+        y: 884
+        width: 188
+        height: 232
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 91f17e939f94acf40800000000000000
-      internalID: 5749489209058991897
+      spriteID: 40f3823d483ae43e0800000000000000
+      internalID: -2067535388042838268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_7
+      name: Menu_7
       rect:
         serializedVersion: 2
-        x: 601
-        y: 971
-        width: 182
-        height: 203
+        x: 1516
+        y: 884
+        width: 224
+        height: 229
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,20 +306,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 21ab4c3d69026d0c0800000000000000
-      internalID: -4551414541241239022
+      spriteID: 42896799c681c3110800000000000000
+      internalID: 1241894451957635108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BringFood_8
+      name: Menu_8
       rect:
         serializedVersion: 2
-        x: 743
-        y: 776
-        width: 215
-        height: 405
+        x: 1742
+        y: 885
+        width: 202
+        height: 226
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,8 +328,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3c0cbdbe5d5a1c730800000000000000
-      internalID: 4017674680794857667
+      spriteID: 2e66ecdfe29895140800000000000000
+      internalID: 4708945720312227554
       vertices: []
       indices: 
       edges: []
@@ -348,15 +348,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BringFood_0: -8493077779086071621
-      BringFood_1: 730230671453784806
-      BringFood_2: 7032222543071705209
-      BringFood_3: 5624986876994779260
-      BringFood_4: 8290282839561752159
-      BringFood_5: -188633800437117033
-      BringFood_6: 5749489209058991897
-      BringFood_7: -4551414541241239022
-      BringFood_8: 4017674680794857667
+      Menu_0: -198938125430884413
+      Menu_1: -1909268238846872576
+      Menu_2: -275939537401066862
+      Menu_3: 2406227903653740696
+      Menu_4: -894268473198475317
+      Menu_5: 7585431397144717044
+      Menu_6: -2067535388042838268
+      Menu_7: 1241894451957635108
+      Menu_8: 4708945720312227554
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

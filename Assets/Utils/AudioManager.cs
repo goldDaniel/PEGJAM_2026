@@ -59,7 +59,9 @@ public class AudioManager : MonoSingleton<AudioManager>
 		CreatePool(AudioChannel.SFX, _sfxPoolSize, _sfxMixer);
 		CreatePool(AudioChannel.Music, _musicPoolSize, _musicMixer);
 		CreatePool(AudioChannel.UI, _uiPoolSize, _uiMixer);
-	}
+
+        Instance.PlayMusicCrossfade("MainMenu");
+    }
 
 	private void BuildBankMap()
 	{
