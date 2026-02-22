@@ -19,6 +19,8 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private LevelEndPanel _levelEndPanel;
 	[SerializeField] private TextMeshProUGUI _countdownText;
 
+	[SerializeField] private ComboSystem _comboSystem;
+
 	[SerializeField] private RectTransform[] _arrowPath;
 	[SerializeField] private LevelLoader _levels;
 	private Level _currentLevel => _levels.CurrentLevel;
@@ -357,10 +359,13 @@ public class Game : MonoSingleton<Game>
 		{
 			_missCooldownTimer = _missCooldownTime;
 			_indicator.MissedInput();
+			_comboSystem.ResetCombo();
 		}
 		else if(comboPressed)
 		{ 
 			_indicator.CorrectInput();
+			_comboSystem.IncreaseCombo();
+
 			_player.Bite((float)_inputSeqProgress++ / (_inputSeqCount - 1));
 			element.OnValidPress();
 

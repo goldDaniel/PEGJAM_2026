@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: e9dd81770c4f7a147bf94505c069f7d1
+guid: a187c4e1da2c23348971a29f2c5398a7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7419339227180037303
-    second: Baby_Arm_Reach_0
-  - first:
-      213: 6383036707303396873
-    second: Baby_Arm_Reach_1
-  - first:
-      213: 5633352474697696041
-    second: Baby_Arm_Reach_2
+      213: -7943662960481446373
+    second: KingClosed0_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Baby_Arm_Reach_0
+      name: KingClosed0_0
       rect:
         serializedVersion: 2
-        x: 290
-        y: 542
-        width: 478
-        height: 402
+        x: 43
+        y: 0
+        width: 1718
+        height: 1890
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,52 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 94b00df3846390990800000000000000
-      internalID: -7419339227180037303
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Baby_Arm_Reach_1
-      rect:
-        serializedVersion: 2
-        x: 1135
-        y: 545
-        width: 567
-        height: 431
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9061917011a159850800000000000000
-      internalID: 6383036707303396873
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Baby_Arm_Reach_2
-      rect:
-        serializedVersion: 2
-        x: 1165
-        y: 525
-        width: 14
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9238cec9a30bd2e40800000000000000
-      internalID: 5633352474697696041
+      spriteID: b165311ff9072c190800000000000000
+      internalID: -7943662960481446373
       vertices: []
       indices: 
       edges: []
@@ -198,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Baby_Arm_Reach_0: -7419339227180037303
-      Baby_Arm_Reach_1: 6383036707303396873
-      Baby_Arm_Reach_2: 5633352474697696041
+      KingClosed0_0: -7943662960481446373
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -51,23 +51,53 @@ MonoBehaviour:
   _musicMixer: {fileID: 24300002, guid: de80e431038fb6044830a60fea0cc6f5, type: 2}
   _uiMixer: {fileID: 24300002, guid: 7b87f8c6bc3c153448f082b78d3e308a, type: 2}
   _audioBank:
-  - name: DownArrow
-    clip: {fileID: 0}
+  - name: DownKey
+    clip: {fileID: 8300000, guid: 1417c2d33ba0bca4b998aed88cb1ae14, type: 3}
     channel: 0
     loop: 0
-    defaultVolume: 0
-  - name: 
-    clip: {fileID: 0}
+    defaultVolume: 1
+  - name: LeftKey
+    clip: {fileID: 8300000, guid: 6ac94fd685e77e5488f240fc5dc0647f, type: 3}
     channel: 0
     loop: 0
-    defaultVolume: 0
-  - name: 
-    clip: {fileID: 0}
+    defaultVolume: 1
+  - name: RightKey
+    clip: {fileID: 8300000, guid: e90d80f02f842f04aa793874813598e6, type: 3}
     channel: 0
     loop: 0
-    defaultVolume: 0
-  - name: 
-    clip: {fileID: 0}
+    defaultVolume: 1
+  - name: UpKey
+    clip: {fileID: 8300000, guid: 68d09d2e62b9a954dbbcd6a50bc4d600, type: 3}
     channel: 0
     loop: 0
-    defaultVolume: 0
+    defaultVolume: 1
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: 562c12de7eb72454881e60fe197f4614, type: 3}
+    channel: 1
+    loop: 1
+    defaultVolume: 0.6
+  - name: Chew
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
+    channel: 0
+    loop: 0
+    defaultVolume: 1
+  - name: Clap
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
+    channel: 0
+    loop: 0
+    defaultVolume: 1
+  - name: Crumple
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
+    channel: 0
+    loop: 0
+    defaultVolume: 1
+  - name: Crunch
+    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
+    channel: 0
+    loop: 0
+    defaultVolume: 1
+  - name: GameplayMusic
+    clip: {fileID: 8300000, guid: 4a012ba7fd099ba4f91c1b1c73ad1ad2, type: 3}
+    channel: 1
+    loop: 1
+    defaultVolume: 0.6
