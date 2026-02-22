@@ -41,6 +41,8 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private Contestant _player;
 	[SerializeField] private Contestant _opponent;
 
+	private List<AttackType> _currentAttacks;
+
 	private int _inputSeqProgress;
 	private int _inputSeqCount;
 	private List<GameplayUI> _activeArrowCombos = new();
@@ -165,7 +167,6 @@ public class Game : MonoSingleton<Game>
 		}
 	}
 
-
 	public void PrepareLevel()
 	{
 		var level = Instantiate(_currentLevel);
@@ -261,6 +262,8 @@ public class Game : MonoSingleton<Game>
 			}
 
 			InputController.Instance.ClearInputBuffer();
+
+			_currentAttacks.Add(_opponent.Attack()); 
 		}
 	}
 

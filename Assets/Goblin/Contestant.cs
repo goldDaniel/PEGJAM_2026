@@ -12,12 +12,23 @@ public enum ContestantAnimations
 	Damage, // Throwing up? Maybe name better
 }
 
+public enum AttackType
+{
+	Spider,
+	Fire, 
+	Rock,
+	None
+};
+
 public class Contestant : MonoBehaviour
 {
 	[SerializeField] private SpriteRenderer _bodyRenderer;
 	[SerializeField] private SpriteRenderer _armRenderer;
 
 	[SerializeField] private Transform _foodHoldingPosition;
+
+	[SerializeField] private int[] _attackWeights;
+	[SerializeField, Range(0f, 1f)] float _attackRate;
 
 	private Food _currentFood = null;
 	private List<Food> _foodPile = new();
@@ -86,6 +97,26 @@ public class Contestant : MonoBehaviour
 			food.Init(level.foodItems[i]);
 			_foodPile.Add(food);
 		}
+	}
+
+	public AttackType Attack()
+	{
+		float rand = Random.Range(0, 1);
+		if (rand > _attackRate) return AttackType.None;
+
+		int totalWeight = 0;
+		for (int i = 0; i < (int)AttackType.None; i++)
+			totalWeight += _attackWeights[i];
+
+		float[] probabilities  = new float[_attackWeights.Length - 1];
+		for (int i = 0; i < probabilities.Length; i++)
+            probabilities[i] = _attackWeights[i] / totalWeight;
+
+		for (int i = 0; i < probabilities.Length; i++)
+			if (probabilities[i] > rand)
+				return (AttackType)i;
+
+		return AttackType.None;
 	}
 
 	public Food GetHeldFood() => _currentFood;
