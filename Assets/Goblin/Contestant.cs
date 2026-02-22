@@ -59,6 +59,29 @@ public class Contestant : MonoBehaviour
 		_sprites = new();
 	}
 
+	public void Reach()
+	{
+		_armRenderer.sprite = _sprites[ContestantAnimations.Reaching];
+	}
+
+	public void Hold()
+	{
+		_armRenderer.sprite = _sprites[ContestantAnimations.Empty];
+	}
+
+	public void ToggleMouth()
+	{
+		if (_bodyRenderer.sprite == _sprites[ContestantAnimations.EatingUp])
+			_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingDown];
+		else
+			_bodyRenderer.sprite = _sprites[ContestantAnimations.EatingUp];
+	}
+
+	public void Sad()
+	{
+		_bodyRenderer.sprite = _sprites[ContestantAnimations.Damage];
+	}
+
 	public void Setup(ContestantTemplate template, Food foodPrefab, Level level, Transform foodSpawn)
 	{
 		if (template != null) // setup new NPC
@@ -100,8 +123,8 @@ public class Contestant : MonoBehaviour
 		for (int i = 0; i < _initialFoodCount; ++i)
 		{
 			var food = Instantiate(foodPrefab, foodSpawn, true);
-			food.transform.position = foodSpawn.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
 			food.Init(level.foodItems[i]);
+			food.transform.position = foodSpawn.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
 			_foodPile.Add(food);
 		}
 	}
