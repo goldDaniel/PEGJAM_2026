@@ -46,6 +46,12 @@ public class AudioManager : MonoSingleton<AudioManager>
 
 	private void Awake()
 	{
+		if(HasInstance && Instance != this)
+		{
+			Destroy(this.gameObject);
+			return;
+		}
+
 		DontDestroyOnLoad(this.gameObject);
 
 		_bankMap.Clear();
