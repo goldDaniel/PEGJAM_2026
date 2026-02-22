@@ -32,21 +32,21 @@ public class InputController : MonoSingleton<InputController>
 		SetInputCallbacks("Menu", GameInput.Menu);
 	}
 
-	private void SetInputCallbacks(string actionName, GameInput dir)
+    private void LateUpdate()
+    {
+        if (!inWindow()) 
+			_pressedInputs.Clear();
+    }
+
+    private void SetInputCallbacks(string actionName, GameInput dir)
 	{
 		InputSystem.actions.FindAction(actionName).started += (_) => OnKeyPress(dir);
-		InputSystem.actions.FindAction(actionName).canceled += (_) => OnKeyReleased(dir);
 	}
 
 	private void OnKeyPress(GameInput input)
 	{
 		_pressedTime = Time.time;
 		_pressedInputs.Add(input);
-	}
-
-	private void OnKeyReleased(GameInput input)
-	{
-		_pressedInputs.Remove(input);
 	}
 
 	public List<GameInput> GetInputs()

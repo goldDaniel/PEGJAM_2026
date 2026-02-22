@@ -57,10 +57,10 @@ public class Game : MonoSingleton<Game>
 
 	private MashAttack _fire = null;
 	[SerializeField] private MashAttack _spiderPrefab;
-    [SerializeField] private MashAttack _firePrefab;
-    [SerializeField] private GameObject _rockPrefab;
+	[SerializeField] private MashAttack _firePrefab;
+	[SerializeField] private GameObject _rockPrefab;
 
-    [SerializeField] private GameObject _grabFoodIndicator;
+	[SerializeField] private GameObject _grabFoodIndicator;
 	[SerializeField] private GameObject _bringFoodIndicator;
 	[SerializeField] private GameObject _eatIndicator;
 	[SerializeField] private GameObject _mashIndicator;
@@ -71,6 +71,8 @@ public class Game : MonoSingleton<Game>
 	private int _inputSeqCount;
 	private List<GameArrow> _activeArrowCombos = new();
 	private Dictionary<int, GameplayUI> _comboDict = new();
+
+	private bool _wasWaiting = false;
 
 	[Range(0.01f, 1f)]
 	[SerializeField] private float _missCooldownTime = 0.2f;
@@ -206,11 +208,12 @@ public class Game : MonoSingleton<Game>
 			
 
 		var inputs = InputController.Instance.GetInputs();
+		bool waiting = InputController.Instance.inWindow();
 		if (inputs.Contains(GameInput.Action))
 		{
 			HandleAttack();
 		}
-		else if (inputs.Count > 0)
+		else if (inputs.Count > 0 || _wasWaiting)
 		{
 			if (!IsReadyToEat)
 			{
@@ -218,9 +221,10 @@ public class Game : MonoSingleton<Game>
 				InputController.Instance.ClearInputBuffer();
 			}
 			else if (IsReadyToEat && _activeArrowCombos.Count > 0)
-			{
-				HandleEating(inputs, InputController.Instance.inWindow());
-			}
+            {
+                _wasWaiting = waiting;
+                HandleEating(inputs, waiting);
+            }
 		}
 
 		if (inputs.Contains(GameInput.Action))
@@ -262,7 +266,7 @@ public class Game : MonoSingleton<Game>
 				Destroy(arrow.spider.gameObject);
 				arrow.spider = null;
 			}
-        }
+		}
 	}
 
 	public void SetIndicator(GameObject indicator)
@@ -337,23 +341,9 @@ public class Game : MonoSingleton<Game>
 
 	private void HandleEating(List<GameInput> inputs, bool inWindow)
 	{
-		if (ActiveFire())
-		{
-            _missCooldownTimer = _missCooldownTime;
-            _indicator.MissedInput();
-            return;
-        }
-
-		if (ActiveSpider())
-		{
-			_missCooldownTimer = _missCooldownTime;
-			_indicator.MissedInput();
-			return;
-		}
-
-        var element = _activeArrowCombos[0].gameElement;
+		var element = _activeArrowCombos[0].gameElement;
 		var desiredCombo = element.GetInputs();
-		
+
 		bool wrongCombo = false;
 		foreach (var input in inputs)
 			wrongCombo |= !desiredCombo.Contains(input);
@@ -362,11 +352,14 @@ public class Game : MonoSingleton<Game>
 		foreach (var input in desiredCombo)
 			comboPressed &= inputs.Contains(input);
 
-		if (wrongCombo || (!comboPressed && !inWindow))
+		bool threat = ActiveThreat();
+		if (wrongCombo || (!comboPressed && !inWindow) || threat)
 		{
 			_missCooldownTimer = _missCooldownTime;
 			_indicator.MissedInput();
 			_comboSystem.ResetCombo();
+			_wasWaiting = false;
+			return;
 		}
 		else if(comboPressed)
 		{ 
@@ -393,11 +386,12 @@ public class Game : MonoSingleton<Game>
 			}
 
 			InputController.Instance.ClearInputBuffer();
-        }
+			_wasWaiting = false;
+		}
 
-        if (!inputs.Contains(GameInput.Action)) 
+		if (!inputs.Contains(GameInput.Action)) 
 			OpponentAttack(_opponent.Attack());
-    }
+	}
 
 	private void OpponentAttack(AttackType attack)
 	{
@@ -425,7 +419,7 @@ public class Game : MonoSingleton<Game>
 			arrow.spider.transform.SetSiblingIndex(1);
 			_activeArrowCombos[index] = arrow;
 		}
-    }
+	}
 
 	private void SpawnFire()
 	{
