@@ -69,7 +69,7 @@ MonoBehaviour:
   _sfxKey:
   - UpKey
   - RightKey
-  - Clap
+  - Chew
 --- !u!114 &-8028119043519592628
 MonoBehaviour:
   m_ObjectHideFlags: 0
