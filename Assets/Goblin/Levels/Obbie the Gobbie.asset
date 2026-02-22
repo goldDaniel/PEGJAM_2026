@@ -16,8 +16,8 @@ MonoBehaviour:
   EntryImage: {fileID: 21300000, guid: 58f711c7d928d5046adf4d0eba88122f, type: 3}
   EatingTime: 30
   BiteTime: 0.1
-  attackRate: 0.1
-  attackWeights: 460000001e00000000000000
+  attackRate: 0
+  attackWeights: 140000005000000000000000
   EatingLeft: {fileID: 0}
   EatingRight: {fileID: 0}
   EatingUp: {fileID: 21300000, guid: 27086b45ea5be984fb272ff8699ae8d0, type: 3}

@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelLoader
   allLevels:
   - {fileID: 11400000, guid: cb297b229b2be6941aeaf22e2500eef3, type: 2}
+  - {fileID: 11400000, guid: cb297b229b2be6941aeaf22e2500eef3, type: 2}
+  - {fileID: 11400000, guid: cb297b229b2be6941aeaf22e2500eef3, type: 2}
