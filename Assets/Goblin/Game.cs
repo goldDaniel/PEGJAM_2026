@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,7 @@ public class Game : MonoSingleton<Game>
 	[SerializeField] private GameObject _countdownFeast;
 
 	[SerializeField] private ComboSystem _comboSystem;
+	[SerializeField] private Sayan _goblinMode;
 
 	[SerializeField] private RectTransform[] _arrowPath;
 	[SerializeField] private LevelLoader _levels;
@@ -288,7 +290,9 @@ public class Game : MonoSingleton<Game>
 		var level = Instantiate(_currentLevel);
 
 		_player.Setup(_playerTemplate, _foodPrefab, level, _playerFoodSpawn);
-		_opponent.Setup(level.opponent, _foodPrefab, level, _opponentFoodSpawn);	
+		_opponent.Setup(level.opponent, _foodPrefab, level, _opponentFoodSpawn);
+
+		_goblinMode.SetContestant(_player);
 	}
 
 	public void StartGameplayCountdown()
@@ -358,6 +362,9 @@ public class Game : MonoSingleton<Game>
 			_missCooldownTimer = _missCooldownTime;
 			_indicator.MissedInput();
 			_comboSystem.ResetCombo();
+			if (_goblinMode.IsGoblinMode)
+				_goblinMode.ExitGoblinMode(_player);
+
 			_wasWaiting = false;
 			return;
 		}
@@ -366,6 +373,9 @@ public class Game : MonoSingleton<Game>
 			_indicator.CorrectInput();
 			_comboSystem.IncreaseCombo();
 			_player.ToggleMouth();
+			if (_comboSystem.IsMaxCombo && !_goblinMode.IsGoblinMode)
+				_goblinMode.EnterGoblinMode(_player);
+				
 
 			_player.Bite((float)_inputSeqProgress++ / (_inputSeqCount - 1));
 			element.OnValidPress();

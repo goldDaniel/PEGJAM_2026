@@ -82,6 +82,17 @@ public class Contestant : MonoBehaviour
 		_bodyRenderer.sprite = _sprites[ContestantAnimations.Damage];
 	}
 
+	public Sprite GetSprite(ContestantAnimations anim) => _sprites[anim];
+
+	public void UpdateBody(Sprite open, Sprite closed)
+	{
+		_sprites[ContestantAnimations.EatingUp] = closed;
+		_sprites[ContestantAnimations.EatingDown] = open;
+
+		_bodyRenderer.sprite = open;
+	}
+
+
 	public void Setup(ContestantTemplate template, Food foodPrefab, Level level, Transform foodSpawn)
 	{
 		if (template != null) // setup new NPC
