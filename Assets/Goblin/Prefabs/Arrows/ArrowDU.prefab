@@ -69,7 +69,6 @@ MonoBehaviour:
   _sfxKey:
   - DownKey
   - UpKey
-  - Chew
   - Clap
 --- !u!114 &-8028119043519592628
 MonoBehaviour:

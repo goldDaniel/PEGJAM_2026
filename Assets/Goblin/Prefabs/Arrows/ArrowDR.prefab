@@ -70,7 +70,6 @@ MonoBehaviour:
   - DownKey
   - RightKey
   - Chew
-  - Crunch
 --- !u!114 &-8028119043519592628
 MonoBehaviour:
   m_ObjectHideFlags: 0
