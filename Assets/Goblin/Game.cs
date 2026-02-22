@@ -83,6 +83,7 @@ public class Game : MonoSingleton<Game>
 
 	private bool _wasWaiting = false;
 
+	private Camera _camera;
 	private Vector3 _cameraOriginalPos;
 	private float _cameraOriginalSize;
 	[SerializeField] private float _swayAmount;
@@ -154,12 +155,9 @@ public class Game : MonoSingleton<Game>
 			AudioManager.Instance.PlayMusicCrossfade("GameplayMusic");
 			UIController.Instance.ShowVersusPanel(_currentLevel, _playerTemplate.EntryImage);
 		}
-
-		_cameraOriginalPos = Camera.main.transform.position;
-		_cameraOriginalSize = Camera.main.orthographicSize;
 	}
 
-	private static int HashInputs(params GameInput[] inputs)
+    private static int HashInputs(params GameInput[] inputs)
 	{
 		System.Array.Sort(inputs);
 		int hash = 0;
@@ -183,6 +181,13 @@ public class Game : MonoSingleton<Game>
 		_comboDict[HashInputs(GameInput.Up, GameInput.Right)] = _urArrowPrefab;
 	}
 
+	private void SetupCameraData()
+	{
+        _camera = Camera.main;
+        _cameraOriginalPos = _camera.transform.position;
+        _cameraOriginalSize = _camera.orthographicSize;
+    }
+
 	void Update()
 	{
 		if (_isTutorial)
@@ -196,8 +201,10 @@ public class Game : MonoSingleton<Game>
         float swayY = Mathf.Sin(Time.time * _swaySpeedY) * _swayAmount;
         float zoom = Mathf.Sin(Time.time * _zoomSpeed) * _zoomAmount;
 
-		Camera.main.transform.position = _cameraOriginalPos + new Vector3(swayX, swayY, 0);
-		Camera.main.orthographicSize = _cameraOriginalSize + zoom;
+		if (_camera == null) 
+			SetupCameraData();
+		_camera.transform.position = _cameraOriginalPos + new Vector3(swayX, swayY, 0);
+		_camera.orthographicSize = _cameraOriginalSize + zoom;
 
 		if (IsPaused || !HasStarted)
 			return;
