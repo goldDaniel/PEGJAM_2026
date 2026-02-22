@@ -135,14 +135,17 @@ public class Game : MonoSingleton<Game>
 
 		if (_isTutorial)
 		{
-			for(int i = 0; i < 30; ++i)
+			for (int i = 0; i < 30; ++i)
 				yield return null;
 
 			yield return HandleTutorial();
 			SceneTransitionManager.LoadScene("Gameplay");
 		}
 		else
+		{
+			AudioManager.Instance.PlayMusicCrossfade("GameplayMusic");
 			UIController.Instance.ShowVersusPanel(_currentLevel, _playerTemplate.EntryImage);
+		}
 	}
 
 	private static int HashInputs(params GameInput[] inputs)

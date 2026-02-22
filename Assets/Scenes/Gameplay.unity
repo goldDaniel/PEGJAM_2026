@@ -687,7 +687,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6834714461110704974, guid: a9f832dcbc706e94ab09fec7e14857ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a9f832dcbc706e94ab09fec7e14857ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3533,6 +3533,7 @@ MonoBehaviour:
   - {fileID: 710321722}
   - {fileID: 935335814}
   _levels: {fileID: 11400000, guid: 7806bbeeadbc70c4b9e7ed09c5593db6, type: 2}
+  _tutorialLevel: {fileID: 0}
   _playerTemplate: {fileID: 11400000, guid: cc13816b97dea7f4380e194f87585cd8, type: 2}
   _foodPrefab: {fileID: 957973336231640870, guid: c5fcd3c80f7ff5c4a906b5db4872ee41, type: 3}
   _playerFoodHoldingPosition: {fileID: 970863192}
