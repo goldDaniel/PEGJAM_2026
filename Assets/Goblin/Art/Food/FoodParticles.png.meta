@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: 61cd9dc1f5ffc4a47a9959470fcaf494
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 41639439259295205
+    second: FoodParticles_0
+  - first:
+      213: 6731697728343131512
+    second: FoodParticles_1
+  - first:
+      213: 1547906836847869695
+    second: FoodParticles_2
+  - first:
+      213: 8029413718171681579
+    second: FoodParticles_3
+  - first:
+      213: 4558978847152365093
+    second: FoodParticles_4
+  - first:
+      213: -7265001429556132438
+    second: FoodParticles_5
+  - first:
+      213: -5620442585784189149
+    second: FoodParticles_6
+  - first:
+      213: 6313767644842207079
+    second: FoodParticles_7
+  - first:
+      213: -6374121655149050098
+    second: FoodParticles_8
+  - first:
+      213: -8566071107893612907
+    second: FoodParticles_9
+  - first:
+      213: -2066567404095281594
+    second: FoodParticles_10
+  - first:
+      213: 8715406322889940290
+    second: FoodParticles_11
+  - first:
+      213: 2350265803548899830
+    second: FoodParticles_12
+  - first:
+      213: 5105569704861202597
+    second: FoodParticles_13
+  - first:
+      213: -6839341069852621707
+    second: FoodParticles_14
+  - first:
+      213: -1373492073052594779
+    second: FoodParticles_15
+  - first:
+      213: 5529220059687389859
+    second: FoodParticles_16
+  - first:
+      213: -8399230120525640435
+    second: FoodParticles_17
+  - first:
+      213: 4059360689574768328
+    second: FoodParticles_18
+  - first:
+      213: -8796098807793116896
+    second: FoodParticles_19
+  - first:
+      213: 1938342714783054716
+    second: FoodParticles_20
+  - first:
+      213: -4959651436841589913
+    second: FoodParticles_21
+  - first:
+      213: 5472441401807409961
+    second: FoodParticles_22
+  - first:
+      213: -2666148118865195095
+    second: FoodParticles_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FoodParticles_0
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 1288
+        width: 61
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ed52b179dee39000800000000000000
+      internalID: 41639439259295205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_1
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 1166
+        width: 68
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8754239fa6bcb6d50800000000000000
+      internalID: 6731697728343131512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_2
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 1177
+        width: 82
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffe37b321154b7510800000000000000
+      internalID: 1547906836847869695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_3
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 1231
+        width: 40
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b23854a2c353e6f60800000000000000
+      internalID: 8029413718171681579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_4
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 1203
+        width: 40
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52e59036b1fb44f30800000000000000
+      internalID: 4558978847152365093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_5
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 1181
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa50a9201b78d2b90800000000000000
+      internalID: -7265001429556132438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_6
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 1101
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32ffad12f3d2002b0800000000000000
+      internalID: -5620442585784189149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_7
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 1013
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 767ac21a8320f9750800000000000000
+      internalID: 6313767644842207079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_8
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 987
+        width: 72
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0747bd40229a87a0800000000000000
+      internalID: -6374121655149050098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_9
+      rect:
+        serializedVersion: 2
+        x: 1538
+        y: 1023
+        width: 41
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59ea34d56b33f1980800000000000000
+      internalID: -8566071107893612907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_10
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 935
+        width: 68
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 646ef7625e31253e0800000000000000
+      internalID: -2066567404095281594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_11
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 947
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24d5c0ddfd753f870800000000000000
+      internalID: 8715406322889940290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_12
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 801
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f9b74ccb42dd9020800000000000000
+      internalID: 2350265803548899830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_13
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 806
+        width: 35
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a87f3a9890aad640800000000000000
+      internalID: 5105569704861202597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_14
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 770
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 574c1b98887c511a0800000000000000
+      internalID: -6839341069852621707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_15
+      rect:
+        serializedVersion: 2
+        x: 1433
+        y: 716
+        width: 72
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ad92e39c3060fce0800000000000000
+      internalID: -1373492073052594779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_16
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 651
+        width: 86
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa81a6695cbbbc40800000000000000
+      internalID: 5529220059687389859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_17
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 710
+        width: 38
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0dce47d4b0ff6b80800000000000000
+      internalID: -8399230120525640435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_18
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 684
+        width: 71
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cee94d2a0fb55830800000000000000
+      internalID: 4059360689574768328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_19
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 599
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0291140fcbafde580800000000000000
+      internalID: -8796098807793116896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_20
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 498
+        width: 73
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7b3c97ed6066ea10800000000000000
+      internalID: 1938342714783054716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_21
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 542
+        width: 36
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7632d49ab47cb2bb0800000000000000
+      internalID: -4959651436841589913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_22
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 492
+        width: 70
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9231fd0f57402fb40800000000000000
+      internalID: 5472441401807409961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FoodParticles_23
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 399
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9afc6786960fffad0800000000000000
+      internalID: -2666148118865195095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FoodParticles_0: 41639439259295205
+      FoodParticles_1: 6731697728343131512
+      FoodParticles_10: -2066567404095281594
+      FoodParticles_11: 8715406322889940290
+      FoodParticles_12: 2350265803548899830
+      FoodParticles_13: 5105569704861202597
+      FoodParticles_14: -6839341069852621707
+      FoodParticles_15: -1373492073052594779
+      FoodParticles_16: 5529220059687389859
+      FoodParticles_17: -8399230120525640435
+      FoodParticles_18: 4059360689574768328
+      FoodParticles_19: -8796098807793116896
+      FoodParticles_2: 1547906836847869695
+      FoodParticles_20: 1938342714783054716
+      FoodParticles_21: -4959651436841589913
+      FoodParticles_22: 5472441401807409961
+      FoodParticles_23: -2666148118865195095
+      FoodParticles_3: 8029413718171681579
+      FoodParticles_4: 4558978847152365093
+      FoodParticles_5: -7265001429556132438
+      FoodParticles_6: -5620442585784189149
+      FoodParticles_7: 6313767644842207079
+      FoodParticles_8: -6374121655149050098
+      FoodParticles_9: -8566071107893612907
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

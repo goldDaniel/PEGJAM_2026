@@ -132,13 +132,13 @@ public class Contestant : MonoBehaviour
 			_eatingTime = template.EatingTime;
 			_biteTime = template.BiteTime;
 
-            _attackRate = template.attackRate;
-            _attackWeights = new int[template.attackWeights.Length];
-            for (int i = 0; i < _attackWeights.Length; i++)
-            {
-                _attackWeights[i] = template.attackWeights[i];
-            }
-        }
+			_attackRate = template.attackRate;
+			_attackWeights = new int[template.attackWeights.Length];
+			for (int i = 0; i < _attackWeights.Length; i++)
+			{
+				_attackWeights[i] = template.attackWeights[i];
+			}
+		}
 		
 		_foodPile.Capacity = level.foodItems.Count;
 		_initialFoodCount = level.foodItems.Count;
@@ -156,7 +156,7 @@ public class Contestant : MonoBehaviour
 
 	public AttackType Attack()
 	{
-		float chance = Random.Range(0f, 1f);
+		float chance = Random.value;
 		if (chance > _attackRate) return AttackType.None;
 
 		int totalWeight = 0;
@@ -167,7 +167,7 @@ public class Contestant : MonoBehaviour
 		for (int i = 0; i < probabilities.Length; i++)
 			probabilities[i] = (float)_attackWeights[i] / totalWeight;
 
-		float rand = Random.Range(0f, 1f);
+		float rand = Random.value;
 		for (int i = 0; i < probabilities.Length; i++)
 			if (probabilities[i] > rand)
 				return (AttackType)i;

@@ -7,6 +7,10 @@ public class Food : MonoBehaviour
 {
 	[NonSerialized]
 	public FoodTemplate template;
+	[SerializeField]
+	private FoodParticle _foodParticlePrefab;
+	[SerializeField, Min(0)]
+	private int _maxParticleCount;
 
 	private Vector2 tablePosition;
 	private Vector2 _origin;
@@ -19,7 +23,7 @@ public class Food : MonoBehaviour
 		this.tablePosition = tablePosition;
 		this.template = template;
 		var sr = GetComponentInChildren<SpriteRenderer>();
-        sr.sprite = template.sprites[0];
+		sr.sprite = template.sprites[0];
 		sr.sortingOrder = -10;
 		this.gameObject.transform.localScale = Vector3.one;
 		StartCoroutine(FallToSpawn());
@@ -55,9 +59,24 @@ public class Food : MonoBehaviour
 
 	public void Bite(float foodProgress)
 	{
-        var sr = GetComponentInChildren<SpriteRenderer>();
+		var sr = GetComponentInChildren<SpriteRenderer>();
 		sr.sprite = template.sprites[GetSpriteIndex(foodProgress)];
-        StartCoroutine(AnimateBite(0.5f));
+		StartCoroutine(AnimateBite(0.5f));
+
+		SpawnFoodParticles(UnityEngine.Random.Range(0, _maxParticleCount));
+	}
+
+	private void SpawnFoodParticles(int count)
+	{
+		for (int i = 0; i < count; i++)
+		{
+			FoodParticle particle = Instantiate(_foodParticlePrefab);
+
+			Vector2 vel = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(1f, 3f));
+			float lifetime = UnityEngine.Random.Range(0.3f, 1f);
+			float scale = UnityEngine.Random.Range(0.1f, 0.4f);
+			particle.Init((Vector2)this.transform.position, vel, lifetime, scale);
+		}
 	}
 
 	private IEnumerator AnimateBite(float duration)
