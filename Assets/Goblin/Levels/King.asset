@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b1956e32494ad4faa367dab5a1dcf7, type: 3}
+  m_Name: King
+  m_EditorClassIdentifier: Assembly-CSharp::ContestantTemplate
+  Name: The Goblin King
+  EntryImage: {fileID: 21300000, guid: 10796c41c4680f848932aa03eff83443, type: 3}
+  EatingTime: 5
+  BiteTime: 0.01
+  EatingLeft: {fileID: 0}
+  EatingRight: {fileID: 0}
+  EatingUp: {fileID: 21300000, guid: a187c4e1da2c23348971a29f2c5398a7, type: 3}
+  EatingDown: {fileID: 21300000, guid: 482d4279a4add0f498bc6847facfff2d, type: 3}
+  Empty: {fileID: 21300000, guid: 0b9b3054099edd54f988f6e0bec1daa1, type: 3}
+  Reaching: {fileID: 21300000, guid: 10ee5dbce0d0fee40a66150daecdbdbf, type: 3}
+  Damage: {fileID: 0}

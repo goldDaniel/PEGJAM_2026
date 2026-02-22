@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d310f846a031945b8b651799bf1cb4, type: 3}
   m_Name: Test Level
   m_EditorClassIdentifier: Assembly-CSharp::Level
-  opponent: {fileID: 11400000, guid: a1a0391fd8fb3144d8e34a21d1ace1a3, type: 2}
+  opponent: {fileID: 11400000, guid: 77ecb8abcfcd6ef49b685a8529f9af64, type: 2}
   foodItems:
   - {fileID: 11400000, guid: e03b9f6d05e188b41b82b8cc6b57fc5f, type: 2}
   - {fileID: 11400000, guid: e96f9e16c389f164c9fe34e692f4b1f1, type: 2}
