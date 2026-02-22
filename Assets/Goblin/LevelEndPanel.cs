@@ -85,6 +85,7 @@ public class LevelEndPanel : MonoBehaviour
 		{
 			OnComplete = () =>
 			{
+				LevelLoader.CurrentLevelIndex = 0;
 				SceneTransitionManager.LoadScene("Main Menu");
 			}
 		});
