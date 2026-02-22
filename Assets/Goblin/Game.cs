@@ -387,10 +387,9 @@ public class Game : MonoSingleton<Game>
 
 			InputController.Instance.ClearInputBuffer();
 			_wasWaiting = false;
-		}
 
-		if (!inputs.Contains(GameInput.Action)) 
-			OpponentAttack(_opponent.Attack());
+            OpponentAttack(_opponent.Attack());
+        }
 	}
 
 	private void OpponentAttack(AttackType attack)
