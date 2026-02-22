@@ -111,3 +111,8 @@ MonoBehaviour:
     channel: 0
     loop: 0
     defaultVolume: 1
+  - name: GoblinMode
+    clip: {fileID: 8300000, guid: bc269dcaf5b58cd44a6b917d5a35c697, type: 3}
+    channel: 0
+    loop: 0
+    defaultVolume: 0.6

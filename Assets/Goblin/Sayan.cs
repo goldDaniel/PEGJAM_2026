@@ -31,6 +31,8 @@ public class Sayan : MonoBehaviour
 		contestant.UpdateBody(_sayanOpen, _sayanClosed);
 		foreach(var renderer in _renderers) 
 			renderer.gameObject.SetActive(true);
+
+		AudioManager.Instance.Play("GoblinMode");
 	}
 
 	public void ExitGoblinMode(Contestant contestant)
