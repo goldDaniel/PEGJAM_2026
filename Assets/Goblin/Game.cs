@@ -578,5 +578,8 @@ public class Game : MonoSingleton<Game>
 			yield return null;
 
 		Destroy(spider.gameObject);
+
+		while (_tutorial.CurrentStepIndex == 10)
+			yield return null;
 	}
 }
