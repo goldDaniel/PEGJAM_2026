@@ -93,10 +93,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameplayUI
   _animator: {fileID: -8028119043519592628}
   _target: {fileID: 2193385791444176368}
-  _renderer: {fileID: 6993883291903538888}
   rectTransform: {fileID: 7813737567390986927}
   _bounce: {fileID: 11400000, guid: 861bde0733689994c936dc071be21d73, type: 2}
-  _sfxKey: DownArrow
+  _sfxKey:
+  - DownKey
+  - Chew
 --- !u!114 &-8028119043519592628
 MonoBehaviour:
   m_ObjectHideFlags: 0

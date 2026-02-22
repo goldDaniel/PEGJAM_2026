@@ -13,7 +13,7 @@ public class GameplayUI : MonoBehaviour
 
 	[SerializeField] private UIAnimationClip _bounce;
 
-	[SerializeField] private string _sfxKey;
+	[SerializeField] private string[] _sfxKey;
 
 	private GameInput[] _controls;
 
@@ -30,7 +30,8 @@ public class GameplayUI : MonoBehaviour
 
 	public void OnValidPress()
 	{
-		AudioManager.Instance.Play(_sfxKey);
+		foreach (var key in _sfxKey)
+			AudioManager.Instance.Play(key);
 	}
 
 	public void MoveToPosition(Vector2 position)
