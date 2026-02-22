@@ -111,4 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a972c4f418c3b54591e87e61dbe8d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MashAttack
-  maxHealth: 8
+  maxHealth: 4
