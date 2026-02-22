@@ -509,8 +509,6 @@ MonoBehaviour:
   _bodyRenderer: {fileID: 1187010741}
   _armRenderer: {fileID: 751978380}
   _foodHoldingPosition: {fileID: 331516277}
-  _attackWeights: 
-  _attackRate: 0
   _isPlayer: 0
 --- !u!1 &68195307
 GameObject:
@@ -879,7 +877,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1043347664}
-  m_Father: {fileID: 371957415}
+  m_Father: {fileID: 1283535923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1255,10 +1253,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1735769792}
-  - {fileID: 889365692}
-  - {fileID: 651292642}
-  - {fileID: 396478744}
-  - {fileID: 244359966}
   m_Father: {fileID: 1283535923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1300,7 +1294,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1402669113}
-  m_Father: {fileID: 371957415}
+  m_Father: {fileID: 1283535923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2363,7 +2357,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2010523430}
-  m_Father: {fileID: 371957415}
+  m_Father: {fileID: 1283535923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2624,8 +2618,6 @@ MonoBehaviour:
   _bodyRenderer: {fileID: 0}
   _armRenderer: {fileID: 0}
   _foodHoldingPosition: {fileID: 970863192}
-  _attackWeights: 
-  _attackRate: 0
   _isPlayer: 0
 --- !u!1 &751978378
 GameObject:
@@ -2971,7 +2963,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 371957415}
+  m_Father: {fileID: 1283535923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3300,8 +3292,8 @@ MonoBehaviour:
   _indicator: {fileID: 310953196}
   _player: {fileID: 736688993}
   _opponent: {fileID: 57966302}
-  _spiderPrefab: {fileID: 0}
-  _firePrefab: {fileID: 0}
+  _spiderPrefab: {fileID: 1334872165862959312, guid: b001bea8987c6e14c8d81f07f5414be0, type: 3}
+  _firePrefab: {fileID: -1562210924554015312, guid: 7539fe91d4be1b041b423464f4c2f64a, type: 3}
   _rockPrefab: {fileID: 0}
   _grabFoodIndicator: {fileID: 651292641}
   _bringFoodIndicator: {fileID: 396478743}

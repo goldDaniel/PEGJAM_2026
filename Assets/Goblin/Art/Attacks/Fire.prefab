@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1342476935114108116}
   - component: {fileID: 1583028082837519058}
   - component: {fileID: 7762665384789168549}
-  - component: {fileID: 2774352029060621382}
+  - component: {fileID: -1562210924554015312}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -99,7 +99,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2774352029060621382
+--- !u!114 &-1562210924554015312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5795704787610296207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: def0afe2751b33e4c816e13da2dc6b3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a972c4f418c3b54591e87e61dbe8d43, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fire
+  m_EditorClassIdentifier: Assembly-CSharp::MashAttack
   maxHealth: 8
