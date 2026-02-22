@@ -17,7 +17,10 @@ public class Game : MonoSingleton<Game>
 	};
 
 	[SerializeField] private LevelEndPanel _levelEndPanel;
-	[SerializeField] private TextMeshProUGUI _countdownText;
+	[SerializeField] private GameObject _countdown3;
+	[SerializeField] private GameObject _countdown2;
+	[SerializeField] private GameObject _countdown1;
+	[SerializeField] private GameObject _countdownFeast;
 
 	[SerializeField] private ComboSystem _comboSystem;
 
@@ -293,21 +296,22 @@ public class Game : MonoSingleton<Game>
 
 	private IEnumerator GameplayCountdown()
 	{
-		_countdownText.gameObject.SetActive(true);
-
-		_countdownText.text = $"{3}";
-		yield return new WaitForSeconds(1);
-		
-		_countdownText.text = $"{2}";
-		yield return new WaitForSeconds(1);
-		
-		_countdownText.text = $"{1}";
-		yield return new WaitForSeconds(1);
-		
-		_countdownText.text = "feast";
+		_countdown3.gameObject.SetActive(true);
 		yield return new WaitForSeconds(1);
 
-		_countdownText.gameObject.SetActive(false);
+		_countdown3.gameObject.SetActive(false);
+		_countdown2.gameObject.SetActive(true);
+		yield return new WaitForSeconds(1);
+
+		_countdown2.gameObject.SetActive(false);
+		_countdown1.gameObject.SetActive(true);
+		yield return new WaitForSeconds(1);
+
+		_countdown1.gameObject.SetActive(false);
+		_countdownFeast.gameObject.SetActive(true);
+		yield return new WaitForSeconds(1);
+
+		_countdownFeast.gameObject.SetActive(false);
 		_hasStarted = true;
 	}
 
