@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class CurrentIndicator : MonoBehaviour
 {
+	private RectTransform _rectTransform;
 	private Vector2 _origin;
 
 	public UIAnimator animator;
@@ -17,7 +18,8 @@ public class CurrentIndicator : MonoBehaviour
 	void Awake()
 	{
 		Play();
-		_origin = transform.position;
+		_rectTransform = GetComponent<RectTransform>();
+		_origin = _rectTransform.anchoredPosition;
 	}
 
 	public void Play() => _handle = animator.Play(clip);
@@ -29,8 +31,11 @@ public class CurrentIndicator : MonoBehaviour
 	public void Update()
 	{
 		if (!Game.Instance.OnPunishmentCooldown)
+		{
+			_rectTransform.anchoredPosition = _origin;
 			return;
-
+		}
+			
 		float shakeIntensity = Game.Instance.CooldownPercentage;
 		Vector2 shakeOffset = intensity * (new Vector2(
 													Mathf.PerlinNoise1D(456 + Time.time * 16),
