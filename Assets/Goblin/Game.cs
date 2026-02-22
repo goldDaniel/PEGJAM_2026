@@ -29,6 +29,8 @@ public class Game : MonoSingleton<Game>
 	private Level _currentLevel => _levels.CurrentLevel;
 	public bool IsLastLevel => _levels.IsLastLevel;
 
+	[SerializeField] private ContestantTemplate _playerTemplate;
+
 	[SerializeField] private Food _foodPrefab;
 	[SerializeField] private Transform _playerFoodHoldingPosition;
 	[SerializeField] private Transform _opponentFoodHoldingPosition;
@@ -119,7 +121,7 @@ public class Game : MonoSingleton<Game>
 		while (SceneTransitionManager.Instance.IsTransitioning)
 			yield return null;
 
-		UIController.Instance.ShowVersusPanel(_currentLevel);
+		UIController.Instance.ShowVersusPanel(_currentLevel, _playerTemplate.EntryImage);
 	}
 
 	private static int HashInputs(params GameInput[] inputs)
@@ -281,7 +283,7 @@ public class Game : MonoSingleton<Game>
 	{
 		var level = Instantiate(_currentLevel);
 
-		_player.Setup(null, _foodPrefab, level, _playerFoodSpawn);
+		_player.Setup(_playerTemplate, _foodPrefab, level, _playerFoodSpawn);
 		_opponent.Setup(level.opponent, _foodPrefab, level, _opponentFoodSpawn);	
 	}
 
@@ -318,7 +320,7 @@ public class Game : MonoSingleton<Game>
 			if (inputs.Contains(GameInput.Right))
 			{
 				_handState = HandState.Reaching;
-				// TODO (danielg): set reaching hand animation
+				_player.Reach();
 			}
 		}
 		else if (_handState == HandState.Reaching)
@@ -327,6 +329,7 @@ public class Game : MonoSingleton<Game>
 			{
 				_handState = HandState.Holding;
 				_player.GrabNextFoodItem();
+				_player.Hold();
 				SetupArrowsForFood(_player.GetHeldFood());
 			}
 		}
@@ -369,6 +372,7 @@ public class Game : MonoSingleton<Game>
 		{ 
 			_indicator.CorrectInput();
 			_comboSystem.IncreaseCombo();
+			_player.ToggleMouth();
 
 			_player.Bite((float)_inputSeqProgress++ / (_inputSeqCount - 1));
 			element.OnValidPress();

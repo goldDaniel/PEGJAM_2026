@@ -21,6 +21,7 @@ public class UIController : MonoSingleton<UIController>
 	public TextMeshProUGUI opponentName;
 	public Image opponentImage;
 
+	public Image playerImage;
 
 	[Header("Tutorial")]
 	public UITutorialController tutorialController;
@@ -53,11 +54,12 @@ public class UIController : MonoSingleton<UIController>
 		UpdatePause();
 	}
 
-	public void ShowVersusPanel(Level level)
+	public void ShowVersusPanel(Level level, Sprite playerImage)
 	{
 		_versusHandle?.Stop();
 		opponentName.text = level.opponent.Name.ToLower();
 		opponentImage.sprite = level.opponent.EntryImage;
+		this.playerImage.sprite = playerImage;
 
 		versusAnimator.gameObject.SetActive(true);
 		_versusHandle = versusAnimator.Play(pauseInClip, new()

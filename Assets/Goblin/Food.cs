@@ -15,6 +15,8 @@ public class Food : MonoBehaviour
 		this.template = template;
 		var sr = GetComponentInChildren<SpriteRenderer>();
         sr.sprite = template.sprites[0];
+		sr.sortingOrder = -10;
+		this.gameObject.transform.localScale = Vector3.one;
 	}
 
 	private int GetSpriteIndex(float t)
