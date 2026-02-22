@@ -26,6 +26,11 @@ public class CrowdGoblin : MonoBehaviour
 
 	private float _leftShoulderSeed;
 	private float _rightShoulderSeed;
+	private float _speed;
+
+	private float _bodyBob;
+	private Vector3 _basePos;
+	private float _bobSpeed;
 
 	void Start()
 	{
@@ -36,15 +41,35 @@ public class CrowdGoblin : MonoBehaviour
 		_armRenderers[(int)Arm.Left].sprite = _armSprite;
 		_armRenderers[(int)Arm.Right].sprite = _armSprite;
 
-		_leftShoulderSeed = Random.Range(0f, Mathf.PI / 2);
-		_rightShoulderSeed = _leftShoulderSeed + Random.Range(0f, Mathf.PI / 2);
+		_leftShoulderSeed = Random.value * 123f;
+		_rightShoulderSeed = Random.value * 456f;
+
+		_speed = Random.Range(0.8f, 1.2f);
+
+		_bodyBob = Random.value * 789f;
+		_bobSpeed = Random.Range(0.5f, 3f);
+
+		List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+		renderers.Add(_headRenderer);
+		renderers.Add(_bodyRenderer);
+		renderers.AddRange(_armRenderers);
+
+		float red = Random.Range(0.7f, 0.9f);
+		float green = Random.Range(0.5f, 1f);
+		float blue = Random.Range(0.5f, 0.8f);
+		Color color = new Color(red, green, blue, 0.8f);
+		foreach (var renderer in renderers )
+			renderer.color = color;
 	}
 
 
 	void Update()
 	{
-		_leftShoulderSeed += Time.deltaTime;
-		_rightShoulderSeed += Time.deltaTime;
+		if (_basePos == Vector3.zero)
+			_basePos = transform.position;
+
+		_leftShoulderSeed += Time.deltaTime * _speed;
+		_rightShoulderSeed += Time.deltaTime * _speed;
 
 		float leftT = Mathf.Sin(_leftShoulderSeed);
 		float rightT = Mathf.Sin(_rightShoulderSeed);
@@ -54,5 +79,8 @@ public class CrowdGoblin : MonoBehaviour
 
 		_leftShoulder.transform.rotation = Quaternion.Euler(0, 0, leftAngle);
 		_rightShoulder.transform.rotation = Quaternion.Euler(0, 0, rightAngle);
+
+		_bodyBob += Time.deltaTime * _bobSpeed;
+		transform.position = _basePos + Vector3.up * 0.5f * Mathf.Sin(_bodyBob);
 	}
 }

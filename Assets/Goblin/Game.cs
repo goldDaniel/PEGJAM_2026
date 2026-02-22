@@ -1,4 +1,5 @@
 ﻿
+using JetBrains.Annotations;
 using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
@@ -121,7 +122,8 @@ public class Game : MonoSingleton<Game>
 	{
 		InitArrowDict();
 		_missCooldownTimer = 0;
-
+		_comboSystem.AnimateGoblinMeter(0.1f);
+		
 		while (SceneTransitionManager.Instance.IsTransitioning)
 			yield return null;
 
@@ -156,6 +158,8 @@ public class Game : MonoSingleton<Game>
 	{
 		if (IsPaused || !HasStarted)
 			return;
+
+		_comboSystem.Update();
 
 		bool stageComplete = _player.HasEatenAllFood || _opponent.HasEatenAllFood;
 		if (stageComplete)
