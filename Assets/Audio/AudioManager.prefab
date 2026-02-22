@@ -82,17 +82,17 @@ MonoBehaviour:
     loop: 0
     defaultVolume: 1
   - name: Clap
-    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
+    clip: {fileID: 8300000, guid: e496f0b20cb75fd47ba3740a40a0e69e, type: 3}
     channel: 0
     loop: 0
     defaultVolume: 1
   - name: Crumple
-    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
+    clip: {fileID: 8300000, guid: e3c5be20aaadbb94e8629dc4c65098ff, type: 3}
     channel: 0
     loop: 0
     defaultVolume: 1
   - name: Crunch
-    clip: {fileID: 8300000, guid: 46e23619a5a8bcb418fdd9a28bdba0e1, type: 3}
+    clip: {fileID: 8300000, guid: b83686482e7a16f4dbb4a44efb0f0bcd, type: 3}
     channel: 0
     loop: 0
     defaultVolume: 1
