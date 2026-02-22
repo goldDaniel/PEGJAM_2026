@@ -39,9 +39,11 @@ public class LevelEndPanel : MonoBehaviour
 		{
 			OnComplete = () =>
 			{
-				// TODO (danielg): Transition to game end / credits scene instead
 				if (Game.Instance.IsLastLevel)
-					SceneTransitionManager.LoadScene("Main Menu");
+				{
+                    AudioManager.Instance.PlayMusicCrossfade("MainMenu", 5f);
+                    SceneTransitionManager.LoadScene("Credits");
+				}
 			}
 		});
 	}
@@ -84,8 +86,9 @@ public class LevelEndPanel : MonoBehaviour
 		animator.Play(outClip, new()
 		{
 			OnComplete = () =>
-			{
-				LevelLoader.CurrentLevelIndex = 0;
+            {
+                AudioManager.Instance.PlayMusicCrossfade("MainMenu", 5f);
+                LevelLoader.CurrentLevelIndex = 0;
 				SceneTransitionManager.LoadScene("Main Menu");
 			}
 		});

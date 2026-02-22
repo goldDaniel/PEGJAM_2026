@@ -147,7 +147,7 @@ public class Contestant : MonoBehaviour
 		if (chance > _attackRate) return AttackType.None;
 
 		int totalWeight = 0;
-		for (int i = 0; i < (int)AttackType.Rock; i++) // hardcode out the rock attack
+		for (int i = 0; i < (int)AttackType.Fire; i++) // hardcode out the fire and rock attacks
 			totalWeight += _attackWeights[i];
 
 		float[] probabilities  = new float[_attackWeights.Length];

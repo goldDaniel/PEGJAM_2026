@@ -46,6 +46,12 @@ public class AudioManager : MonoSingleton<AudioManager>
 
 	private void Awake()
 	{
+		if(HasInstance && Instance != this)
+		{
+			Destroy(this.gameObject);
+			return;
+		}
+
 		DontDestroyOnLoad(this.gameObject);
 
 		_bankMap.Clear();
@@ -59,7 +65,9 @@ public class AudioManager : MonoSingleton<AudioManager>
 		CreatePool(AudioChannel.SFX, _sfxPoolSize, _sfxMixer);
 		CreatePool(AudioChannel.Music, _musicPoolSize, _musicMixer);
 		CreatePool(AudioChannel.UI, _uiPoolSize, _uiMixer);
-	}
+
+        Instance.PlayMusicCrossfade("MainMenu");
+    }
 
 	private void BuildBankMap()
 	{
