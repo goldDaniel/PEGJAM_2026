@@ -76,6 +76,15 @@ public class Game : MonoSingleton<Game>
 
 	private bool _wasWaiting = false;
 
+	private Camera _camera;
+	private Vector3 _cameraOriginalPos;
+	private float _cameraOriginalSize;
+	[SerializeField] private float _swayAmount;
+	[SerializeField] private float _swaySpeedX;
+    [SerializeField] private float _swaySpeedY;
+    [SerializeField] private float _zoomAmount;
+	[SerializeField] private float _zoomSpeed;
+
 	[Range(0.01f, 1f)]
 	[SerializeField] private float _missCooldownTime = 0.2f;
 	private float _missCooldownTimer = 0;
@@ -141,7 +150,7 @@ public class Game : MonoSingleton<Game>
 		}
 	}
 
-	private static int HashInputs(params GameInput[] inputs)
+    private static int HashInputs(params GameInput[] inputs)
 	{
 		System.Array.Sort(inputs);
 		int hash = 0;
@@ -165,6 +174,13 @@ public class Game : MonoSingleton<Game>
 		_comboDict[HashInputs(GameInput.Up, GameInput.Right)] = _urArrowPrefab;
 	}
 
+	private void SetupCameraData()
+	{
+        _camera = Camera.main;
+        _cameraOriginalPos = _camera.transform.position;
+        _cameraOriginalSize = _camera.orthographicSize;
+    }
+
 	void Update()
 	{
 		if (_isTutorial)
@@ -173,6 +189,15 @@ public class Game : MonoSingleton<Game>
 				_missCooldownTimer = Mathf.Max(_missCooldownTimer - Time.deltaTime, 0f);
 			return;
 		}
+
+		float swayX = Mathf.Sin(Time.time * _swaySpeedX) * _swayAmount;
+        float swayY = Mathf.Sin(Time.time * _swaySpeedY) * _swayAmount;
+        float zoom = Mathf.Sin(Time.time * _zoomSpeed) * _zoomAmount;
+
+		if (_camera == null) 
+			SetupCameraData();
+		_camera.transform.position = _cameraOriginalPos + new Vector3(swayX, swayY, 0);
+		_camera.orthographicSize = _cameraOriginalSize + zoom;
 
 		if (IsPaused || !HasStarted)
 			return;
