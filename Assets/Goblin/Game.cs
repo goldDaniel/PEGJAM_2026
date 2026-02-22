@@ -159,8 +159,6 @@ public class Game : MonoSingleton<Game>
 		if (IsPaused || !HasStarted)
 			return;
 
-		_comboSystem.Update();
-
 		bool stageComplete = _player.HasEatenAllFood || _opponent.HasEatenAllFood;
 		if (stageComplete)
 		{
