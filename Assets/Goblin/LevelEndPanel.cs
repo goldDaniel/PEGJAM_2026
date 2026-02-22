@@ -37,7 +37,6 @@ public class LevelEndPanel : MonoBehaviour
 		gameObject.SetActive(true);
 		animator.Play(inClip, new()
 		{
-			Speed = 0.25f,
 			OnComplete = () =>
 			{
 				// TODO (danielg): Transition to game end / credits scene instead
