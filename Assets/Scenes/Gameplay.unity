@@ -4691,7 +4691,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 500139947}
         m_TargetAssemblyTypeName: LevelEndPanel, Assembly-CSharp
-        m_MethodName: OnWin
+        m_MethodName: OnContinuePressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
