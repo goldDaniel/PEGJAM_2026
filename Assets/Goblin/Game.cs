@@ -190,9 +190,15 @@ public class Game : MonoSingleton<Game>
 			if (!_levelEndPanel.IsDisplayed)
 			{
 				if (_player.HasEatenAllFood)
+				{
+					AudioManager.Instance.Play("CrowdClap");
 					_levelEndPanel.OnWin();
+				}
 				else if (_opponent.HasEatenAllFood)
+				{
+					AudioManager.Instance.Play("CrowdBoo");
 					_levelEndPanel.OnLose();
+				}					
 			}
 
 			return;

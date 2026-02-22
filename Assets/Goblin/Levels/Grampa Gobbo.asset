@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContestantTemplate
   Name: Grandpa Gobbo
   EntryImage: {fileID: 21300000, guid: a3da77c0efb72fd45941b6ba92206bbb, type: 3}
-  EatingTime: 90
+  EatingTime: 30
   BiteTime: 0.1
   attackRate: 0.1
   attackWeights: 1e0000004600000000000000

@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: The Gobblin' King
   EntryImage: {fileID: 21300000, guid: 10796c41c4680f848932aa03eff83443, type: 3}
   EatingTime: 30
-  BiteTime: 0.01
+  BiteTime: 0.05
   attackRate: 0.3
   attackWeights: 410000002300000000000000
   EatingLeft: {fileID: 0}

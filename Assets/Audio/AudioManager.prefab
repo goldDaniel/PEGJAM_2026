@@ -95,9 +95,19 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b83686482e7a16f4dbb4a44efb0f0bcd, type: 3}
     channel: 0
     loop: 0
-    defaultVolume: 1
+    defaultVolume: 1.2
   - name: GameplayMusic
     clip: {fileID: 8300000, guid: 4a012ba7fd099ba4f91c1b1c73ad1ad2, type: 3}
     channel: 1
     loop: 1
-    defaultVolume: 0.6
+    defaultVolume: 0.4
+  - name: CrowdBoo
+    clip: {fileID: 8300000, guid: a2ddb7e3a401c1646a9d0df6a3f96734, type: 3}
+    channel: 0
+    loop: 0
+    defaultVolume: 1
+  - name: CrowdClap
+    clip: {fileID: 8300000, guid: e541bc1c4016e394c8a7309e4aa02cfe, type: 3}
+    channel: 0
+    loop: 0
+    defaultVolume: 1
