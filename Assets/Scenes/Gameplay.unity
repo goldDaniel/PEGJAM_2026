@@ -2168,7 +2168,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3584,6 +3584,11 @@ MonoBehaviour:
   _bringFoodIndicator: {fileID: 396478743}
   _eatIndicator: {fileID: 244359965}
   _mashIndicator: {fileID: 68195307}
+  _swayAmount: 0.1
+  _swaySpeedX: 1
+  _swaySpeedY: 1.2
+  _zoomAmount: 0.1
+  _zoomSpeed: 1
   _missCooldownTime: 0.5
 --- !u!114 &917699326
 MonoBehaviour:
