@@ -35,7 +35,7 @@ public class Food : MonoBehaviour
 		while (diff > 0.001f)
 		{
 			diff = Mathf.Abs(transform.position.y - tablePosition.y);
-			float y = Mathf.MoveTowards(transform.position.y, tablePosition.y, 0.01f);
+			float y = Mathf.MoveTowards(transform.position.y, tablePosition.y, Time.deltaTime * 4);
 
 			var pos = transform.position;
 			pos.y = y;

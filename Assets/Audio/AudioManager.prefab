@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   _sfxPoolSize: 16
-  _musicPoolSize: 2
+  _musicPoolSize: 6
   _uiPoolSize: 8
   _sfxMixer: {fileID: 24300002, guid: ad0cd941d2162ad498f1d2aff9fe895c, type: 2}
   _musicMixer: {fileID: 24300002, guid: de80e431038fb6044830a60fea0cc6f5, type: 2}
@@ -100,7 +100,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4a012ba7fd099ba4f91c1b1c73ad1ad2, type: 3}
     channel: 1
     loop: 1
-    defaultVolume: 0.4
+    defaultVolume: 0.6
   - name: CrowdBoo
     clip: {fileID: 8300000, guid: a2ddb7e3a401c1646a9d0df6a3f96734, type: 3}
     channel: 0

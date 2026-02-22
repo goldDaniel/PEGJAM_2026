@@ -110,7 +110,7 @@ public class UIController : MonoSingleton<UIController>
 
 	private void UpdatePause()
 	{
-		if (Keyboard.current.escapeKey.wasPressedThisFrame)
+		if (Keyboard.current.pKey.wasPressedThisFrame)
 		{
 			if (_pauseHandle == null || !_pauseHandle.IsPlaying)
 			{

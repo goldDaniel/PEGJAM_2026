@@ -127,6 +127,16 @@ public class AudioManager : MonoSingleton<AudioManager>
 		source.Play();
 	}
 
+	public void Stop(string soundName, AudioChannel channel)
+	{
+		var clip = _bankMap[soundName].clip;
+		foreach (var p in _pools[channel])
+		{
+			if (p.isPlaying && p.clip == clip)
+				p.Stop(); 
+		}
+	}
+
 	public void PlayMusicCrossfade(string musicName, float fadeDuration = 1f)
 	{
 		if (!_pools.TryGetValue(AudioChannel.Music, out var musicSources) || musicSources.Length == 0)

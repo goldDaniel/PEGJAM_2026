@@ -41,6 +41,7 @@ public class LevelEndPanel : MonoBehaviour
 			{
 				if (Game.Instance.IsLastLevel)
 				{
+					LevelLoader.CurrentLevelIndex = 0;
 					AudioManager.Instance.PlayMusicCrossfade("MainMenu", 5f);
 					SceneTransitionManager.LoadScene("Credits");
 				}

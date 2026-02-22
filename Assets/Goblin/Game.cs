@@ -1,15 +1,8 @@
-﻿
-using JetBrains.Annotations;
-using Mono.Cecil.Cil;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using TMPro.EditorUtilities;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Game : MonoSingleton<Game>
 {
@@ -335,6 +328,9 @@ public class Game : MonoSingleton<Game>
 
 	private IEnumerator GameplayCountdown()
 	{
+		while(!_player.AllFoodSetup)
+			yield return null;
+
 		_countdown3.gameObject.SetActive(true);
 		yield return new WaitForSeconds(1);
 
