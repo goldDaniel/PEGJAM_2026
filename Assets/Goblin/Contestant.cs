@@ -134,8 +134,9 @@ public class Contestant : MonoBehaviour
 		for (int i = 0; i < _initialFoodCount; ++i)
 		{
 			var food = Instantiate(foodPrefab, foodSpawn, true);
-			food.Init(level.foodItems[i]);
-			food.transform.position = foodSpawn.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
+			var tablePosition = foodSpawn.position.xy() + Random.insideUnitCircle * new Vector2(0.8f, 0.5f);
+			food.transform.position = tablePosition + Vector2.up * (15 + Random.value * 3f);
+			food.Init(level.foodItems[i], tablePosition);
 			_foodPile.Add(food);
 		}
 	}

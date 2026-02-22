@@ -71,6 +71,9 @@ public sealed class UITutorialController : MonoBehaviour
 	[SerializeField]
 	private List<UITutorialStep> _steps = new List<UITutorialStep>();
 
+	public UITutorialStep CurrentStep => _currentStepIndex < 0 ? null : _steps[_currentStepIndex];
+	public int CurrentStepIndex => _currentStepIndex;
+
 	private int _currentStepIndex = -1;
 	private string _lastReceivedEvent;
 	private bool _isRunning;

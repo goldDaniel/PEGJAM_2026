@@ -7,6 +7,7 @@ using System.Linq;
 using TMPro;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,9 @@ public class Game : MonoSingleton<Game>
 		public GameplayUI gameElement;
 		public MashAttack spider;
 	};
+
+	[SerializeField] private UITutorialController _tutorial;
+	[SerializeField] private bool _isTutorial = false;
 
 	[SerializeField] private LevelEndPanel _levelEndPanel;
 	[SerializeField] private GameObject _countdown3;
@@ -127,7 +131,16 @@ public class Game : MonoSingleton<Game>
 		while (SceneTransitionManager.Instance.IsTransitioning)
 			yield return null;
 
-		UIController.Instance.ShowVersusPanel(_currentLevel, _playerTemplate.EntryImage);
+		if (_isTutorial)
+		{
+			for(int i = 0; i < 30; ++i)
+				yield return null;
+
+			_tutorial.StartTutorial();
+			yield break;
+		}
+		else
+			UIController.Instance.ShowVersusPanel(_currentLevel, _playerTemplate.EntryImage);
 	}
 
 	private static int HashInputs(params GameInput[] inputs)
@@ -156,6 +169,12 @@ public class Game : MonoSingleton<Game>
 
 	void Update()
 	{
+		if (_isTutorial)
+		{
+			HandleTutorial();
+			return;
+		}
+
 		if (IsPaused || !HasStarted)
 			return;
 
@@ -474,5 +493,10 @@ public class Game : MonoSingleton<Game>
 		_inputSeqCount = _activeArrowCombos.Count;
 		_indicator.Stop();
 		_indicator.Play();
+	}
+
+	public void HandleTutorial()
+	{
+		
 	}
 }

@@ -8,15 +8,32 @@ public class Food : MonoBehaviour
 	[NonSerialized]
 	public FoodTemplate template;
 
+	private Vector2 tablePosition;
 	private Vector2 _origin;
 
-    public void Init(FoodTemplate template)
+    public void Init(FoodTemplate template, Vector2 tablePosition)
 	{
+		this.tablePosition = tablePosition;
 		this.template = template;
 		var sr = GetComponentInChildren<SpriteRenderer>();
         sr.sprite = template.sprites[0];
 		sr.sortingOrder = -10;
 		this.gameObject.transform.localScale = Vector3.one;
+		StartCoroutine(FallToSpawn());
+	}
+
+	public IEnumerator FallToSpawn()
+	{
+		while (transform.position.y != tablePosition.y)
+		{
+			float y = Mathf.MoveTowards(transform.position.y, tablePosition.y, 0.01f);
+
+			var pos = transform.position;
+			pos.y = y;
+			transform.position = pos;
+			yield return null;
+		}
+		transform.position = tablePosition;
 	}
 
 	private int GetSpriteIndex(float t)
