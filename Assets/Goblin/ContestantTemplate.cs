@@ -8,7 +8,7 @@ public class ContestantTemplate : ScriptableObject
 	public Sprite EntryImage;
 
 	// how long it takes the contestant to finish their plate. Only applicable to NPCS
-	[Range(5f, 30f)]
+	[Range(5f, 90f)]
 	public float EatingTime;
 
 	// How long between switching eating animation frames

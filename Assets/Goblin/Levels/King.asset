@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContestantTemplate
   Name: The Goblin King
   EntryImage: {fileID: 21300000, guid: 10796c41c4680f848932aa03eff83443, type: 3}
-  EatingTime: 5
+  EatingTime: 30
   BiteTime: 0.01
   EatingLeft: {fileID: 0}
   EatingRight: {fileID: 0}
