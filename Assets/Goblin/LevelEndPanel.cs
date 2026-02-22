@@ -41,8 +41,8 @@ public class LevelEndPanel : MonoBehaviour
 			{
 				if (Game.Instance.IsLastLevel)
 				{
-                    AudioManager.Instance.PlayMusicCrossfade("MainMenu", 5f);
-                    SceneTransitionManager.LoadScene("Credits");
+					AudioManager.Instance.PlayMusicCrossfade("MainMenu", 5f);
+					SceneTransitionManager.LoadScene("Credits");
 				}
 			}
 		});
@@ -86,9 +86,9 @@ public class LevelEndPanel : MonoBehaviour
 		animator.Play(outClip, new()
 		{
 			OnComplete = () =>
-            {
-                AudioManager.Instance.PlayMusicCrossfade("MainMenu", 5f);
-                LevelLoader.CurrentLevelIndex = 0;
+			{
+				AudioManager.Instance.PlayMusicCrossfade("MainMenu", 5f);
+				LevelLoader.CurrentLevelIndex = 0;
 				SceneTransitionManager.LoadScene("Main Menu");
 			}
 		});

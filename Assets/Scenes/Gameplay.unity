@@ -3506,6 +3506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3b97ca4c0a56b4a90b3f05bc9ab768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game
+  _tutorial: {fileID: 0}
+  _isTutorial: 0
   _levelEndPanel: {fileID: 500139947}
   _countdown3: {fileID: 889365691}
   _countdown2: {fileID: 2138419300}

@@ -244,10 +244,10 @@ public class Game : MonoSingleton<Game>
 				InputController.Instance.ClearInputBuffer();
 			}
 			else if (IsReadyToEat && _activeArrowCombos.Count > 0)
-            {
-                _wasWaiting = waiting;
-                HandleEating(inputs, waiting);
-            }
+			{
+				_wasWaiting = waiting;
+				HandleEating(inputs, waiting);
+			}
 		}
 
 		if (inputs.Contains(GameInput.Action))
@@ -419,8 +419,8 @@ public class Game : MonoSingleton<Game>
 			InputController.Instance.ClearInputBuffer();
 			_wasWaiting = false;
 
-            OpponentAttack(_opponent.Attack());
-        }
+			OpponentAttack(_opponent.Attack());
+		}
 	}
 
 	private void OpponentAttack(AttackType attack)
